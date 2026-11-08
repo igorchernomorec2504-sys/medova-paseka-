@@ -85,7 +85,7 @@
             width: auto;
             display: block;
             object-fit: contain;
-            background: transparent; /* Прибрано будь-який фон */
+            mix-blend-mode: multiply; /* Автоматично прибирає білий квадрат фону картинки */
         }
 
         header h1 {
@@ -301,7 +301,6 @@
             z-index: 2;
         }
 
-        /* ПОВЕРНУТО ПОЧАТКОВИЙ РОЗМІР ТА ВИГЛЯД ФОТОГРАФІЙ У КАТАЛОЗІ */
         .product-icon-img {
             display: block;
             width: 100%;
