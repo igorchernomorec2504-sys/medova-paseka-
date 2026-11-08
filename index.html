@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Медова Пасіка | Натуральний мед та вироби з воску</title>
     <meta name="description" content="Купити натуральний крафтовий мед, воскові свічки ручної роботи, бджолиний пилок та прополіс напряму з сімейної пасіки. Доставка по Україні.">
-    <meta name="keywords" content="мед, натуральний мед, воскові свічки, бджолиний пилок, прополіс, пасіка, купити мед">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -54,7 +53,6 @@
             font-weight: 600; 
         }
 
-        /* --- ШАПКА --- */
         header {
             background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
             color: #ffffff;
@@ -96,7 +94,6 @@
             font-weight: 500;
         }
 
-        /* --- КНОПКА КОРЗИНЫ --- */
         .top-cart-btn {
             position: fixed;
             top: 16px;
@@ -146,7 +143,6 @@
             margin: 32px 0 20px;
         }
 
-        /* --- КАТАЛОГ И ФИЛЬТРЫ --- */
         .catalog-controls {
             background: var(--bg-card);
             padding: 18px;
@@ -251,7 +247,6 @@
             border-color: var(--primary-amber);
         }
 
-        /* --- КАРТОЧКИ ТОВАРОВ --- */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -292,12 +287,6 @@
             letter-spacing: 0.5px;
             box-shadow: 0 3px 8px rgba(236, 57, 70, 0.3);
             z-index: 2;
-        }
-
-        .product-icon {
-            font-size: 3.2rem;
-            margin-bottom: 10px;
-            display: inline-block;
         }
 
         .product-icon-img {
@@ -350,7 +339,7 @@
             gap: 8px;
         }
 
-        .candles-grid-row, .pollen-grid-row {
+        .pollen-grid-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 6px;
@@ -373,7 +362,7 @@
             justify-content: flex-start;
         }
 
-        .candles-grid-row .radio-option, .pollen-grid-row .radio-option {
+        .pollen-grid-row .radio-option {
             width: 100%;
             justify-content: flex-start;
         }
@@ -519,7 +508,6 @@
             margin-bottom: 12px; 
         }
 
-        /* --- ДОСТАВКА И ОТЗЫВЫ --- */
         .delivery-section, .reviews-section {
             background: var(--bg-card);
             border-radius: 20px;
@@ -659,7 +647,6 @@
             text-align: center; 
         }
 
-        /* --- ПЛАВАЮЩИЙ ВИДЖЕТ СВЯЗИ --- */
         .floating-widget { 
             position: fixed; 
             bottom: 25px; 
@@ -719,7 +706,6 @@
         .widget-btn.insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
         .widget-btn.phone { background: #2980b9; }
 
-        /* --- СЕКЦИИ СТАТЬИ И ИНФО --- */
         .info-article-section {
             background: var(--bg-card);
             border-radius: 20px;
@@ -831,7 +817,6 @@
             transform: translateY(-1px);
         }
 
-        /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal {
             display: none;
             position: fixed;
@@ -1012,7 +997,6 @@
 </head>
 <body>
 
-    <!-- ПЛАВАЮЩИЙ ВИДЖЕТ СВЯЗИ -->
     <div class="floating-widget" id="floatingWidget">
         <div class="widget-items" id="widgetItems">
             <a href="https://t.me/+380968980543" target="_blank" class="widget-btn tg">📱 Telegram</a>
@@ -1065,11 +1049,11 @@
 
         <div class="products-grid" id="productsGrid">
 
-            <!-- Мед Травневий (з переходом на product.html) -->
+            <!-- Мед Травневий -->
             <div class="product-card" data-category="honey" data-name="мед травневий">
                 <span class="badge-highlight" id="badge-may">ВЕСНЯНИЙ СМАК</span>
                 <div>
-                    <div class="product-icon">🌼</div>
+                    <img src="may1.jpg" alt="Мед Травневий" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="may-honey-title">Мед Травневий</h3>
                     <p id="may-honey-desc">Ароматний і ніжний мед із перших весняних квітів. Найперший збір року — солодкий, запашний та дуже корисний!</p>
                 </div>
@@ -1079,11 +1063,11 @@
                 </div>
             </div>
 
-            <!-- Мед Соняшниковий (з переходом на product.html) -->
+            <!-- Мед Соняшниковий -->
             <div class="product-card" data-category="honey" data-name="мед соняшниковий">
                 <span class="badge-highlight" id="badge-sun">ХІТ ПРОДАЖ</span>
                 <div>
-                    <div class="product-icon">🌻</div>
+                    <img src="med-sonyashnykovyi.jpg" alt="Мед Соняшниковий" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="honey-title">Мед Соняшниковий</h3>
                     <p id="honey-desc">Густий, сонячний та найсолодший мед! Натуральна кристалізація — знак справжньої якості та зрілості з власної пасіки.</p>
                 </div>
@@ -1093,11 +1077,11 @@
                 </div>
             </div>
 
-            <!-- Свічки з вощини (з переходом на product.html) -->
+            <!-- Свічки з вощини -->
             <div class="product-card" data-category="candles" data-name="свічка з вощини">
                 <span class="badge-highlight" id="badge-candle">РУЧНА РОБОТА</span>
                 <div>
-                    <div class="product-icon">🏵️</div>
+                    <img src="svesha1.jpg" alt="Свічки з вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="candle-title">Свічка з вощини</h3>
                     <p id="candle-desc">100% чистий пасічний віск. Дарують затишок, натуральний медовий аромат та очищають повітря в домі.</p>
                 </div>
@@ -1107,11 +1091,11 @@
                 </div>
             </div>
 
-            <!-- Прополіс (з переходом на product.html) -->
+            <!-- Прополіс -->
             <div class="product-card" data-category="propolis other" data-name="прополіс">
                 <span class="badge-highlight" id="badge-prop">МІЦНИЙ ІМУНІТЕТ</span>
                 <div>
-                    <div class="product-icon">👌</div>
+                    <img src="propolis1.jpg" alt="Прополіс" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="propolis-title">Прополіс</h3>
                     <p id="propolis-desc">Сильний природний антисептик та захисник здоров'я. Натуральний смолистий продукт прямо з вулика.</p>
                 </div>
@@ -1125,9 +1109,7 @@
             <div class="product-card" data-category="pollen other" data-name="бджолиний пилок">
                 <span class="badge-highlight" id="badge-pollen">ЗАРЯД ЕНЕРГІЇ</span>
                 <div>
-                    <div class="product-icon">
-                        <img src="pollen.jpg" alt="Бджолиний пилок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
-                    </div>
+                    <img src="pollen.jpg" alt="Бджолиний пилок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="pollen-title">Бджолиний Пилок</h3>
                     <p id="pollen-desc">Натуральний мікс вітамінів, амінокислот та мікроелементів. Повертає бадьорість, тонус та силу кожен день!</p>
                     
@@ -1155,9 +1137,7 @@
             <div class="product-card" data-category="honey other" data-name="стільниковий мед">
                 <span class="badge-highlight" id="badge-comb">100% ЕКО</span>
                 <div>
-                    <div class="product-icon">
-                        <img src="sotu.jpg" alt="Стільниковий мед" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
-                    </div>
+                    <img src="sotu.jpg" alt="Стільниковий мед" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="comb-title">Стільниковий Мед 🍯</h3>
                     <p id="comb-desc">Натуральний продукт найвищої якості, неймовірно смачний та корисний. Ціна за 1 кг.</p>
                 </div>
@@ -1172,13 +1152,11 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 1: «Медовий затишок» (з новими параметрами: 250 грн замість 300, 20x3 см) -->
+            <!-- Подарунковий набір 1 -->
             <div class="product-card" data-category="gifts" data-name="подарунковий набір медовий затишок свічки">
                 <span class="badge-highlight">🔥 АКЦІЯ</span>
                 <div>
-                    <div class="product-icon">
-                        <img src="svechi-podarok.jpg" alt="Набір Медовий затишок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
-                    </div>
+                    <img src="svechi-podarok.jpg" alt="Набір Медовий затишок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3>Набір «Медовий затишок»</h3>
                     <p>Чудовий комплект свічок ручної роботи. Розміри свічей: 20×3 см.</p>
                     <div class="timer-box" id="promoTimer1">⏳ Акція до кінця місяця!</div>
@@ -1194,13 +1172,11 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 2: Патріотичний набір (200 грн замість 220, таймер до кінця місяця) -->
+            <!-- Подарунковий набір 2 -->
             <div class="product-card" data-category="gifts" data-name="патріотичний набір свічки">
                 <span class="badge-highlight" id="badge-gift2">ХІТ / АКЦІЯ</span>
                 <div>
-                    <div class="product-icon">
-                        <img src="nabor3.jpg" alt="Патріотичний набір" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
-                    </div>
+                    <img src="nabor3.jpg" alt="Патріотичний набір" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="gift2-title">Патріотичний набір свічок</h3>
                     <p id="gift2-desc">Синьо-жовті свічки з вощини. Розміри свічей: 20×3 см.</p>
                     <div class="timer-box" id="promoTimer">⏳ До кінця акції: завантаження...</div>
@@ -1216,13 +1192,11 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 3: Набір з натуральної вощини (170 грн замість 200, медовий аромат) -->
+            <!-- Подарунковий набір 3 -->
             <div class="product-card" data-category="gifts" data-name="набір з натуральної вощини свічки">
                 <span class="badge-highlight">-15%</span>
                 <div>
-                    <div class="product-icon">
-                        <img src="svecha3.jpg" alt="Набір з натуральної вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
-                    </div>
+                    <img src="svecha3.jpg" alt="Набір з натуральної вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="gift3-title">Набір з натуральної вощини</h3>
                     <p id="gift3-desc">З медовим запахом та ніжним природним ароматом.</p>
                 </div>
@@ -1239,7 +1213,6 @@
 
         </div>
 
-        <!-- ДОСТАВКА ТА ОПЛАТА -->
         <section class="delivery-section">
             <h2>🚚 Доставка та оплата</h2>
             <p>Ми дбаємо про те, щоб ваше замовлення прибуло швидко та в ідеальному стані. Оберіть зручний для себе спосіб доставки та оплати:</p>
@@ -1256,7 +1229,6 @@
             </div>
         </section>
 
-        <!-- ВІДГУКИ ПОКУПЦІВ -->
         <section class="reviews-section" id="reviewsSection">
             <h2>⭐ Що кажуть наші клієнти</h2>
             
@@ -1291,7 +1263,6 @@
             </div>
         </section>
 
-        <!-- ИНФОРМАЦИОННАЯ СТАТЬЯ -->
         <section class="info-article-section">
             <h2>Користь живого меду та продуктів бджільництва</h2>
             <p>Натуральні продукти з власної пасіки — це не просто ласощі, а справжнє джерело природної сили, вітамінів і здоров'я для всієї родини.</p>
@@ -1306,7 +1277,6 @@
             <p>«Бджолиний хліб» та пилок — це потужний природний концентрати амінокислот, мікроелементів і вітамінів групи B. Вони чудово відновлюють сили після фізичних і розумових навантажень, підвищують тонус і заряджають енергією на весь день.</p>
         </section>
 
-        <!-- ФОРМА ЗАКАЗА КОНСУЛЬТАЦИИ (ОТПРАВКА В TELEGRAM) -->
         <section class="consultation-section">
             <h2>💬 Бажаєте проконсультуватися чи підібрати мед?</h2>
             <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі питання!</p>
@@ -1335,11 +1305,14 @@
             <p id="about-text-2">Усі роботи робимо самі, з турботою про якість для вашої родини! При великих замовленнях можлива індивідуальна домовленість.</p>
         </section>
 
+        <!-- ДОДАНО ВАЙБЕР, ТЕЛЕГРАМ ТА ЗМІНЕНО НОМЕР НА +380968980543 -->
         <section class="contacts-section">
             <p style="margin-bottom: 12px;"><strong id="contacts-heading">Швидкий зв'язок з нами:</strong></p>
+            <a href="https://t.me/+380968980543" class="btn-social" style="background: #0088cc;" target="_blank">📱 Telegram</a>
+            <a href="viber://chat?number=%2B380968980543" class="btn-social" style="background: #7360f2;" target="_blank">💬 Viber</a>
             <a href="https://wa.me/380968980543" class="btn-social" style="background: #25D366;" target="_blank">WhatsApp</a>
             <a href="https://www.instagram.com/wax_candles_eco_honey?cplk=MTM5ZTRiM2UyazVwMA==" class="btn-social" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);" target="_blank">Instagram</a>
-            <a href="tel:+380968980543" class="btn-social" style="background: #2980b9;">📞 0968980543</a>
+            <a href="tel:+380968980543" class="btn-social" style="background: #2980b9;">📞 +380968980543</a>
         </section>
 
         <footer>
@@ -1363,7 +1336,6 @@
                 <strong id="total-sum-text">Загальна сума: <span id="cartTotalSum">0</span> грн</strong>
             </div>
 
-            <!-- Форма оформления заказа в телеграм -->
             <form id="orderForm" onsubmit="sendOrderToTelegram(event)">
                 <div class="form-group">
                     <label id="label-name">ПІБ (Прізвище та Ім'я):</label>
@@ -1387,12 +1359,12 @@
                     <button type="button" class="btn-close" onclick="closeCartModal()" id="btn-close-modal">Закрити</button>
                     <button type="submit" class="btn-submit" id="submitBtn">Надіслати замовлення</button>
                 </div>
+                <div id="orderStatus" style="margin-top: 10px; text-align: center; font-weight: 600;"></div>
             </form>
         </div>
     </div>
 
     <script>
-        // ВАШИ ДАННЫЕ TELEGRAM БОТА И ID
         const BOT_TOKEN = '8812886094:AAFdw7NkHOSRB0If8ZMAME4tEbhwq1XCAZA';
         const CHAT_ID = '1763769244';
 
@@ -1451,7 +1423,6 @@
             }
         });
 
-        // Таймер обратного отсчета до конца текущего месяца
         function updateTimer() {
             const now = new Date();
             const endMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
@@ -1597,12 +1568,13 @@
             totalSumElement.innerText = totalSum;
         }
 
-        // ОТПРАВКА ЗАКАЗА ИЗ КОРЗИНЫ В TELEGRAM
+        // ОТПРАВКА ЗАКАЗА В TELEGRAM БЕЗ НАДОКУЧЛИВЫХ ПЛАШЕК ОК
         async function sendOrderToTelegram(e) {
             e.preventDefault();
             const name = document.getElementById('orderName').value.trim();
             const phone = document.getElementById('orderPhone').value.trim();
             const delivery = document.getElementById('orderDelivery').value;
+            const statusDiv = document.getElementById('orderStatus');
 
             if (cart.length === 0) return;
 
@@ -1619,6 +1591,7 @@
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.innerText = 'Відправка...';
+            statusDiv.innerText = '';
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -1633,17 +1606,22 @@
 
                 const data = await response.json();
                 if (data.ok) {
-                    alert('✅ Замовлення успішно надіслано! Ми зв\'яжемося з вами найближчим часом.');
+                    statusDiv.style.color = '#16a34a';
+                    statusDiv.innerText = '✅ Замовлення успішно надіслано! Ми зв\'яжемося з вами.';
                     cart = [];
                     saveCart();
                     updateCartUI();
-                    closeCartModal();
                     document.getElementById('orderForm').reset();
+                    setTimeout(() => {
+                        closeCartModal();
+                        statusDiv.innerText = '';
+                    }, 2500);
                 } else {
                     throw new Error(data.description || 'Помилка');
                 }
             } catch (error) {
-                alert('❌ Помилка при відправці. Спробуйте ще раз або зателефонуйте нам.');
+                statusDiv.style.color = '#dc2626';
+                statusDiv.innerText = '❌ Помилка відправки. Спробуйте ще раз.';
                 console.error(error);
             } finally {
                 submitBtn.disabled = false;
@@ -1651,7 +1629,6 @@
             }
         }
 
-        // ОТПРАВКА ЗАПРОСА НА КОНСУЛЬТАЦИЮ В TELEGRAM
         document.getElementById('consultationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1684,14 +1661,14 @@
                 const data = await response.json();
                 if (data.ok) {
                     statusDiv.style.color = '#16a34a';
-                    statusDiv.innerText = '✅ Запит на консультацію успішно надіслано! Пасічник зв\'яжеться з вами.';
+                    statusDiv.innerText = '✅ Запит успішно надіслано!';
                     document.getElementById('consultationForm').reset();
                 } else {
                     throw new Error(data.description || 'Помилка');
                 }
             } catch (error) {
                 statusDiv.style.color = '#dc2626';
-                statusDiv.innerText = '❌ Помилка відправки. Спробуйте ще раз або напишіть у месенджери.';
+                statusDiv.innerText = '❌ Помилка відправки. Спробуйте ще раз.';
                 console.error(error);
             } finally {
                 submitBtn.disabled = false;
@@ -1790,7 +1767,6 @@
             isShowingAll = false;
             renderReviews();
             document.getElementById('commentForm').reset();
-            alert('Дякуємо! Ваш відгук успішно додано.');
         }
 
         const translations = {
