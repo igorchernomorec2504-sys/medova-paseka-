@@ -2,7 +2,7 @@
 
 <img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
 
-Hey igorchernomorec2504-sys!
+Hey medova-paseka.top!
 
 Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
 
