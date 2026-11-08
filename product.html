@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Натуральний мед та воскові свічки | Медова Пасіка</title>
+    <meta name="description" content="Купити натуральний крафтовий мед, свічки з натурального бджолиного воску, пилок та прополіс напряму з пасіки. Доставка по Україні.">
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-amber: #ff9800;
+            --dark-amber: #e65100;
+            --bg-gradient: linear-gradient(135deg, #fff9e6 0%, #ffecb3 50%, #ffe082 100%);
+            --card-shadow: 0 8px 20px rgba(216, 112, 147, 0.08), 0 4px 10px rgba(230, 81, 0, 0.1);
+            --text-main: #3e2723;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+        body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-main); min-height: 100vh; padding-bottom: 50px; font-size: 0.9rem; }
+        
+        header { background: linear-gradient(135deg, #f57c00 0%, #e65100 100%); color: #fff; text-align: center; padding: 20px 15px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 8px 25px rgba(230, 81, 0, 0.25); position: relative; }
+        header h1 { font-family: 'Comfortaa', cursive; font-size: 1.5rem; }
+        
+        .top-cart-btn { position: fixed; top: 15px; right: 15px; background: #fff; color: var(--dark-amber); border: 2px solid var(--primary-amber); padding: 8px 14px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 150; display: flex; align-items: center; gap: 6px; }
+        .cart-badge { background: var(--dark-amber); color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.78rem; }
+        
+        .container { max-width: 650px; margin: 20px auto; padding: 0 15px; }
+        .back-link { display: inline-block; margin-bottom: 15px; color: var(--dark-amber); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .back-link:hover { text-decoration: underline; }
+
+        .product-detail-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: var(--card-shadow); border: 1.5px solid #fff3e0; }
+        
+        .gallery-main { width: 100%; height: 280px; object-fit: cover; border-radius: 12px; border: 2px solid var(--primary-amber); margin-bottom: 10px; }
+        .gallery-thumbs { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
+        .thumb-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 2px solid #ffe0b2; cursor: pointer; transition: 0.2s; }
+        .thumb-img:hover, .thumb-img.active { border-color: var(--dark-amber); transform: scale(1.05); }
+
+        .product-title { font-family: 'Comfortaa', cursive; font-size: 1.4rem; color: var(--dark-amber); margin-bottom: 10px; }
+        .product-desc { font-size: 0.95rem; color: #5d4037; line-height: 1.5; margin-bottom: 15px; }
+        .product-price { font-weight: 700; font-size: 1.3rem; color: var(--dark-amber); margin-bottom: 15px; }
+        
+        .volume-options { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .volume-label { flex: 1; min-width: 70px; text-align: center; background: #fff3e0; padding: 10px 8px; border-radius: 12px; border: 1.5px solid #ffe0b2; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .volume-label input { display: none; }
+        .volume-label.selected { background: var(--primary-amber); color: white; border-color: var(--dark-amber); box-shadow: 0 4px 10px rgba(230,81,0,0.2); }
+
+        .candle-options-section { margin-bottom: 15px; background: #fff9e6; padding: 14px; border-radius: 12px; border: 1.5px solid #ffe0b2; }
+        .candle-options-section label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.88rem; color: var(--dark-amber); }
+        
+        .qty-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
+        .qty-btn { background: #ffe0b2; color: var(--dark-amber); border: none; width: 35px; height: 35px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
+        .qty-input { width: 60px; text-align: center; padding: 8px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-weight: 700; font-size: 1rem; }
+
+        .btn-add-cart { background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 15px rgba(230,81,0,0.2); }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: white; padding: 22px; border-radius: 18px; max-width: 450px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
+        .modal-content h3 { font-family: 'Comfortaa', cursive; color: var(--dark-amber); margin-bottom: 12px; text-align: center; font-size: 1.2rem; }
+        .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #ffe0b2; font-size: 0.85rem; }
+        .remove-btn { background: #ff4d4d; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-weight: 700; font-size: 0.75rem; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.82rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-size: 0.9rem; background: #fff; outline: none; }
+        .form-group textarea { resize: vertical; height: 70px; }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-submit { flex: 1; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+        .btn-close { background: #eee; color: #333; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+        
+        footer { text-align: center; margin-top: 30px; color: #8d6e63; font-size: 0.85rem; font-weight: 600; }
+
+        .floating-widget { position: fixed; bottom: 25px; right: 20px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; }
+        .widget-toggle-btn { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(230, 81, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+        .widget-items { display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .widget-items.open { display: flex; }
+        .widget-btn { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 25px; color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); white-space: nowrap; }
+        .widget-btn.tg { background: #0088cc; }
+        .widget-btn.viber { background: #7360f2; }
+        .widget-btn.wa { background: #25D366; }
+        .widget-btn.insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .widget-btn.phone { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+    <div class="floating-widget" id="floatingWidget">
+        <div class="widget-items" id="widgetItems">
+            <a href="https://t.me/+380968980543" target="_blank" class="widget-btn tg">📱 Telegram</a>
+            <a href="viber://chat?number=%2B380968980543" target="_blank" class="widget-btn viber">💬 Viber</a>
+            <a href="https://wa.me/380968980543" target="_blank" class="widget-btn wa">🟢 WhatsApp</a>
+            <a href="https://www.instagram.com/wax_candles_eco_honey" target="_blank" class="widget-btn insta">📸 Instagram</a>
+            <a href="tel:+380968980543" class="widget-btn phone">📞 Зателефонувати</a>
+        </div>
+        <button class="widget-toggle-btn" onclick="toggleWidget()" id="widgetMainBtn">💬</button>
+    </div>
+
+    <button class="top-cart-btn" onclick="openCartModal()">🛒 Кошик <span class="cart-badge" id="cartCount">0</span></button>
+
+    <header>
+        <h1>🍯 Медова Пасіка</h1>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Повернутися до каталогу</a>
+        <div class="product-detail-card" id="productCard"></div>
+    </div>
+
+    <footer>
+        <p>© Медова Пасіка. Всі права захищено.</p>
+    </footer>
+
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <h3>Ваш Кошик</h3>
+            <div id="cartItemsList" style="margin-bottom: 15px;"></div>
+            <div style="background: #fff3e0; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: right;">
+                <strong>Загальна сума: <span id="cartTotalSum">0</span> грн</strong>
+            </div>
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>ПІБ (Прізвище та Ім'я):</label>
+                    <input type="text" name="ПІБ" required placeholder="Іванов Іван">
+                </div>
+                <div class="form-group">
+                    <label>Номер телефону:</label>
+                    <input type="tel" name="Телефон" required placeholder="+380XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Спосіб доставки:</label>
+                    <select name="Доставка" required>
+                        <option value="" disabled selected>Оберіть спосіб доставки</option>
+                        <option value="Нова пошта">Нова пошта</option>
+                        <option value="Самовивіз">Самовивіз</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Коментар до замовлення (необов'язково):</label>
+                    <textarea name="Коментар" placeholder="Ваші побажання або зручний час для дзвінка..."></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-close" onclick="closeCartModal()">Закрити</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Надіслати замовлення</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleWidget() {
+            const items = document.getElementById('widgetItems');
+            const mainBtn = document.getElementById('widgetMainBtn');
+            items.classList.toggle('open');
+            mainBtn.innerHTML = items.classList.contains('open') ? '✕' : '💬';
+        }
+
+        const productsData = {
+            'sunflower-honey': {
+                title: "Мед Соняшниковий",
+                description: "Свіжий, густий та сонячний мед з власної пасіки. Натуральна кристалізація — знак якості та зрілості.",
+                images: ["med-sonyashnykovyi.jpg"],
+                hasVolumes: true,
+                volumes: [
+                    { name: "1 л", price: 250 },
+                    { name: "2 л", price: 500 },
+                    { name: "3 л", price: 700 }
+                ]
+            },
+            'may-honey': {
+                title: "Мед Травневий",
+                description: "Ароматний, духмяний та ніжний травневий мед зібраний під час першого весняного медозбору.",
+                images: ["may1.jpg", "may2.jpg", "may3.jpg"],
+                hasVolumes: true,
+                volumes: [
+                    { name: "1 л", price: 350 },
+                    { name: "2 л", price: 700 },
+                    { name: "3 л", price: 1000 }
+                ]
+            },
+            'candle': {
+                title: "Свічки з вощини",
+                description: "100% натуральний пасічний віск. Ручна робота, дарують затишок та природний аромат.",
+                images: ["svecha1.jpg", "svecha2.jpg", "svecha4.jpg", "swecha.jpg"],
+                isCandle: true,
+                volumes: [
+                    { name: "3×10 см", price: 40 },
+                    { name: "3×20 см", price: 80 },
+                    { name: "4×10 см", price: 50 },
+                    { name: "4×20 см", price: 100 }
+                ]
+            },
+            'propolis': {
+                title: "Натуральний бджолиний прополіс",
+                description: "Унікальний природний антибіотик та потужний антисептик напряму з пасіки. Зміцнює імунітет, має виражені бактерицидні та протизапальні властивості.",
+                images: ["propolis1.jpg", "propolis2.jpg"],
+                hasVolumes: true,
+                volumes: [
+                    { name: "100 г", price: 300 },
+                    { name: "200 г", price: 600 },
+                    { name: "300 г", price: 900 }
+                ]
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemKey = urlParams.get('id') || 'may-honey';
+        const product = productsData[itemKey] || productsData['may-honey'];
+
+        let selectedPrice = product.hasVolumes || product.isCandle ? product.volumes[0].price : product.price;
+        let selectedVariantName = product.hasVolumes || product.isCandle ? product.volumes[0].name : '';
+        let colorOptionName = "Натуральна";
+        let colorPriceExtra = 0;
+
+        function renderProductPage() {
+            const container = document.getElementById('productCard');
+            
+            let imagesHtml = `<img src="${product.images[0]}" id="mainImage" class="gallery-main" alt="${product.title}">`;
+            let thumbsHtml = '';
+            
+            if (product.images.length > 1) {
+                thumbsHtml = '<div class="gallery-thumbs">';
+                product.images.forEach((img, index) => {
+                    thumbsHtml += `<img src="${img}" class="thumb-img ${index === 0 ? 'active' : ''}" onclick="changeImage('${img}', this)">`;
+                });
+                thumbsHtml += '</div>';
+            }
+
+            let optionsHtml = '';
+            if (product.hasVolumes || product.isCandle) {
+                optionsHtml = '<div class="volume-options">';
+                product.volumes.forEach((vol, index) => {
+                    optionsHtml += `
+                        <label class="volume-label ${index === 0 ? 'selected' : ''}" onclick="selectVolume(${vol.price}, '${vol.name}', this)">
+                            <input type="radio" name="volume" ${index === 0 ? 'checked' : ''}> ${vol.name}
+                        </label>
+                    `;
+                });
+                optionsHtml += '</div>';
+            }
+
+            let candleColorHtml = '';
+            if (product.isCandle) {
+                candleColorHtml = `
+                    <div class="candle-options-section">
+                        <label>Тип воску:</label>
+                        <div class="volume-options" style="margin-bottom: 0;">
+                            <label class="volume-label selected" onclick="selectColor('Натуральна', 0, this)">
+                                <input type="radio" name="candle-color" checked> Натуральна
+                            </label>
+                            <label class="volume-label" onclick="selectColor('Кольорова вощина (+20 грн)', 20, this)">
+                                <input type="radio" name="candle-color"> Кольорова (+20₴)
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                ${thumbsHtml}
+                ${imagesHtml}
+                <h2 class="product-title">${product.title}</h2>
+                <p class="product-desc">${product.description}</p>
+                <div class="product-price" id="displayPrice">${selectedPrice} грн</div>
+                ${optionsHtml}
+                ${candleColorHtml}
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="changeQty(-1)">-</button>
+                    <input type="number" id="prodQty" class="qty-input" value="1" min="1">
+                    <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+                <button class="btn-add-cart" onclick="addToCartFromPage()">🛒 Додати в кошик</button>
+            `;
+        }
+
+        function changeImage(src, thumbElement) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumb-img').forEach(el => el.classList.remove('active'));
+            thumbElement.classList.add('active');
+        }
+
+        let baseSelectedPrice = selectedPrice;
+
+        function selectVolume(price, variantName, labelElement) {
+            baseSelectedPrice = price;
+            selectedVariantName = variantName;
+            updateTotalPrice();
+            labelElement.parentNode.querySelectorAll('.volume-label').forEach(el => el.classList.remove('selected'));
+            labelElement.classList.add('selected');
+        }
+
+        function selectColor(name, extraPrice, labelElement) {
+            colorOptionName = name;
+            colorPriceExtra = extraPrice;
+            updateTotalPrice();
+            labelElement.parentNode.querySelectorAll('.volume-label').forEach(el => el.classList.remove('selected'));
+            labelElement.classList.add('selected');
+        }
+
+        function updateTotalPrice() {
+            selectedPrice = baseSelectedPrice + colorPriceExtra;
+            document.getElementById('displayPrice').innerText = `${selectedPrice} грн`;
+        }
+
+        function changeQty(delta) {
+            const input = document.getElementById('prodQty');
+            let val = parseInt(input.value) || 1;
+            val += delta;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        let cart = [];
+        try { cart = JSON.parse(localStorage.getItem('medova_cart')) || []; } catch(e) { cart = []; }
+
+        function saveCart() {
+            try { localStorage.setItem('medova_cart', JSON.stringify(cart)); } catch(e) {}
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+            }
+        }
+
+        function addToCartFromPage() {
+            const qty = parseInt(document.getElementById('prodQty').value) || 1;
+            let fullName = product.title;
+            if (selectedVariantName) {
+                fullName += ` (${selectedVariantName})`;
+            }
+            if (product.isCandle) {
+                fullName += ` [${colorOptionName}]`;
+            }
+
+            const existingIndex = cart.findIndex(item => item.name === fullName);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({ name: fullName, price: selectedPrice, qty: qty });
+            }
+            saveCart();
+            alert('🛒 Товар успішно додано до кошика!');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCartModal();
+        }
+
+        function renderCartModal() {
+            const listContainer = document.getElementById('cartItemsList');
+            const totalSumElement = document.getElementById('cartTotalSum');
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = `<p style="text-align:center; color:#888;">Кошик порожній</p>`;
+                totalSumElement.innerText = '0';
+                return;
+            }
+
+            let html = '';
+            let totalSum = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                totalSum += itemTotal;
+                html += `
+                    <div class="cart-item-row">
+                        <div><strong>${item.name}</strong><br><small>${item.qty} шт x ${item.price} грн = ${itemTotal} грн</small></div>
+                        <button type="button" class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+                    </div>
+                `;
+            });
+
+            listContainer.innerHTML = html;
+            totalSumElement.innerText = totalSum;
+        }
+
+        function openCartModal() {
+            renderCartModal();
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert("Кошик порожній!");
+                return;
+            }
+
+            const form = e.target;
+            const pib = form.querySelector('[name="ПІБ"]').value.trim();
+            const phone = form.querySelector('[name="Телефон"]').value.trim();
+            const delivery = form.querySelector('[name="Доставка"]').value;
+            const comment = form.querySelector('[name="Коментар"]').value.trim();
+
+            let totalSum = 0;
+            let itemsListStr = "";
+            cart.forEach(item => {
+                const sum = item.price * item.qty;
+                totalSum += sum;
+                itemsListStr += `• ${item.name} — ${item.qty} шт. (${sum} грн)\n`;
+            });
+
+            const token = "8812886094:AAFdw7NkHOSRB0If8ZMAME4tEbhwq1XCAZA";
+            const chatId = "1763769244";
+
+            const text = `🛒 <b>НОВЕ ЗАМОВЛЕННЯ З СТОРІНКИ ТОВАРУ!</b>\n\n` +
+                         `👤 <b>ПІБ:</b> ${pib}\n` +
+                         `📞 <b>Телефон:</b> ${phone}\n` +
+                         `🚚 <b>Доставка:</b> ${delivery}\n` +
+                         `💬 <b>Коментар:</b> ${comment || 'немає'}\n\n` +
+                         `📦 <b>Товари:</b>\n${itemsListStr}\n` +
+                         `💰 <b>Загальна сума:</b> ${totalSum} грн`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                if (response.ok) {
+                    alert("✅ Замовлення успішно надіслано!");
+                    cart = [];
+                    saveCart();
+                    form.reset();
+                    closeCartModal();
+                } else {
+                    alert("Помилка відправки замовлення. Спробуйте ще раз.");
+                }
+            } catch (err) {
+                alert("Помилка мережі. Перевірте з'єднання з інтернетом.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProductPage();
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
