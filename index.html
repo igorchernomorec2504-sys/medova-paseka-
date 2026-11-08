@@ -85,7 +85,7 @@
             width: auto;
             display: block;
             object-fit: contain;
-            mix-blend-mode: multiply; /* Автоматично прибирає білий квадрат фону картинки */
+            mix-blend-mode: multiply;
         }
 
         header h1 {
@@ -301,22 +301,16 @@
             z-index: 2;
         }
 
+        /* Відновлені акуратні пропорції фотографій як на перших зразках */
         .product-icon-img {
             display: block;
             width: 100%;
             max-width: 180px;
-            height: 140px;
+            height: 190px;
             object-fit: cover;
-            margin: 0 auto 10px;
+            margin: 0 auto 14px;
             border-radius: 14px;
             border: 1.5px solid var(--border-color);
-        }
-
-        /* Збільшений розмір та пропорції лише для трьох подарункових наборів зі скриншотів, а текст опускається нижче */
-        .product-card[data-category="gifts"] .product-icon-img {
-            max-width: 210px;
-            height: 220px;
-            margin: 0 auto 18px;
         }
 
         .product-card h3 {
@@ -1369,9 +1363,13 @@
                     <select id="orderDelivery" required="">
                         <option value="" disabled="" selected="" id="del-placeholder">Оберіть спосіб доставки</option>
                         <option value="Нова пошта" id="del-np">Нова пошта</option>
-                        <option value="Укрпошта">Укрпошта</option>
+                        <option value="Укрпошта" id="del-ukr">Укрпошта</option>
                         <option value="Самовивіз" id="del-pickup">Самовивіз</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label id="label-comment">Коментар до замовлення:</label>
+                    <textarea id="orderComment" rows="2" placeholder="Номер відділення, побажання тощо..."></textarea>
                 </div>
 
                 <div class="modal-buttons">
@@ -1592,6 +1590,7 @@
             const name = document.getElementById('orderName').value.trim();
             const phone = document.getElementById('orderPhone').value.trim();
             const delivery = document.getElementById('orderDelivery').value;
+            const comment = document.getElementById('orderComment').value.trim();
             const statusDiv = document.getElementById('orderStatus');
 
             if (cart.length === 0) return;
@@ -1602,7 +1601,8 @@
             const text = `<b>🛒 Нове замовлення в інтернет-магазині!</b>\n\n` +
                          `<b>👤 ПІБ:</b> ${name}\n` +
                          `<b>📞 Телефон:</b> ${phone}\n` +
-                         `<b>🚚 Доставка:</b> ${delivery}\n\n` +
+                         `<b>🚚 Доставка:</b> ${delivery}\n` +
+                         `<b>💬 Коментар:</b> ${comment || 'Відсутній'}\n\n` +
                          `<b>📦 Товари:</b>\n${itemsDetails}\n\n` +
                          `<b>💰 Загальна сума:</b> ${totalSum} грн`;
 
@@ -1819,8 +1819,10 @@
                 labelName: "ПІБ (Прізвище та Ім'я):",
                 labelPhone: "Номер телефону:",
                 labelDelivery: "Спосіб доставки:",
+                labelComment: "Коментар до замовлення:",
                 delPlaceholder: "Оберіть спосіб доставки",
                 delNp: "Нова пошта",
+                delUkr: "Укрпошта",
                 delPickup: "Самовивіз",
                 btnCloseModal: "Закрити",
                 submitBtn: "Надіслати замовлення",
@@ -1864,8 +1866,10 @@
                 labelName: "ФИО (Фамилия и Имя):",
                 labelPhone: "Номер телефона:",
                 labelDelivery: "Способ доставки:",
+                labelComment: "Комментарий к заказу:",
                 delPlaceholder: "Выберите способ доставки",
                 delNp: "Новая почта",
+                delUkr: "Укрпочта",
                 delPickup: "Самовывоз",
                 btnCloseModal: "Закрыть",
                 submitBtn: "Отправить заказ",
@@ -1917,8 +1921,10 @@
             document.getElementById('label-name').innerText = t.labelName;
             document.getElementById('label-phone').innerText = t.labelPhone;
             document.getElementById('label-delivery').innerText = t.labelDelivery;
+            document.getElementById('label-comment').innerText = t.labelComment;
             document.getElementById('del-placeholder').innerText = t.delPlaceholder;
             document.getElementById('del-np').innerText = t.delNp;
+            document.getElementById('del-ukr').innerText = t.delUkr;
             document.getElementById('del-pickup').innerText = t.delPickup;
             document.getElementById('btn-close-modal').innerText = t.btnCloseModal || "Закрити";
             document.getElementById('submitBtn').innerText = t.submitBtn;
