@@ -39,7 +39,8 @@
         .thumb-img:hover, .thumb-img.active { border-color: var(--dark-amber); transform: scale(1.05); }
 
         .product-title { font-family: 'Comfortaa', cursive; font-size: 1.4rem; color: var(--dark-amber); margin-bottom: 10px; }
-        .product-desc { font-size: 0.95rem; color: #5d4037; line-height: 1.5; margin-bottom: 15px; }
+        .product-desc { font-size: 0.95rem; color: #5d4037; line-height: 1.5; margin-bottom: 12px; }
+        .product-extended-desc { font-size: 0.88rem; color: #795548; line-height: 1.5; background: #fff8e1; padding: 12px; border-radius: 10px; border-left: 4px solid var(--primary-amber); margin-bottom: 15px; }
         .product-price { font-weight: 700; font-size: 1.3rem; color: var(--dark-amber); margin-bottom: 15px; }
         
         .volume-options { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -53,6 +54,10 @@
         .qty-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
         .qty-btn { background: #ffe0b2; color: var(--dark-amber); border: none; width: 35px; height: 35px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
         .qty-input { width: 60px; text-align: center; padding: 8px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-weight: 700; font-size: 1rem; }
+
+        .product-item-comment { margin-bottom: 15px; }
+        .product-item-comment label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px; color: var(--dark-amber); }
+        .product-item-comment textarea { width: 100%; padding: 10px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-size: 0.9rem; outline: none; height: 60px; resize: vertical; }
 
         .btn-add-cart { background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 15px rgba(230,81,0,0.2); }
 
@@ -132,6 +137,7 @@
                     <select name="Доставка" required>
                         <option value="" disabled selected>Оберіть спосіб доставки</option>
                         <option value="Нова пошта">Нова пошта</option>
+                        <option value="Укрпошта">Укрпошта</option>
                         <option value="Самовивіз">Самовивіз</option>
                     </select>
                 </div>
@@ -159,6 +165,7 @@
             'sunflower-honey': {
                 title: "Мед Соняшниковий",
                 description: "Свіжий, густий та сонячний мед з власної пасіки. Натуральна кристалізація — знак якості та зрілості.",
+                extendedDescription: "Соняшниковий мед має яскраво-жовтий колір, насичений солодкий смак та приємний легкий аромат. Він містить велику кількість глюкози, завдяки чому швидко кристалізується, утворюючи дрібнозернисту структуру. Чудово підходить для повсякденного вживання, випічки та підтримки енергії.",
                 images: ["med.jpg"],
                 hasVolumes: true,
                 volumes: [
@@ -170,6 +177,7 @@
             'may-honey': {
                 title: "Мед Травневий",
                 description: "Ароматний, духмяний та ніжний травневий мед зібраний під час першого весняного медозбору.",
+                extendedDescription: "Травневий мед вважається одним із найцінніших та найелітніших видів меду. Бджоли збирають його з перших весняних квіток та плодових дерев. Мед має прозорий золотавий відтінок, неймовірно ніжний м'який смак без гіркоти та багатий вітамінний комплекс.",
                 images: ["may1.jpg", "may2.jpg", "may3.jpg"],
                 hasVolumes: true,
                 volumes: [
@@ -181,6 +189,7 @@
             'candle': {
                 title: "Свічки з вощини",
                 description: "100% натуральний пасічний віск. Ручна робота, дарують затишок та природний аромат.",
+                extendedDescription: "Свічки виготовлені виключно з натуральної бджолиної вощини без хімічних домішок. При горінні вони виділяють легкий медово-прополисний аромат, м'яко очищають повітря в кімнаті від пилу та створюють надзвичайно затишну й теплу атмосферу в домі.",
                 images: ["svecha1.jpg", "svecha2.jpg", "svecha4.jpg", "swecha.jpg"],
                 isCandle: true,
                 volumes: [
@@ -193,6 +202,7 @@
             'propolis': {
                 title: "Натуральний бджолиний прополіс",
                 description: "Унікальний природний антибіотик та потужний антисептик напряму з пасіки. Зміцнює імунітет, має виражені бактерицидні та протизапальні властивості.",
+                extendedDescription: "Прополіс — це унікальний смолистий продукт життєдіяльності бджіл, яким вони захищають вулик від бактерій. Це потужний природний імуностимулятор, який допомагає організму боротися із запаленнями, прискорює загоєння та підтримує захисні сили організму.",
                 images: ["propolis1.jpg", "propolis2.jpg"],
                 hasVolumes: true,
                 volumes: [
@@ -256,11 +266,14 @@
                 `;
             }
 
+            let extendedDescHtml = product.extendedDescription ? `<div class="product-extended-desc">${product.extendedDescription}</div>` : '';
+
             container.innerHTML = `
                 ${thumbsHtml}
                 ${imagesHtml}
                 <h2 class="product-title">${product.title}</h2>
                 <p class="product-desc">${product.description}</p>
+                ${extendedDescHtml}
                 <div class="product-price" id="displayPrice">${selectedPrice} грн</div>
                 ${optionsHtml}
                 ${candleColorHtml}
@@ -268,6 +281,10 @@
                     <button class="qty-btn" onclick="changeQty(-1)">-</button>
                     <input type="number" id="prodQty" class="qty-input" value="1" min="1">
                     <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+                <div class="product-item-comment">
+                    <label for="itemComment">Коментар до товару (побажання):</label>
+                    <textarea id="itemComment" placeholder="Наприклад: подрібнити, гарно запакувати тощо..."></textarea>
                 </div>
                 <button class="btn-add-cart" onclick="addToCartFromPage()">🛒 Додати в кошик</button>
             `;
@@ -327,12 +344,17 @@
 
         function addToCartFromPage() {
             const qty = parseInt(document.getElementById('prodQty').value) || 1;
+            const commentVal = document.getElementById('itemComment').value.trim();
+            
             let fullName = product.title;
             if (selectedVariantName) {
                 fullName += ` (${selectedVariantName})`;
             }
             if (product.isCandle) {
                 fullName += ` [${colorOptionName}]`;
+            }
+            if (commentVal) {
+                fullName += ` — коментар: ${commentVal}`;
             }
 
             const existingIndex = cart.findIndex(item => item.name === fullName);
@@ -342,7 +364,10 @@
                 cart.push({ name: fullName, price: selectedPrice, qty: qty });
             }
             saveCart();
-            alert('🛒 Товар успішно додано до кошика!');
+            
+            // Скидаємо поле коментаря та лічильник кількості назад на 1
+            document.getElementById('itemComment').value = '';
+            document.getElementById('prodQty').value = 1;
         }
 
         function removeFromCart(index) {
