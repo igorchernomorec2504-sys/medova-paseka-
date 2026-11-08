@@ -312,6 +312,13 @@
             border: 1.5px solid var(--border-color);
         }
 
+        /* Збільшений розмір та пропорції лише для трьох подарункових наборів зі скриншотів, а текст опускається нижче */
+        .product-card[data-category="gifts"] .product-icon-img {
+            max-width: 210px;
+            height: 220px;
+            margin: 0 auto 18px;
+        }
+
         .product-card h3 {
             font-family: 'Comfortaa', cursive;
             font-size: 1.15rem;
@@ -1292,7 +1299,7 @@
 
         <section class="consultation-section">
             <h2>💬 Бажаєте проконсультуватися чи підібрати мед?</h2>
-            <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі питання!</p>
+            <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі запитання!</p>
             
             <form id="consultationForm">
                 <div class="form-group">
