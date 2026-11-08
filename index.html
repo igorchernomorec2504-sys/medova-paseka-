@@ -485,6 +485,40 @@
             box-shadow: 0 6px 18px rgba(230, 138, 0, 0.35);
         }
 
+        .card-link-btn {
+            background: linear-gradient(135deg, #ffb703 0%, #e68a00 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 14px rgba(230, 138, 0, 0.25);
+            transition: all 0.2s ease;
+        }
+        .card-link-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        .timer-box { 
+            background: #fff3e0; 
+            border: 1px dashed var(--primary-amber); 
+            padding: 6px; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-size: 0.78rem; 
+            font-weight: 700; 
+            color: #d84315; 
+            margin-bottom: 12px; 
+        }
+
         /* --- ДОСТАВКА И ОТЗЫВЫ --- */
         .delivery-section, .reviews-section {
             background: var(--bg-card);
@@ -1031,92 +1065,59 @@
 
         <div class="products-grid" id="productsGrid">
 
-            <!-- Мед Травневий -->
+            <!-- Мед Травневий (з переходом на product.html) -->
             <div class="product-card" data-category="honey" data-name="мед травневий">
                 <span class="badge-highlight" id="badge-may">ВЕСНЯНИЙ СМАК</span>
                 <div>
                     <div class="product-icon">🌼</div>
                     <h3 id="may-honey-title">Мед Травневий</h3>
                     <p id="may-honey-desc">Ароматний і ніжний мед із перших весняних квітів. Найперший збір року — солодкий, запашний та дуже корисний!</p>
-                    
-                    <div class="options-group">
-                        <label class="group-label" id="lbl-volume-may">Об'єм:</label>
-                        <div class="radio-options-row">
-                            <label class="radio-option"><input type="radio" name="may-honey-vol" value="350" data-label="1 л" checked="" onchange="updateMayHoney()"> 1л</label>
-                            <label class="radio-option"><input type="radio" name="may-honey-vol" value="700" data-label="2 л" onchange="updateMayHoney()"> 2л</label>
-                            <label class="radio-option"><input type="radio" name="may-honey-vol" value="1000" data-label="3 л" onchange="updateMayHoney()"> 3л</label>
-                        </div>
-                    </div>
                 </div>
                 <div>
-                    <div class="product-price"><span id="may-honey-price">350</span> грн</div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty('qty-may-honey', -1)">-</button>
-                        <input type="number" id="qty-may-honey" class="qty-input" value="1" min="1">
-                        <button class="qty-btn" onclick="changeQty('qty-may-honey', 1)">+</button>
-                    </div>
-                    <button class="btn-add-cart" onclick="addMayHoneyToCart()" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <div class="product-price">від 350 грн</div>
+                    <a href="product.html?id=may-honey" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати об'єм</a>
                 </div>
             </div>
 
-            <!-- Мед Соняшниковий -->
+            <!-- Мед Соняшниковий (з переходом на product.html) -->
             <div class="product-card" data-category="honey" data-name="мед соняшниковий">
                 <span class="badge-highlight" id="badge-sun">ХІТ ПРОДАЖ</span>
                 <div>
                     <div class="product-icon">🌻</div>
                     <h3 id="honey-title">Мед Соняшниковий</h3>
                     <p id="honey-desc">Густий, сонячний та найсолодший мед! Натуральна кристалізація — знак справжньої якості та зрілості з власної пасіки.</p>
-                    
-                    <div class="options-group">
-                        <label class="group-label" id="lbl-volume">Об'єм:</label>
-                        <div class="radio-options-row">
-                            <label class="radio-option"><input type="radio" name="honey-vol" value="250" data-label="1 л" checked="" onchange="updateHoney()"> 1л</label>
-                            <label class="radio-option"><input type="radio" name="honey-vol" value="500" data-label="2 л" onchange="updateHoney()"> 2л</label>
-                            <label class="radio-option"><input type="radio" name="honey-vol" value="700" data-label="3 л" onchange="updateHoney()"> 3л</label>
-                        </div>
-                    </div>
                 </div>
                 <div>
-                    <div class="product-price"><span id="honey-price">250</span> грн</div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty('qty-honey', -1)">-</button>
-                        <input type="number" id="qty-honey" class="qty-input" value="1" min="1">
-                        <button class="qty-btn" onclick="changeQty('qty-honey', 1)">+</button>
-                    </div>
-                    <button class="btn-add-cart" onclick="addHoneyToCart()" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <div class="product-price">від 250 грн</div>
+                    <a href="product.html?id=sunflower-honey" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати об'єм</a>
                 </div>
             </div>
 
-            <!-- Свічки з вощини -->
+            <!-- Свічки з вощини (з переходом на product.html) -->
             <div class="product-card" data-category="candles" data-name="свічка з вощини">
                 <span class="badge-highlight" id="badge-candle">РУЧНА РОБОТА</span>
                 <div>
                     <div class="product-icon">🏵️</div>
                     <h3 id="candle-title">Свічка з вощини</h3>
                     <p id="candle-desc">100% чистий пасічний віск. Дарують затишок, натуральний медовий аромат та очищають повітря в домі.</p>
-                    <div class="options-group">
-                        <label class="group-label" id="lbl-size">Розмір:</label>
-                        <div class="candles-grid-row">
-                            <label class="radio-option"><input type="radio" name="candle-param" value="40" data-size="3х10 см" checked="" onchange="updateCandle()"> 3х10см (40₴)</label>
-                            <label class="radio-option"><input type="radio" name="candle-param" value="80" data-size="3х20 см" onchange="updateCandle()"> 3х20см (80₴)</label>
-                            <label class="radio-option"><input type="radio" name="candle-param" value="50" data-size="4х10 см" onchange="updateCandle()"> 4х10см (50₴)</label>
-                            <label class="radio-option"><input type="radio" name="candle-param" value="100" data-size="4х20 см" onchange="updateCandle()"> 4х20см (100₴)</label>
-                        </div>
-                        <label class="group-label" style="margin-top:10px;" id="lbl-type">Тип воску:</label>
-                        <div class="radio-options-row">
-                            <label class="radio-option"><input type="radio" name="candle-type" value="natural" data-typename="Натуральна" checked="" onchange="updateCandle()"> <span id="lbl-nat">Натуральна</span></label>
-                            <label class="radio-option"><input type="radio" name="candle-type" value="color" data-typename="Кольорова вощина (+20 грн)" onchange="updateCandle()"> <span id="lbl-col">Кольорова (+20₴)</span></label>
-                        </div>
-                    </div>
                 </div>
                 <div>
-                    <div class="product-price"><span id="candle-price">40</span> грн</div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty('qty-candle', -1)">-</button>
-                        <input type="number" id="qty-candle" class="qty-input" value="1" min="1">
-                        <button class="qty-btn" onclick="changeQty('qty-candle', 1)">+</button>
-                    </div>
-                    <button class="btn-add-cart" onclick="addCandleToCart()" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <div class="product-price">від 40 грн</div>
+                    <a href="product.html?id=candle" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати розмір</a>
+                </div>
+            </div>
+
+            <!-- Прополіс (з переходом на product.html) -->
+            <div class="product-card" data-category="propolis other" data-name="прополіс">
+                <span class="badge-highlight" id="badge-prop">МІЦНИЙ ІМУНІТЕТ</span>
+                <div>
+                    <div class="product-icon">👌</div>
+                    <h3 id="propolis-title">Прополіс</h3>
+                    <p id="propolis-desc">Сильний природний антисептик та захисник здоров'я. Натуральний смолистий продукт прямо з вулика.</p>
+                </div>
+                <div>
+                    <div class="product-price">від 300 грн</div>
+                    <a href="product.html?id=propolis" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати вагу</a>
                 </div>
             </div>
 
@@ -1150,115 +1151,89 @@
                 </div>
             </div>
 
-            <!-- Прополіс -->
-            <div class="product-card" data-category="propolis other" data-name="прополіс">
-                <span class="badge-highlight" id="badge-prop">МІЦНИЙ ІМУНІТЕТ</span>
-                <div>
-                    <div class="product-icon">👌</div>
-                    <h3 id="propolis-title">Прополіс</h3>
-                    <p id="propolis-desc">Сильний природний антисептик та захисник здоров'я. Натуральний смолистий продукт прямо з вулика.</p>
-                    
-                    <div class="options-group">
-                        <label class="group-label" id="lbl-weight-prop">ФАСУВАННЯ:</label>
-                        <div class="pollen-grid-row">
-                            <label class="radio-option"><input type="radio" name="prop-weight" value="250" data-label="100 г" checked="" onchange="updateProp()"> 100г (250₴)</label>
-                            <label class="radio-option"><input type="radio" name="prop-weight" value="450" data-label="200 г" onchange="updateProp()"> 200г (450₴)</label>
-                            <label class="radio-option" style="grid-column: span 2;"><input type="radio" name="prop-weight" value="600" data-label="300 г" onchange="updateProp()"> 300г (600₴)</label>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="product-price"><span id="prop-price">250</span> грн</div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="changeQty('qty-prop', -1)">-</button>
-                        <input type="number" id="qty-prop" class="qty-input" value="1" min="1">
-                        <button class="qty-btn" onclick="changeQty('qty-prop', 1)">+</button>
-                    </div>
-                    <button class="btn-add-cart" onclick="addPropToCart()" data-translate="add-to-cart">🛒 Додати в кошик</button>
-                </div>
-            </div>
-
             <!-- Стільниковий мед -->
             <div class="product-card" data-category="honey other" data-name="стільниковий мед">
                 <span class="badge-highlight" id="badge-comb">100% ЕКО</span>
                 <div>
-                    <div class="product-icon">🍯</div>
-                    <h3 id="comb-title">Стільниковий Мед</h3>
-                    <p id="comb-desc">Найчистіший делікатес у запечатаних воскових сотах. Максимум користі, прополісу та задоволення!</p>
+                    <div class="product-icon">
+                        <img src="sotu.jpg" alt="Стільниковий мед" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    </div>
+                    <h3 id="comb-title">Стільниковий Мед 🍯</h3>
+                    <p id="comb-desc">Натуральний продукт найвищої якості, неймовірно смачний та корисний. Ціна за 1 кг.</p>
                 </div>
                 <div>
-                    <div class="product-price">150 грн</div>
+                    <div class="product-price">150 грн / кг</div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('qty-comb', -1)">-</button>
                         <input type="number" id="qty-comb" class="qty-input" value="1" min="1">
                         <button class="qty-btn" onclick="changeQty('qty-comb', 1)">+</button>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart('Стільниковий Мед (у рамці)', 150, 'qty-comb')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <button class="btn-add-cart" onclick="addToCart('Стільниковий мед (1 кг)', 150, 'qty-comb')" data-translate="add-to-cart">🛒 Додати в кошик</button>
                 </div>
             </div>
 
-            <!-- Подарунковий набір 1 -->
-            <div class="product-card" data-category="gifts" data-name="подарунковий набір медовий затишок мед свічка пилок">
+            <!-- Подарунковий набір 1: «Медовий затишок» (з новими параметрами: 250 грн замість 300, 20x3 см) -->
+            <div class="product-card" data-category="gifts" data-name="подарунковий набір медовий затишок свічки">
                 <span class="badge-highlight">🔥 АКЦІЯ</span>
                 <div>
-                    <div class="product-icon">🎁</div>
+                    <div class="product-icon">
+                        <img src="svechi-podarok.jpg" alt="Набір Медовий затишок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    </div>
                     <h3>Набір «Медовий затишок»</h3>
-                    <p>Соняшниковий мед (0,5 л) + Воскова свічка + Пилок (100 г)</p>
+                    <p>Чудовий комплект свічок ручної роботи. Розміри свічей: 20×3 см.</p>
+                    <div class="timer-box" id="promoTimer1">⏳ Акція до кінця місяця!</div>
                 </div>
                 <div>
-                    <div class="product-price"><span class="old-price">350 грн</span> <span>300</span> грн</div>
+                    <div class="product-price"><span class="old-price">300 грн</span> <span>250</span> грн</div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('qty-gift1', -1)">-</button>
                         <input type="number" id="qty-gift1" class="qty-input" value="1" min="1">
                         <button class="qty-btn" onclick="changeQty('qty-gift1', 1)">+</button>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart('Набір «Медовий затишок» (Мед + Свічка + Пилок)', 300, 'qty-gift1')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <button class="btn-add-cart" onclick="addToCart('Набір «Медовий затишок» (20×3 см)', 250, 'qty-gift1')" data-translate="add-to-cart">🛒 Додати в кошик</button>
                 </div>
             </div>
 
-            <!-- Подарунковий набір 2 -->
-            <div class="product-card" data-category="gifts" data-name="подарунковий набір свічки">
-                <span class="badge-highlight" id="badge-gift2">ЗАТИШОК</span>
+            <!-- Подарунковий набір 2: Патріотичний набір (200 грн замість 220, таймер до кінця місяця) -->
+            <div class="product-card" data-category="gifts" data-name="патріотичний набір свічки">
+                <span class="badge-highlight" id="badge-gift2">ХІТ / АКЦІЯ</span>
                 <div>
-                    <div class="product-icon">🎁</div>
-                    <h3 id="gift2-title">Подарунковий набір свічок</h3>
-                    <p id="gift2-desc">Дві гарні воскові свічки для затишного вечора. Наповнять дім теплом та ароматом пасіки.</p>
+                    <div class="product-icon">
+                        <img src="nabor3.jpg" alt="Патріотичний набір" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    </div>
+                    <h3 id="gift2-title">Патріотичний набір свічок</h3>
+                    <p id="gift2-desc">Синьо-жовті свічки з вощини. Розміри свічей: 20×3 см.</p>
+                    <div class="timer-box" id="promoTimer">⏳ До кінця акції: завантаження...</div>
                 </div>
                 <div>
-                    <div class="product-price"><span class="old-price">200 грн</span> <span>170</span> грн</div>
+                    <div class="product-price"><span class="old-price">220 грн</span> <span>200</span> грн</div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('qty-gift2', -1)">-</button>
                         <input type="number" id="qty-gift2" class="qty-input" value="1" min="1">
                         <button class="qty-btn" onclick="changeQty('qty-gift2', 1)">+</button>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart('Подарунковий набір свічок (2 шт 20x3 см: синя + жовта)', 170, 'qty-gift2')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <button class="btn-add-cart" onclick="addToCart('Патріотичний набір свічок (20×3 см)', 200, 'qty-gift2')" data-translate="add-to-cart">🛒 Додати в кошик</button>
                 </div>
             </div>
 
-            <!-- Подарунковий набір 3 -->
-            <div class="product-card" data-category="gifts" data-name="подарунковий набір мікс мед свіча пилок">
-                <span class="badge-highlight" id="badge-gift3">ВСЕ В ОДНОМУ</span>
+            <!-- Подарунковий набір 3: Набір з натуральної вощини (170 грн замість 200, медовий аромат) -->
+            <div class="product-card" data-category="gifts" data-name="набір з натуральної вощини свічки">
+                <span class="badge-highlight">-15%</span>
                 <div>
-                    <div class="product-icon">🎁</div>
-                    <h3 id="gift3-title">Подарунковий набір «Мікс»</h3>
-                    <p id="gift3-desc">Найкраще в одному наборі: смачний мед, корисний пилок та затишна свічка. Чудова увага близьким!</p>
-                    
-                    <div class="options-group">
-                        <label class="group-label" id="lbl-candle-color">Колір свічки:</label>
-                        <div class="radio-options-row">
-                            <label class="radio-option"><input type="radio" name="gift3-color" value="Синя" checked=""> <span id="col-blue">Синя</span></label>
-                            <label class="radio-option"><input type="radio" name="gift3-color" value="Натуральна жовта"> <span id="col-yellow">Жовта натуральна</span></label>
-                        </div>
+                    <div class="product-icon">
+                        <img src="svecha3.jpg" alt="Набір з натуральної вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     </div>
+                    <h3 id="gift3-title">Набір з натуральної вощини</h3>
+                    <p id="gift3-desc">З медовим запахом та ніжним природним ароматом.</p>
                 </div>
                 <div>
-                    <div class="product-price"><span class="old-price">400 грн</span> <span>350</span> грн</div>
+                    <div class="product-price"><span class="old-price">200 грн</span> <span>170</span> грн</div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('qty-gift3', -1)">-</button>
                         <input type="number" id="qty-gift3" class="qty-input" value="1" min="1">
                         <button class="qty-btn" onclick="changeQty('qty-gift3', 1)">+</button>
                     </div>
-                    <button class="btn-add-cart" onclick="addGift3ToCart()" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                    <button class="btn-add-cart" onclick="addToCart('Набір з натуральної вощини з медовим ароматом', 170, 'qty-gift3')" data-translate="add-to-cart">🛒 Додати в кошик</button>
                 </div>
             </div>
 
@@ -1476,80 +1451,29 @@
             }
         });
 
-        function addGift3ToCart() {
-            const colorRadio = document.querySelector('input[name="gift3-color"]:checked');
-            const colorText = colorRadio ? colorRadio.value : 'Синя';
-            const name = `Подарунковий набір «Мікс» (0.5л різнотрав'я + свіча 20x3 см - ${colorText} + 100г пилку)`;
-            const qtyId = 'qty-gift3';
-            const qty = parseInt(document.getElementById(qtyId).value) || 1;
-            
-            addToCartCommon(name, 350, qty);
-            document.getElementById(qtyId).value = 1;
-        }
+        // Таймер обратного отсчета до конца текущего месяца
+        function updateTimer() {
+            const now = new Date();
+            const endMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+            const diff = endMonth - now;
 
-        function updateMayHoney() {
-            const selected = document.querySelector('input[name="may-honey-vol"]:checked');
-            document.getElementById('may-honey-price').innerText = selected.value;
-        }
-
-        function addMayHoneyToCart() {
-            const selected = document.querySelector('input[name="may-honey-vol"]:checked');
-            const volumeLabel = selected.getAttribute('data-label');
-            const price = parseInt(selected.value);
-            const name = `Мед Травневий (${volumeLabel})`;
-            const qtyId = 'qty-may-honey';
-            const qty = parseInt(document.getElementById(qtyId).value) || 1;
-            
-            addToCartCommon(name, price, qty);
-            document.getElementById(qtyId).value = 1;
-        }
-
-        function updateHoney() {
-            const selected = document.querySelector('input[name="honey-vol"]:checked');
-            document.getElementById('honey-price').innerText = selected.value;
-        }
-
-        function addHoneyToCart() {
-            const selected = document.querySelector('input[name="honey-vol"]:checked');
-            const volumeLabel = selected.getAttribute('data-label');
-            const price = parseInt(selected.value);
-            const name = `Мед Соняшниковий (${volumeLabel})`;
-            const qtyId = 'qty-honey';
-            const qty = parseInt(document.getElementById(qtyId).value) || 1;
-            
-            addToCartCommon(name, price, qty);
-            document.getElementById(qtyId).value = 1;
-        }
-
-        function updateCandle() {
-            const sizeRadio = document.querySelector('input[name="candle-param"]:checked');
-            const typeRadio = document.querySelector('input[name="candle-type"]:checked');
-            
-            let basePrice = parseInt(sizeRadio.value);
-            if (typeRadio.value === 'color') {
-                basePrice += 20;
-            }
-            document.getElementById('candle-price').innerText = basePrice;
-        }
-
-        function addCandleToCart() {
-            const sizeRadio = document.querySelector('input[name="candle-param"]:checked');
-            const typeRadio = document.querySelector('input[name="candle-type"]:checked');
-            
-            let basePrice = parseInt(sizeRadio.value);
-            if (typeRadio.value === 'color') {
-                basePrice += 20;
+            if (diff <= 0) {
+                document.getElementById('promoTimer').innerText = '⏳ Акція завершена';
+                return;
             }
 
-            const sizeText = sizeRadio.getAttribute('data-size');
-            const typeText = typeRadio.getAttribute('data-typename');
-            const name = `Свічка з вощини (${sizeText}, ${typeText})`;
-            const qtyId = 'qty-candle';
-            const qty = parseInt(document.getElementById(qtyId).value) || 1;
-            
-            addToCartCommon(name, basePrice, qty);
-            document.getElementById(qtyId).value = 1;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            const timerEl = document.getElementById('promoTimer');
+            if(timerEl) {
+                timerEl.innerText = `⏳ До кінця акції: ${days}д ${hours}г ${minutes}хв ${seconds}с`;
+            }
         }
+        setInterval(updateTimer, 1000);
+        updateTimer();
 
         function updatePollen() {
             const selected = document.querySelector('input[name="pollen-weight"]:checked');
@@ -1562,23 +1486,6 @@
             const price = parseInt(selected.value);
             const name = `Бджолиний Пилок (${weightLabel})`;
             const qtyId = 'qty-pollen';
-            const qty = parseInt(document.getElementById(qtyId).value) || 1;
-            
-            addToCartCommon(name, price, qty);
-            document.getElementById(qtyId).value = 1;
-        }
-
-        function updateProp() {
-            const selected = document.querySelector('input[name="prop-weight"]:checked');
-            document.getElementById('prop-price').innerText = selected.value;
-        }
-
-        function addPropToCart() {
-            const selected = document.querySelector('input[name="prop-weight"]:checked');
-            const weightLabel = selected.getAttribute('data-label');
-            const price = parseInt(selected.value);
-            const name = `Прополіс (${weightLabel})`;
-            const qtyId = 'qty-prop';
             const qty = parseInt(document.getElementById(qtyId).value) || 1;
             
             addToCartCommon(name, price, qty);
@@ -1907,6 +1814,7 @@
                 combTitle: "Стільниковий Мед",
                 combDesc: "Найчистіший делікатес у запечатаних воскових сотах. Максимум користі, прополісу та задоволення!",
                 addToCart: "🛒 Додати в кошик",
+                detailsBtn: "Детальніше / Обрати об'єм",
                 aboutHeading: "Про нашу пасіку",
                 aboutText1: "Від вуликів до баночки — ми працюємо з власною пасікою. Мед качаємо своїми руками, свічки виготовляємо з натуральної вощини, а прополіс та пилок збираємо невеликими партіями.",
                 aboutText2: "Усі роботи робимо самі, з турботою про якість для вашої родини! При великих замовленнях можлива індивідуальна домовленість.",
@@ -1922,23 +1830,14 @@
                 delPickup: "Самовивіз",
                 btnCloseModal: "Закрити",
                 submitBtn: "Надіслати замовлення",
-                lblVolume: "Об'єм:",
-                lblSize: "Розмір:",
-                lblType: "Тип воску:",
-                lblNat: "Натуральна",
-                lblCol: "Кольорова (+20₴)",
                 lblWeight: "Фасування:",
-                lblCandleColor: "Колір свічки:",
-                colBlue: "Синя",
-                colYellow: "Жовта натуральна",
                 badgeMay: "ВЕСНЯНИЙ СМАК",
                 badgeSun: "ХІТ ПРОДАЖ",
                 badgeCandle: "РУЧНА РОБОТА",
                 badgePollen: "ЗАРЯД ЕНЕРГІЇ",
                 badgeProp: "МІЦНИЙ ІМУНІТЕТ",
                 badgeComb: "100% ЕКО",
-                badgeGift2: "ЗАТИШОК",
-                badgeGift3: "ВСЕ В ОДНОМУ"
+                badgeGift2: "ЗАТИШОК"
             },
             ru: {
                 pageTitle: "Медовая Пасека | Натуральный мед и изделия из воска",
@@ -1960,6 +1859,7 @@
                 combTitle: "Сотовый Мед",
                 combDesc: "Чистейший деликатес в запечатанных восковых сотах. Максимум пользы, прополиса и удовольствия!",
                 addToCart: "🛒 Добавить в корзину",
+                detailsBtn: "Подробнее / Выбрать объем",
                 aboutHeading: "О нашей пасеке",
                 aboutText1: "От ульев до баночки — мы работаем с собственной пасекой. Мед качаем своими руками, свечи изготавливаем из натуральной вощины, а прополис и пыльцу собираем небольшими партиями.",
                 aboutText2: "Все работы делаем сами, с заботой о качестве для вашей семьи! При крупных заказах возможна индивидуальная договоренность.",
@@ -1975,23 +1875,14 @@
                 delPickup: "Самовывоз",
                 btnCloseModal: "Закрыть",
                 submitBtn: "Отправить заказ",
-                lblVolume: "Объем:",
-                lblSize: "Размер:",
-                lblType: "Тип воска:",
-                lblNat: "Натуральная",
-                lblCol: "Цветная (+20₴)",
                 lblWeight: "Фасовка:",
-                lblCandleColor: "Цвет свечи:",
-                colBlue: "Синяя",
-                colYellow: "Желтая натуральная",
                 badgeMay: "ВЕСЕННИЙ ВКУС",
                 badgeSun: "ХИТ ПРОДАЖ",
                 badgeCandle: "РУЧНАЯ РАБОТА",
                 badgePollen: "ЗАРЯД ЭНЕРГИИ",
                 badgeProp: "КРЕПКИЙ ИММУНИТЕТ",
                 badgeComb: "100% ЭКО",
-                badgeGift2: "УЮТ",
-                badgeGift3: "ВСЕ В ОДНОМ"
+                badgeGift2: "УЮТ"
             }
         };
 
@@ -2020,6 +1911,7 @@
             document.getElementById('comb-desc').innerText = t.combDesc;
 
             document.querySelectorAll('[data-translate="add-to-cart"]').forEach(el => el.innerText = t.addToCart);
+            document.querySelectorAll('[data-translate="details-btn"]').forEach(el => el.innerText = t.detailsBtn);
 
             document.getElementById('about-heading').innerText = t.aboutHeading;
             document.getElementById('about-text-1').innerText = t.aboutText1;
@@ -2037,16 +1929,7 @@
             document.getElementById('btn-close-modal').innerText = t.btnCloseModal || "Закрити";
             document.getElementById('submitBtn').innerText = t.submitBtn;
 
-            document.querySelectorAll('[id^="lbl-volume"]').forEach(el => el.innerText = t.lblVolume);
-            document.getElementById('lbl-size').innerText = t.lblSize;
-            document.getElementById('lbl-type').innerText = t.lblType;
-            document.getElementById('lbl-nat').innerText = t.lblNat;
-            document.getElementById('lbl-col').innerText = t.lblCol;
             document.getElementById('lbl-weight').innerText = t.lblWeight;
-            document.getElementById('lbl-weight-prop').innerText = t.lblWeight;
-            document.getElementById('lbl-candle-color').innerText = t.lblCandleColor;
-            document.getElementById('col-blue').innerText = t.colBlue;
-            document.getElementById('col-yellow').innerText = t.colYellow;
 
             document.getElementById('badge-may').innerText = t.badgeMay;
             document.getElementById('badge-sun').innerText = t.badgeSun;
@@ -2055,7 +1938,6 @@
             document.getElementById('badge-prop').innerText = t.badgeProp;
             document.getElementById('badge-comb').innerText = t.badgeComb;
             document.getElementById('badge-gift2').innerText = t.badgeGift2;
-            document.getElementById('badge-gift3').innerText = t.badgeGift3;
 
             document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
             document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
