@@ -55,10 +55,6 @@
         .qty-btn { background: #ffe0b2; color: var(--dark-amber); border: none; width: 35px; height: 35px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
         .qty-input { width: 60px; text-align: center; padding: 8px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-weight: 700; font-size: 1rem; }
 
-        .product-item-comment { margin-bottom: 15px; }
-        .product-item-comment label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 5px; color: var(--dark-amber); }
-        .product-item-comment textarea { width: 100%; padding: 10px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-size: 0.9rem; outline: none; height: 60px; resize: vertical; }
-
         .btn-add-cart { background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 15px rgba(230,81,0,0.2); }
 
         .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; padding: 15px; }
@@ -282,10 +278,6 @@
                     <input type="number" id="prodQty" class="qty-input" value="1" min="1">
                     <button class="qty-btn" onclick="changeQty(1)">+</button>
                 </div>
-                <div class="product-item-comment">
-                    <label for="itemComment">Коментар до товару (побажання):</label>
-                    <textarea id="itemComment" placeholder="Наприклад: подрібнити, гарно запакувати тощо..."></textarea>
-                </div>
                 <button class="btn-add-cart" onclick="addToCartFromPage()">🛒 Додати в кошик</button>
             `;
         }
@@ -344,7 +336,6 @@
 
         function addToCartFromPage() {
             const qty = parseInt(document.getElementById('prodQty').value) || 1;
-            const commentVal = document.getElementById('itemComment').value.trim();
             
             let fullName = product.title;
             if (selectedVariantName) {
@@ -352,9 +343,6 @@
             }
             if (product.isCandle) {
                 fullName += ` [${colorOptionName}]`;
-            }
-            if (commentVal) {
-                fullName += ` — коментар: ${commentVal}`;
             }
 
             const existingIndex = cart.findIndex(item => item.name === fullName);
@@ -365,8 +353,7 @@
             }
             saveCart();
             
-            // Скидаємо поле коментаря та лічильник кількості назад на 1
-            document.getElementById('itemComment').value = '';
+            // Повертаємо лічильник кількості назад на 1 без жодних спливаючих вікон
             document.getElementById('prodQty').value = 1;
         }
 
