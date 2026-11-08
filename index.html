@@ -85,6 +85,7 @@
             width: auto;
             display: block;
             object-fit: contain;
+            background: transparent; /* Прибрано будь-який фон */
         }
 
         header h1 {
@@ -107,7 +108,7 @@
 
         .top-cart-btn {
             position: fixed;
-            top: 16px;
+            top: 55px;
             right: 16px;
             background: #ffffff;
             color: var(--dark-amber);
@@ -300,18 +301,16 @@
             z-index: 2;
         }
 
-        /* КОМПАКТНІ ТА АКУРАТНІ ЗОБРАЖЕННЯ ТОВАРІВ */
+        /* ПОВЕРНУТО ПОЧАТКОВИЙ РОЗМІР ТА ВИГЛЯД ФОТОГРАФІЙ У КАТАЛОЗІ */
         .product-icon-img {
             display: block;
             width: 100%;
-            max-width: 140px;
-            height: 110px;
-            object-fit: contain;
+            max-width: 180px;
+            height: 140px;
+            object-fit: cover;
             margin: 0 auto 10px;
-            border-radius: 12px;
-            background-color: #fffbf5;
+            border-radius: 14px;
             border: 1.5px solid var(--border-color);
-            padding: 4px;
         }
 
         .product-card h3 {
