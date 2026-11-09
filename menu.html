@@ -1,1 +1,416 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Меню | Медова Пасіка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #fcf9f2;
+            --bg-card: #ffffff;
+            --primary-amber: #e68a00;
+            --dark-amber: #995200;
+            --card-shadow: 0 10px 30px rgba(184, 107, 0, 0.07);
+            --card-shadow-hover: 0 14px 35px rgba(184, 107, 0, 0.15);
+            --text-main: #332417;
+            --text-muted: #7a6552;
+            --border-color: #eedcc8;
+            --accent-red: #e63946;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            background-image: 
+                radial-gradient(rgba(230, 138, 0, 0.08) 1px, transparent 1px), 
+                radial-gradient(rgba(230, 138, 0, 0.08) 1px, var(--bg-light) 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-bottom: 50px;
+            font-size: 0.92rem;
+        }
+
+        /* Верхня панель на сторінці меню */
+        .top-nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .top-nav-btn {
+            background: #ffffff;
+            color: var(--dark-amber);
+            border: 1.5px solid var(--primary-amber);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .top-nav-btn:hover {
+            background: var(--primary-amber);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 20px 20px;
+        }
+
+        header h1 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-amber);
+            margin-bottom: 4px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .menu-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--border-color);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .menu-card:hover {
+            border-color: var(--primary-amber);
+            transform: translateY(-2px);
+        }
+
+        .menu-title {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.15rem;
+            color: var(--dark-amber);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+            justify-content: space-between;
+        }
+
+        .menu-title-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submenu {
+            display: none;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .submenu.open {
+            display: flex;
+        }
+
+        .submenu-item {
+            background: #fffbf5;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1.5px solid #fae8d2;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .submenu-item:hover {
+            background: #fff3db;
+            border-color: var(--primary-amber);
+            color: var(--dark-amber);
+            transform: translateX(4px);
+        }
+
+        .menu-link-direct {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--border-color);
+            color: var(--dark-amber);
+            text-decoration: none;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+
+        .menu-link-direct:hover {
+            border-color: var(--primary-amber);
+            background: #fffbf5;
+            transform: translateY(-2px);
+        }
+
+        .work-hours-box {
+            background: #fffbf5;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1.5px solid #fae8d2;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .lang-switcher {
+            margin-top: 25px;
+            display: inline-flex;
+            gap: 6px;
+            background: #fff;
+            padding: 4px 8px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 14px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-amber);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Верхня панель -->
+    <div class="top-nav-bar">
+        <a href="index.html" class="top-nav-btn">🏠 <span id="nav-home">Головна</span></a>
+        <a href="index.html" class="top-nav-btn">🛒 <span id="nav-cart">Кошик</span></a>
+    </div>
+
+    <header>
+        <h1 id="menu-header-title">📋 Навігаційне Меню</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. Каталог товарів з випадаючим списком -->
+        <div class="menu-card">
+            <div class="menu-title" onclick="toggleSubmenu('catalogSub')">
+                <div class="menu-title-left">
+                    <span>🍯</span> <span id="menu-catalog">Каталог товарів</span>
+                </div>
+                <span id="catalogArrow">▼</span>
+            </div>
+            <div class="submenu open" id="catalogSub">
+                <a href="product.html?id=may-honey" class="submenu-item"><span id="cat-may">🌿 Мед травневий</span> <span>➔</span></a>
+                <a href="product.html?id=sunflower-honey" class="submenu-item"><span id="cat-sun">🌻 Мед соняшниковий</span> <span>➔</span></a>
+                <a href="product.html?id=candle" class="submenu-item"><span id="cat-candle">🕯️ Свічки з вощини</span> <span>➔</span></a>
+                <a href="product.html?id=propolis" class="submenu-item"><span id="cat-prop">🛡️ Прополіс</span> <span>➔</span></a>
+                <a href="index.html" class="submenu-item"><span id="cat-pollen">🌾 Бджолиний пилок</span> <span>➔</span></a>
+                <a href="index.html" class="submenu-item"><span id="cat-comb">🍯 Стільниковий мед</span> <span>➔</span></a>
+                <a href="index.html" class="submenu-item"><span id="cat-gifts">🎁 Подарункові набори</span> <span>➔</span></a>
+            </div>
+        </div>
+
+        <!-- 2. Акції -->
+        <a href="index.html" class="menu-link-direct">
+            <span>🔥 <span id="menu-promo">Акції та знижки</span></span>
+            <span>➔</span>
+        </a>
+
+        <!-- 3. Доставка та оплата -->
+        <a href="index.html#delivery" class="menu-link-direct">
+            <span>🚚 <span id="menu-delivery">Доставка та оплата</span></span>
+            <span>➔</span>
+        </a>
+
+        <!-- 4. Консультація бджоляра -->
+        <a href="index.html#consultationForm" class="menu-link-direct">
+            <span>👨‍🌾 <span id="menu-consult">Консультація бджоляра</span></span>
+            <span>➔</span>
+        </a>
+
+        <!-- 5. Про нашу пасіку -->
+        <a href="index.html#about" class="menu-link-direct">
+            <span>🏡 <span id="menu-about">Про нашу пасіку</span></span>
+            <span>➔</span>
+        </a>
+
+        <!-- 6. Графік роботи -->
+        <div class="menu-card">
+            <div class="menu-title" onclick="toggleSubmenu('hoursSub')">
+                <div class="menu-title-left">
+                    <span>⏱️</span> <span id="menu-hours">Графік роботи</span>
+                </div>
+                <span id="hoursArrow">▼</span>
+            </div>
+            <div class="submenu" id="hoursSub">
+                <div class="work-hours-box">
+                    <p id="hours-days"><b>Понеділок — Субота:</b> 08:00 — 19:00</p>
+                    <p id="hours-sun" style="margin-top: 6px;"><b>Неділя:</b> 09:00 — 16:00</p>
+                    <p id="hours-note" style="margin-top: 8px; font-style: italic; color: var(--primary-amber);">✨ Замовлення через сайт приймаються цілодобово (24/7)!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Перемикач мов та футер -->
+        <div style="text-align: center; margin-top: 20px;">
+            <div class="lang-switcher">
+                <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
+                <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
+            </div>
+            <footer>
+                <p>© <span id="footer-copy">Медова Пасіка. Всі права захищено.</span></p>
+            </footer>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSubmenu(id) {
+            const sub = document.getElementById(id);
+            sub.classList.toggle('open');
+        }
+
+        let currentLang = 'uk';
+
+        const translations = {
+            uk: {
+                pageTitle: "Меню | Медова Пасіка",
+                navHome: "Головна",
+                navCart: "Кошик",
+                menuHeaderTitle: "📋 Навігаційне Меню",
+                menuCatalog: "Каталог товарів",
+                catMay: "🌿 Мед травневий",
+                catSun: "🌻 Мед соняшниковий",
+                catCandle: "🕯️ Свічки з вощини",
+                catProp: "🛡️ Прополіс",
+                catPollen: "🌾 Бджолиний пилок",
+                catComb: "🍯 Стільниковий мед",
+                catGifts: "🎁 Подарункові набори",
+                menuPromo: "Акції та знижки",
+                menuDelivery: "Доставка та оплата",
+                menuConsult: "Консультація бджоляра",
+                menuAbout: "Про нашу пасіку",
+                menuHours: "Графік роботи",
+                hoursDays: "<b>Понеділок — Субота:</b> 08:00 — 19:00",
+                hoursSun: "<b>Неділя:</b> 09:00 — 16:00",
+                hoursNote: "✨ Замовлення через сайт приймаються цілодобово (24/7)!",
+                footerCopy: "Медова Пасіка. Всі права захищено."
+            },
+            ru: {
+                pageTitle: "Меню | Медовая Пасека",
+                navHome: "Главная",
+                navCart: "Корзина",
+                menuHeaderTitle: "📋 Навигационное Меню",
+                menuCatalog: "Каталог товаров",
+                catMay: "🌿 Мед майский",
+                catSun: "🌻 Мед подсолнечный",
+                catCandle: "🕯️ Свечи из вощины",
+                catProp: "🛡️ Прополис",
+                catPollen: "🌾 Пчелиная пыльца",
+                catComb: "🍯 Сотовый мед",
+                catGifts: "🎁 Подарочные наборы",
+                menuPromo: "Акции и скидки",
+                menuDelivery: "Доставка и оплата",
+                menuConsult: "Консультация пчеловода",
+                menuAbout: "О нашей пасеке",
+                menuHours: "График работы",
+                hoursDays: "<b>Понедельник — Суббота:</b> 08:00 — 19:00",
+                hoursSun: "<b>Воскресенье:</b> 09:00 — 16:00",
+                hoursNote: "✨ Заказы через сайт принимаются круглосуточно (24/7)!",
+                footerCopy: "Медовая Пасека. Все права защищены."
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            document.getElementById('page-title').innerText = t.pageTitle;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-cart').innerText = t.navCart;
+            document.getElementById('menu-header-title').innerText = t.menuHeaderTitle;
+            document.getElementById('menu-catalog').innerText = t.menuCatalog;
+            
+            document.getElementById('cat-may').innerText = t.catMay;
+            document.getElementById('cat-sun').innerText = t.catSun;
+            document.getElementById('cat-candle').innerText = t.catCandle;
+            document.getElementById('cat-prop').innerText = t.catProp;
+            document.getElementById('cat-pollen').innerText = t.catPollen;
+            document.getElementById('cat-comb').innerText = t.catComb;
+            document.getElementById('cat-gifts').innerText = t.catGifts;
+
+            document.getElementById('menu-promo').innerText = t.menuPromo;
+            document.getElementById('menu-delivery').innerText = t.menuDelivery;
+            document.getElementById('menu-consult').innerText = t.menuConsult;
+            document.getElementById('menu-about').innerText = t.menuAbout;
+            document.getElementById('menu-hours').innerText = t.menuHours;
+
+            document.getElementById('hours-days').innerHTML = t.hoursDays;
+            document.getElementById('hours-sun').innerHTML = t.hoursSun;
+            document.getElementById('hours-note').innerText = t.hoursNote;
+            document.getElementById('footer-copy').innerText = t.footerCopy;
+
+            document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
+            document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+        }
+    </script>
+</body>
+</html>
