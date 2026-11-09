@@ -53,18 +53,16 @@
             font-weight: 600; 
         }
 
+        /* Повністю прибрано фон у хедера (він став прозорим) */
         header {
-            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-            color: #ffffff;
+            background: transparent;
+            color: var(--text-main);
             text-align: center;
-            padding: 30px 20px 25px;
-            border-bottom-left-radius: 32px;
-            border-bottom-right-radius: 32px;
-            box-shadow: 0 12px 30px rgba(180, 83, 9, 0.25);
+            padding: 25px 20px 15px;
+            box-shadow: none;
             position: relative;
         }
 
-        /* Стилі для хедера: прибрано рамки та фон, картинка по центру між назвою та описом */
         .header-brand-box {
             display: flex;
             flex-direction: column;
@@ -76,19 +74,18 @@
         }
 
         .header-logo-img {
-            height: 75px;
+            height: 90px;
             width: auto;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
         header h1 {
             font-family: 'Comfortaa', cursive;
             font-size: 1.8rem; 
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            color: var(--dark-amber);
             letter-spacing: 0.3px;
             line-height: 1;
             margin-bottom: 4px;
@@ -96,7 +93,7 @@
 
         header p {
             font-size: 0.98rem;
-            opacity: 0.95;
+            color: var(--text-muted);
             max-width: 600px;
             margin: 4px auto 0 auto;
             font-weight: 500;
