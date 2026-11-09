@@ -44,32 +44,33 @@
             font-size: 0.92rem;
         }
 
-        /* Виправлена компактна верхня панель навігації */
+        /* Компактна верхня панель строго в один рядок */
         .top-nav-bar {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            padding: 14px 16px 8px;
+            gap: 8px;
+            padding: 10px 12px 6px;
             max-width: 960px;
             margin: 0 auto;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .top-nav-btn {
             background: #ffffff;
             color: var(--dark-amber);
-            border: 2px solid var(--primary-amber);
-            padding: 8px 16px;
-            border-radius: 25px;
+            border: 1.5px solid var(--primary-amber);
+            padding: 6px 12px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             text-decoration: none;
+            white-space: nowrap;
             transition: all 0.25s ease;
         }
 
@@ -83,8 +84,8 @@
             background: var(--accent-red);
             color: white;
             border-radius: 50%;
-            padding: 2px 7px;
-            font-size: 0.75rem;
+            padding: 1px 6px;
+            font-size: 0.7rem;
             font-weight: 700;
         }
 
@@ -144,7 +145,30 @@
             text-align: center;
             font-size: 1.5rem;
             color: var(--dark-amber);
-            margin: 32px 0 20px;
+            margin: 24px 0 16px;
+        }
+
+        /* Поле пошуку товарів */
+        .search-container {
+            max-width: 450px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-amber);
         }
 
         .products-grid {
@@ -738,7 +762,7 @@
         .modal-content {
             background: var(--bg-card);
             border: 1.5px solid var(--border-color);
-            padding: 28px;
+            padding: 24px;
             border-radius: 24px;
             max-width: 480px;
             width: 100%;
@@ -753,7 +777,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .modal-content h3 {
@@ -972,10 +996,10 @@
         <button class="widget-toggle-btn" onclick="toggleWidget()">💬</button>
     </div>
 
-    <!-- Компактна верхня панель навігації -->
+    <!-- Компактна верхня панель строго в один рядок -->
     <div class="top-nav-bar">
         <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
-        <a href="#searchInput" class="top-nav-btn">🔍 <span id="nav-search-text">Пошук</span></a>
+        <button class="top-nav-btn" onclick="focusSearch()">🔍 <span id="nav-search-text">Пошук</span></button>
         <button class="top-nav-btn" onclick="openCartModal()">
             🛒 <span id="cart-text-btn">Кошик</span> <span class="cart-badge" id="cartCount">0</span>
         </button>
@@ -992,6 +1016,11 @@
     <div class="container">
 
         <h2 class="section-title" id="catalog-heading">Каталог Продукції</h2>
+
+        <!-- Поле Пошуку -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Пошук товарів за назвою..." oninput="filterProducts()">
+        </div>
 
         <div class="products-grid" id="productsGrid">
 
@@ -1275,7 +1304,7 @@
 
     </div>
 
-    <!-- Модальне вікно Кошика із закриттям при пустому стані -->
+    <!-- Модальне вікно Кошика із закриттям при будь-якому стані -->
     <div class="modal" id="cartModal">
         <div class="modal-content">
             <div class="modal-header-row">
@@ -1359,6 +1388,32 @@
 
         function saveCart() {
             localStorage.setItem('medova_cart', JSON.stringify(cart));
+        }
+
+        /* Функція швидкого переходу до поля пошуку */
+        function focusSearch() {
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) {
+                searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => searchInput.focus(), 400);
+            }
+        }
+
+        /* Фільтрація товарів на сторінці */
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.product-card');
+
+            cards.forEach(card => {
+                const name = (card.getAttribute('data-name') || '').toLowerCase();
+                const title = card.querySelector('h3') ? card.querySelector('h3').innerText.toLowerCase() : '';
+                
+                if (name.includes(query) || title.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         function updatePollen() {
@@ -1517,7 +1572,7 @@
                 const data = await response.json();
                 if (data.ok) {
                     statusDiv.style.color = '#16a34a';
-                    statusDiv.innerText = '✅ Замовлення успішно надіслано! Ми зв'язалися з вами.';
+                    statusDiv.innerText = '✅ Замовлення успішно надіслано! Ми зв\'яжемося з вами.';
                     cart = [];
                     saveCart();
                     updateCartUI();
