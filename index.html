@@ -64,45 +64,41 @@
             position: relative;
         }
 
+        /* Стилі для хедера: прибрано рамки та фон, картинка по центру між назвою та описом */
         .header-brand-box {
-            display: inline-flex;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.35);
-            padding: 8px 24px 8px 16px;
-            border-radius: 50px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            margin-bottom: 12px;
-            white-space: nowrap;
             max-width: 100%;
+            margin: 0 auto;
         }
 
         .header-logo-img {
-            height: 48px;
+            height: 75px;
             width: auto;
             display: block;
             object-fit: contain;
-            mix-blend-mode: multiply;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
 
         header h1 {
             font-family: 'Comfortaa', cursive;
-            font-size: 1.6rem; 
+            font-size: 1.8rem; 
             font-weight: 700;
             color: #ffffff;
             text-shadow: 0 2px 6px rgba(0,0,0,0.2);
             letter-spacing: 0.3px;
             line-height: 1;
+            margin-bottom: 4px;
         }
 
         header p {
             font-size: 0.98rem;
             opacity: 0.95;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 4px auto 0 auto;
             font-weight: 500;
         }
 
@@ -301,7 +297,6 @@
             z-index: 2;
         }
 
-        /* Відновлені акуратні пропорції фотографій як на перших зразках */
         .product-icon-img {
             display: block;
             width: 100%;
@@ -1031,10 +1026,10 @@
 
     <header>
         <div class="header-brand-box">
-            <img src="11431.png" alt="Вінні Пух" class="header-logo-img">
             <h1 id="header-title">Медова Пасіка</h1>
+            <img src="11431.png" alt="Ведмедик з медом" class="header-logo-img">
+            <p id="header-subtitle">Натуральний мед, воскові свічки та продукти бджільництва</p>
         </div>
-        <p id="header-subtitle">Натуральний мед, воскові свічки та продукти бджільництва</p>
     </header>
 
     <div class="container">
