@@ -78,7 +78,7 @@
 
         header {
             text-align: center;
-            padding: 10px 20px 20px;
+            padding: 10px 20px 15px;
         }
 
         header h1 {
@@ -102,12 +102,11 @@
             margin-bottom: 16px;
             box-shadow: var(--card-shadow);
             border: 1.5px solid var(--border-color);
-            transition: transform 0.2s, border-color 0.2s;
+            transition: border-color 0.2s;
         }
 
         .menu-card:hover {
             border-color: var(--primary-amber);
-            transform: translateY(-2px);
         }
 
         .menu-title {
@@ -133,13 +132,20 @@
             margin-top: 14px;
             padding-top: 12px;
             border-top: 1px dashed var(--border-color);
-            display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
         .submenu.open {
             display: flex;
+        }
+
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card.active .arrow-icon {
+            transform: rotate(180deg);
         }
 
         .submenu-item {
@@ -244,20 +250,20 @@
     </div>
 
     <header>
-        <h1 id="menu-header-title">📋 Навігаційне Меню</h1>
+        <h1 id="menu-header-title">📋 Меню</h1>
     </header>
 
     <div class="container">
 
-        <!-- 1. Каталог товарів з випадаючим списком -->
-        <div class="menu-card">
-            <div class="menu-title" onclick="toggleSubmenu('catalogSub')">
+        <!-- 1. Каталог товарів -->
+        <div class="menu-card" id="catalogCard">
+            <div class="menu-title" onclick="toggleSubmenu('catalogSub', 'catalogCard')">
                 <div class="menu-title-left">
                     <span>🍯</span> <span id="menu-catalog">Каталог товарів</span>
                 </div>
-                <span id="catalogArrow">▼</span>
+                <span class="arrow-icon">▼</span>
             </div>
-            <div class="submenu open" id="catalogSub">
+            <div class="submenu" id="catalogSub">
                 <a href="product.html?id=may-honey" class="submenu-item"><span id="cat-may">🌿 Мед травневий</span> <span>➔</span></a>
                 <a href="product.html?id=sunflower-honey" class="submenu-item"><span id="cat-sun">🌻 Мед соняшниковий</span> <span>➔</span></a>
                 <a href="product.html?id=candle" class="submenu-item"><span id="cat-candle">🕯️ Свічки з вощини</span> <span>➔</span></a>
@@ -275,30 +281,30 @@
         </a>
 
         <!-- 3. Доставка та оплата -->
-        <a href="index.html#delivery" class="menu-link-direct">
+        <a href="index.html" class="menu-link-direct">
             <span>🚚 <span id="menu-delivery">Доставка та оплата</span></span>
             <span>➔</span>
         </a>
 
         <!-- 4. Консультація бджоляра -->
-        <a href="index.html#consultationForm" class="menu-link-direct">
+        <a href="index.html" class="menu-link-direct">
             <span>👨‍🌾 <span id="menu-consult">Консультація бджоляра</span></span>
             <span>➔</span>
         </a>
 
         <!-- 5. Про нашу пасіку -->
-        <a href="index.html#about" class="menu-link-direct">
+        <a href="index.html" class="menu-link-direct">
             <span>🏡 <span id="menu-about">Про нашу пасіку</span></span>
             <span>➔</span>
         </a>
 
         <!-- 6. Графік роботи -->
-        <div class="menu-card">
-            <div class="menu-title" onclick="toggleSubmenu('hoursSub')">
+        <div class="menu-card" id="hoursCard">
+            <div class="menu-title" onclick="toggleSubmenu('hoursSub', 'hoursCard')">
                 <div class="menu-title-left">
                     <span>⏱️</span> <span id="menu-hours">Графік роботи</span>
                 </div>
-                <span id="hoursArrow">▼</span>
+                <span class="arrow-icon">▼</span>
             </div>
             <div class="submenu" id="hoursSub">
                 <div class="work-hours-box">
@@ -323,9 +329,11 @@
     </div>
 
     <script>
-        function toggleSubmenu(id) {
-            const sub = document.getElementById(id);
+        function toggleSubmenu(subId, cardId) {
+            const sub = document.getElementById(subId);
+            const card = document.getElementById(cardId);
             sub.classList.toggle('open');
+            card.classList.toggle('active');
         }
 
         let currentLang = 'uk';
@@ -335,7 +343,7 @@
                 pageTitle: "Меню | Медова Пасіка",
                 navHome: "Головна",
                 navCart: "Кошик",
-                menuHeaderTitle: "📋 Навігаційне Меню",
+                menuHeaderTitle: "📋 Меню",
                 menuCatalog: "Каталог товарів",
                 catMay: "🌿 Мед травневий",
                 catSun: "🌻 Мед соняшниковий",
@@ -358,7 +366,7 @@
                 pageTitle: "Меню | Медовая Пасека",
                 navHome: "Главная",
                 navCart: "Корзина",
-                menuHeaderTitle: "📋 Навигационное Меню",
+                menuHeaderTitle: "📋 Меню",
                 menuCatalog: "Каталог товаров",
                 catMay: "🌿 Мед майский",
                 catSun: "🌻 Мед подсолнечный",
