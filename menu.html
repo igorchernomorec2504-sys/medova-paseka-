@@ -42,14 +42,13 @@
             font-size: 0.92rem;
         }
 
-        /* Верхня панель на сторінці меню */
+        /* Верхня панель (кнопка зсунута вліво, кошик прибрано) */
         .top-nav-bar {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            gap: 8px;
             padding: 12px 16px;
-            max-width: 960px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
@@ -78,7 +77,7 @@
 
         header {
             text-align: center;
-            padding: 10px 20px 15px;
+            padding: 5px 20px 10px;
         }
 
         header h1 {
@@ -194,15 +193,33 @@
             transform: translateY(-2px);
         }
 
+        /* Несвоертовний блок графіку роботи */
         .work-hours-box {
             background: #fffbf5;
-            padding: 12px 14px;
-            border-radius: 12px;
+            padding: 14px 16px;
+            border-radius: 14px;
             border: 1.5px solid #fae8d2;
             font-size: 0.88rem;
             color: var(--text-muted);
-            line-height: 1.5;
-            margin-top: 10px;
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        .work-hours-box h4 {
+            font-family: 'Comfortaa', cursive;
+            color: var(--dark-amber);
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .work-hours-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .work-hours-box li {
+            margin-bottom: 4px;
         }
 
         .lang-switcher {
@@ -243,10 +260,9 @@
 </head>
 <body>
 
-    <!-- Верхня панель -->
+    <!-- Верхня панель (зліва) -->
     <div class="top-nav-bar">
         <a href="index.html" class="top-nav-btn">🏠 <span id="nav-home">Головна</span></a>
-        <a href="index.html" class="top-nav-btn">🛒 <span id="nav-cart">Кошик</span></a>
     </div>
 
     <header>
@@ -298,20 +314,26 @@
             <span>➔</span>
         </a>
 
-        <!-- 6. Графік роботи -->
-        <div class="menu-card" id="hoursCard">
-            <div class="menu-title" onclick="toggleSubmenu('hoursSub', 'hoursCard')">
+        <!-- 6. Графік роботи (несвоертовний, з даними з фото) -->
+        <div class="menu-card">
+            <div class="menu-title" style="cursor: default;">
                 <div class="menu-title-left">
                     <span>⏱️</span> <span id="menu-hours">Графік роботи</span>
                 </div>
-                <span class="arrow-icon">▼</span>
             </div>
-            <div class="submenu" id="hoursSub">
-                <div class="work-hours-box">
-                    <p id="hours-days"><b>Понеділок — Субота:</b> 08:00 — 19:00</p>
-                    <p id="hours-sun" style="margin-top: 6px;"><b>Неділя:</b> 09:00 — 16:00</p>
-                    <p id="hours-note" style="margin-top: 8px; font-style: italic; color: var(--primary-amber);">✨ Замовлення через сайт приймаються цілодобово (24/7)!</p>
-                </div>
+            <div class="work-hours-box">
+                <h4 id="hours-title-1">Графік роботи</h4>
+                <ul>
+                    <li id="h-row1">• Пн-Пт: 09:00 - 18:00</li>
+                    <li id="h-row2">• Субота: 09:00 - 14:00</li>
+                    <li id="h-row3">• Нд: Вихідний</li>
+                </ul>
+                <h4 id="hours-title-2" style="margin-top: 10px;">Опрацювання замовлень</h4>
+                <p id="h-row4" style="font-weight: 600; color: var(--dark-amber); margin-bottom: 6px;">В телефонному режимі</p>
+                <ul>
+                    <li id="h-row5">• Пн-Пт: 09:00 - 21:00</li>
+                    <li id="h-row6">• Сб: 09:00 - 14:00</li>
+                </ul>
             </div>
         </div>
 
@@ -342,7 +364,6 @@
             uk: {
                 pageTitle: "Меню | Медова Пасіка",
                 navHome: "Головна",
-                navCart: "Кошик",
                 menuHeaderTitle: "📋 Меню",
                 menuCatalog: "Каталог товарів",
                 catMay: "🌿 Мед травневий",
@@ -357,15 +378,19 @@
                 menuConsult: "Консультація бджоляра",
                 menuAbout: "Про нашу пасіку",
                 menuHours: "Графік роботи",
-                hoursDays: "<b>Понеділок — Субота:</b> 08:00 — 19:00",
-                hoursSun: "<b>Неділя:</b> 09:00 — 16:00",
-                hoursNote: "✨ Замовлення через сайт приймаються цілодобово (24/7)!",
+                hoursTitle1: "Графік роботи",
+                hRow1: "• Пн-Пт: 09:00 - 18:00",
+                hRow2: "• Субота: 09:00 - 14:00",
+                hRow3: "• Нд: Вихідний",
+                hoursTitle2: "Опрацювання замовлень",
+                hRow4: "В телефонному режимі",
+                hRow5: "• Пн-Пт: 09:00 - 21:00",
+                hRow6: "• Сб: 09:00 - 14:00",
                 footerCopy: "Медова Пасіка. Всі права захищено."
             },
             ru: {
                 pageTitle: "Меню | Медовая Пасека",
                 navHome: "Главная",
-                navCart: "Корзина",
                 menuHeaderTitle: "📋 Меню",
                 menuCatalog: "Каталог товаров",
                 catMay: "🌿 Мед майский",
@@ -380,9 +405,14 @@
                 menuConsult: "Консультация пчеловода",
                 menuAbout: "О нашей пасеке",
                 menuHours: "График работы",
-                hoursDays: "<b>Понедельник — Суббота:</b> 08:00 — 19:00",
-                hoursSun: "<b>Воскресенье:</b> 09:00 — 16:00",
-                hoursNote: "✨ Заказы через сайт принимаются круглосуточно (24/7)!",
+                hoursTitle1: "График работы",
+                hRow1: "• Пн-Пт: 09:00 - 18:00",
+                hRow2: "• Суббота: 09:00 - 14:00",
+                hRow3: "• Вс: Выходной",
+                hoursTitle2: "Обработка заказов",
+                hRow4: "В телефонном режиме",
+                hRow5: "• Пн-Пт: 09:00 - 21:00",
+                hRow6: "• Сб: 09:00 - 14:00",
                 footerCopy: "Медовая Пасека. Все права защищены."
             }
         };
@@ -393,7 +423,6 @@
 
             document.getElementById('page-title').innerText = t.pageTitle;
             document.getElementById('nav-home').innerText = t.navHome;
-            document.getElementById('nav-cart').innerText = t.navCart;
             document.getElementById('menu-header-title').innerText = t.menuHeaderTitle;
             document.getElementById('menu-catalog').innerText = t.menuCatalog;
             
@@ -411,9 +440,14 @@
             document.getElementById('menu-about').innerText = t.menuAbout;
             document.getElementById('menu-hours').innerText = t.menuHours;
 
-            document.getElementById('hours-days').innerHTML = t.hoursDays;
-            document.getElementById('hours-sun').innerHTML = t.hoursSun;
-            document.getElementById('hours-note').innerText = t.hoursNote;
+            document.getElementById('hours-title-1').innerText = t.hoursTitle1;
+            document.getElementById('h-row1').innerText = t.hRow1;
+            document.getElementById('h-row2').innerText = t.hRow2;
+            document.getElementById('h-row3').innerText = t.hRow3;
+            document.getElementById('hours-title-2').innerText = t.hoursTitle2;
+            document.getElementById('h-row4').innerText = t.hRow4;
+            document.getElementById('h-row5').innerText = t.hRow5;
+            document.getElementById('h-row6').innerText = t.hRow6;
             document.getElementById('footer-copy').innerText = t.footerCopy;
 
             document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
