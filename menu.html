@@ -297,7 +297,7 @@
             <span>➔</span>
         </a>
 
-        <!-- 6. Графік роботи -->
+        <!-- 6. Графік роботи (без зайвого повторення всередині) -->
         <div class="menu-card">
             <div class="menu-title" style="cursor: default;">
                 <div class="menu-title-left">
@@ -305,13 +305,12 @@
                 </div>
             </div>
             <div class="work-hours-box">
-                <h4 id="hours-title-1">Графік роботи</h4>
                 <ul>
                     <li id="h-row1">• Пн-Пт: 09:00 - 18:00</li>
                     <li id="h-row2">• Субота: 09:00 - 14:00</li>
                     <li id="h-row3">• Нд: Вихідний</li>
                 </ul>
-                <h4 id="hours-title-2" style="margin-top: 10px;">Опрацювання замовлень</h4>
+                <h4 id="hours-title-2" style="margin-top: 12px;">Опрацювання замовлень</h4>
                 <p id="h-row4" style="font-weight: 600; color: var(--dark-amber); margin-bottom: 6px;">В телефонному режимі</p>
                 <ul>
                     <li id="h-row5">• Пн-Пт: 09:00 - 21:00</li>
@@ -320,7 +319,7 @@
             </div>
         </div>
 
-        <!-- Перемикач мов та футер із 2026 -->
+        <!-- Перемикач мов та футер -->
         <div style="text-align: center; margin-top: 20px;">
             <div class="lang-switcher">
                 <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
@@ -328,7 +327,6 @@
             </div>
             <footer>
                 <p>© <span id="footer-copy">2026 Медова Пасіка. Всі права захищено.</span></p>
-                <p>2026</p>
             </footer>
         </div>
 
@@ -361,7 +359,6 @@
                 menuConsult: "Консультація бджоляра",
                 menuAbout: "Про нашу пасіку",
                 menuHours: "Графік роботи",
-                hoursTitle1: "Графік роботи",
                 hRow1: "• Пн-Пт: 09:00 - 18:00",
                 hRow2: "• Субота: 09:00 - 14:00",
                 hRow3: "• Нд: Вихідний",
@@ -387,7 +384,6 @@
                 menuConsult: "Консультация пчеловода",
                 menuAbout: "О нашей пасеке",
                 menuHours: "График работы",
-                hoursTitle1: "График работы",
                 hRow1: "• Пн-Пт: 09:00 - 18:00",
                 hRow2: "• Суббота: 09:00 - 14:00",
                 hRow3: "• Вс: Выходной",
@@ -421,7 +417,6 @@
             document.getElementById('menu-about').innerText = t.menuAbout;
             document.getElementById('menu-hours').innerText = t.menuHours;
 
-            document.getElementById('hours-title-1').innerText = t.hoursTitle1;
             document.getElementById('h-row1').innerText = t.hRow1;
             document.getElementById('h-row2').innerText = t.hRow2;
             document.getElementById('h-row3').innerText = t.hRow3;
