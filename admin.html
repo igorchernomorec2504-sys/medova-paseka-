@@ -15,7 +15,7 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-main); min-height: 100vh; padding: 20px; font-size: 0.9rem; }
-        .container { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 25px; box-shadow: var(--card-shadow); border: 1.5px solid #fff3e0; }
+        .container { max-width: 950px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 25px; box-shadow: var(--card-shadow); border: 1.5px solid #fff3e0; }
         h1, h2 { font-family: 'Comfortaa', cursive; color: var(--dark-amber); text-align: center; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: var(--dark-amber); }
@@ -24,7 +24,7 @@
         .btn-secondary { background: #795548; margin-top: 20px; }
         .btn-danger { background: #d32f2f; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; }
         .card { background: #fff9e6; border: 1px solid #ffe0b2; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
-        .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; background: #fff; }
         .table th, .table td { border: 1px solid #ffe0b2; padding: 8px; text-align: left; }
         .table th { background: #fff3e0; color: var(--dark-amber); }
         .nav-links { display: flex; justify-content: space-between; margin-bottom: 20px; }
@@ -103,7 +103,7 @@
             <div class="admin-tabs">
                 <button class="tab-btn active" onclick="switchTab(0)">1. Зареєстровані клієнти</button>
                 <button class="tab-btn" onclick="switchTab(1)">2. Створити співробітника</button>
-                <button class="tab-btn" onclick="switchTab(2)">3. Список співробітників та замовлень</button>
+                <button class="tab-btn" onclick="switchTab(2)">3. Співробітники та замовлення</button>
             </div>
 
             <!-- Вкладка 1: Зареєстровані клієнти -->
@@ -141,22 +141,10 @@
                     </div>
 
                     <div class="card">
-                        <h2>Призначити замовлення</h2>
-                        <form onsubmit="assignOrder(event)">
-                            <div class="form-group">
-                                <label>Опис замовлення:</label>
-                                <input type="text" id="ordDesc" class="form-control" required placeholder="Мед 3л">
-                            </div>
-                            <div class="form-group">
-                                <label>Клієнт:</label>
-                                <input type="text" id="ordClient" class="form-control" required placeholder="Олександр">
-                            </div>
-                            <div class="form-group">
-                                <label>Виконавець:</label>
-                                <select id="ordEmployee" class="form-control" required></select>
-                            </div>
-                            <button type="submit" class="btn">Призначити</button>
-                        </form>
+                        <h2>Інформація про систему</h2>
+                        <p style="font-size: 0.9rem; line-height: 1.5; color: #5d4037;">
+                            Тут ви можете керувати персоналом пасіки. Клієнтські замовлення надходять автоматично в загальний список із бази даних Supabase при їх оформленні на сайті.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -164,9 +152,12 @@
             <!-- Вкладка 3: Список співробітників та замовлень -->
             <div class="tab-content" id="tab2">
                 <div class="card">
-                    <h2>📋 Список співробітників та замовлень</h2>
+                    <h2>📋 Список співробітників</h2>
                     <div id="allEmployeesList"></div>
-                    <div id="allOrdersList" style="margin-top: 15px;"></div>
+                </div>
+                <div class="card" style="margin-top: 15px;">
+                    <h2>📦 Усі замовлення клієнтів (з бази Supabase)</h2>
+                    <div id="allOrdersList">Завантаження замовлень...</div>
                 </div>
             </div>
 
@@ -181,8 +172,7 @@
         let db = JSON.parse(localStorage.getItem('medova_staff_db')) || {
             employees: [
                 { id: 'admin', name: 'Головний Адмін', role: 'Адміністратор', login: 'admin1', pass: 'admin123', isAdmin: true }
-            ],
-            orders: []
+            ]
         };
 
         function saveDb() {
@@ -265,12 +255,6 @@
 
                     if (!response.ok) throw new Error("Помилка видалення");
 
-                    let curUser = null;
-                    try { curUser = JSON.parse(localStorage.getItem('medova_current_user')); } catch(err) {}
-                    if (curUser && curUser.id === userId) {
-                        localStorage.removeItem('medova_current_user');
-                    }
-
                     alert('Користувача успішно видалено з бази!');
                     renderAdminData();
                 } catch (err) {
@@ -299,31 +283,15 @@
             renderAdminData();
         }
 
-        function assignOrder(e) {
-            e.preventDefault();
-            const desc = document.getElementById('ordDesc').value.trim();
-            const client = document.getElementById('ordClient').value.trim();
-            const empId = document.getElementById('ordEmployee').value;
-
-            db.orders.push({
-                id: 'ord_' + Date.now(),
-                desc,
-                client,
-                empId,
-                status: 'Новий',
-                date: new Date().toLocaleDateString()
-            });
-            saveDb();
-            alert('Замовлення створено!');
-            e.target.reset();
-            renderAdminData();
-        }
-
-        // ОТРИМАННЯ СПИСКУ КОРИСТУВАЧІВ ІЗ SUPABASE ТА ВІДОБРАЖЕННЯ
+        // ЗАВАНТАЖЕННЯ ДАНИХ ТА ЗАМОВЛЕНЬ ІЗ SUPABASE
         async function renderAdminData() {
             const usersContainer = document.getElementById('registeredUsersList');
-            usersContainer.innerHTML = 'Завантаження з бази даних...';
+            const ordersContainer = document.getElementById('allOrdersList');
+            
+            usersContainer.innerHTML = 'Завантаження клієнтів...';
+            ordersContainer.innerHTML = 'Завантаження замовлень з бази...';
 
+            // 1. Загрузка пользователей
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/users?select=*`, {
                     method: 'GET',
@@ -339,16 +307,14 @@
                 if (!allUsers || allUsers.length === 0) {
                     usersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #666;">Поки немає зареєстрованих покупців у базі.</p>';
                 } else {
-                    let html = '<table class="table"><tr><th>№</th><th>Логін (Телефон / Email)</th><th>ПІБ</th><th>Адреса</th><th>Замовлення</th><th>Дія</th></tr>';
+                    let html = '<table class="table"><tr><th>№</th><th>Логін (Телефон / Email)</th><th>ПІБ</th><th>Адреса</th><th>Дія</th></tr>';
                     
                     allUsers.forEach((u, index) => {
-                        const ordersCount = u.data?.orders ? u.data.orders.length : 0;
                         html += `<tr>
                             <td style="text-align: center; font-weight: bold;">${index + 1}</td>
                             <td><b>${u.login}</b></td>
                             <td>${u.full_name || 'Не вказано'}</td>
                             <td>${u.address || 'Не вказано'}</td>
-                            <td>${ordersCount} замовлень</td>
                             <td><button class="btn-danger" onclick="deleteClientUser('${u.id}')">🗑️ Видалити</button></td>
                         </tr>`;
                     });
@@ -360,33 +326,59 @@
                 usersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #d32f2f;">Помилка завантаження користувачів із бази даних.</p>';
             }
 
-            // Селект співробітників
-            const select = document.getElementById('ordEmployee');
-            select.innerHTML = '';
-            db.employees.filter(e => !e.isAdmin).forEach(emp => {
-                select.innerHTML += `<option value="${emp.id}">${emp.name} (${emp.role})</option>`;
-            });
+            // 2. Загрузка заказов из таблицы "заказы" в Supabase
+            try {
+                const ordResponse = await fetch(`${SUPABASE_URL}/rest/v1/%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D1%8B?select=*&order=%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BE_%D0%B2.desc`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+
+                if (!ordResponse.ok) throw new Error("Помилка завантаження замовлень");
+                const allOrders = await ordResponse.json();
+
+                if (!allOrders || allOrders.length === 0) {
+                    ordersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #666;">У базі даних поки немає замовлень (0 замовлень).</p>';
+                } else {
+                    let ordHtml = '<table class="table"><tr><th>Дата</th><th>Клієнт</th><th>Телефон</th><th>Місто / Пошта</th><th>Товари</th><th>Сума</th><th>Статус</th></tr>';
+                    
+                    allOrders.forEach(ord => {
+                        let formattedDate = 'Не вказано';
+                        if (ord.создано_в) {
+                            const d = new Date(ord.создано_в);
+                            formattedDate = d.toLocaleDateString('uk-UA') + ' ' + d.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
+                        }
+
+                        ordHtml += `<tr>
+                            <td>${formattedDate}</td>
+                            <td><b>${ord.имя_клиента || '-'}</b></td>
+                            <td>${ord.телефон || '-'}</td>
+                            <td>${ord.город_пост || '-'}</td>
+                            <td>${ord.предметы || '-'}</td>
+                            <td><b>${ord.общая_цена || 0} грн</b></td>
+                            <td><span style="background: #e0f2f1; color: #00796b; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${ord.статус || 'Нове'}</span></td>
+                        </tr>`;
+                    });
+                    ordHtml += '</table>';
+                    ordersContainer.innerHTML = ordHtml;
+                }
+            } catch (err) {
+                console.error(err);
+                ordersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #d32f2f;">Помилка завантаження замовлень з бази даних.</p>';
+            }
 
             // Список співробітників
-            let empHtml = '<h3>Співробітники:</h3><ul style="margin-left: 20px; font-size: 0.85rem; margin-bottom: 15px;">';
+            let empHtml = '<h3>Список співробітників:</h3><ul style="margin-left: 20px; font-size: 0.85rem; margin-top: 8px;">';
             db.employees.filter(e => !e.isAdmin).forEach(emp => {
-                empHtml += `<li><b>${emp.name}</b> — ${emp.role} (Логін: <code>${emp.login}</code>)</li>`;
+                empHtml += `<li style="margin-bottom: 4px;"><b>${emp.name}</b> — ${emp.role} (Логін: <code>${emp.login}</code>)</li>`;
             });
             empHtml += '</ul>';
-            document.getElementById('allEmployeesList').innerHTML = empHtml;
-
-            // Замовлення
-            let ordHtml = '<h3>Замовлення:</h3>';
-            if (db.orders.length === 0) {
-                ordHtml += '<p style="font-size:0.85rem; color:#666;">Поки немає замовлень</p>';
-            } else {
-                ordHtml += '<table class="table"><tr><th>Дата</th><th>Опис</th><th>Клієнт</th><th>Статус</th></tr>';
-                db.orders.forEach(ord => {
-                    ordHtml += `<tr><td>${ord.date}</td><td>${ord.desc}</td><td>${ord.client}</td><td><b>${ord.status}</b></td></tr>`;
-                });
-                ordHtml += '</table>';
+            if(db.employees.filter(e => !e.isAdmin).length === 0) {
+                empHtml = '<p style="font-size: 0.85rem; color: #666;">Ще немає створених співробітників.</p>';
             }
-            document.getElementById('allOrdersList').innerHTML = ordHtml;
+            document.getElementById('allEmployeesList').innerHTML = empHtml;
         }
 
         document.addEventListener('DOMContentLoaded', initStaffApp);
