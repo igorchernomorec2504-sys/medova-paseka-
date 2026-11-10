@@ -114,7 +114,7 @@
                 </div>
             </div>
 
-            <!-- Вкладка 2: Створити співробітника / Призначити замовлення -->
+            <!-- Вкладка 2: Створити співробітника -->
             <div class="tab-content" id="tab1">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="card">
@@ -219,25 +219,16 @@
             initStaffApp();
         }
 
-        // Перемикання вкладок
         function switchTab(index) {
             const buttons = document.querySelectorAll('.tab-btn');
             const contents = document.querySelectorAll('.tab-content');
 
             buttons.forEach((btn, idx) => {
-                if (idx === index) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+                btn.classList.toggle('active', idx === index);
             });
 
             contents.forEach((content, idx) => {
-                if (idx === index) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
-                }
+                content.classList.toggle('active', idx === index);
             });
         }
 
@@ -312,8 +303,8 @@
                     allUsers.forEach((u, index) => {
                         html += `<tr>
                             <td style="text-align: center; font-weight: bold;">${index + 1}</td>
-                            <td><b>${u.login}</b></td>
-                            <td>${u.full_name || 'Не вказано'}</td>
+                            <td><b>${u.login || u.phone || '-'}</b></td>
+                            <td>${u.full_name || u.name || 'Не вказано'}</td>
                             <td>${u.address || 'Не вказано'}</td>
                             <td><button class="btn-danger" onclick="deleteClientUser('${u.id}')">🗑️ Видалити</button></td>
                         </tr>`;
@@ -326,9 +317,9 @@
                 usersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #d32f2f;">Помилка завантаження користувачів із бази даних.</p>';
             }
 
-            // 2. Загрузка заказов из таблицы "заказы" в Supabase
+            // 2. Загрузка заказов из английской таблицы "orders" в Supabase
             try {
-                const ordResponse = await fetch(`${SUPABASE_URL}/rest/v1/%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D1%8B?select=*&order=%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BE_%D0%B2.desc`, {
+                const ordResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=*&order=created_at.desc`, {
                     method: 'GET',
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -346,19 +337,20 @@
                     
                     allOrders.forEach(ord => {
                         let formattedDate = 'Не вказано';
-                        if (ord.создано_в) {
-                            const d = new Date(ord.создано_в);
+                        const dateVal = ord.created_at || ord.создано_в;
+                        if (dateVal) {
+                            const d = new Date(dateVal);
                             formattedDate = d.toLocaleDateString('uk-UA') + ' ' + d.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
                         }
 
                         ordHtml += `<tr>
                             <td>${formattedDate}</td>
-                            <td><b>${ord.имя_клиента || '-'}</b></td>
-                            <td>${ord.телефон || '-'}</td>
-                            <td>${ord.город_пост || '-'}</td>
-                            <td>${ord.предметы || '-'}</td>
-                            <td><b>${ord.общая_цена || 0} грн</b></td>
-                            <td><span style="background: #e0f2f1; color: #00796b; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${ord.статус || 'Нове'}</span></td>
+                            <td><b>${ord.client_name || ord.имя_клиента || '-'}</b></td>
+                            <td>${ord.phone || ord.телефон || '-'}</td>
+                            <td>${ord.city || ord.город_пост || '-'}</td>
+                            <td>${ord.items || ord.предметы || '-'}</td>
+                            <td><b>${ord.total_price || ord.общая_цена || 0} грн</b></td>
+                            <td><span style="background: #e0f2f1; color: #00796b; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${ord.status || ord.статус || 'Нове'}</span></td>
                         </tr>`;
                     });
                     ordHtml += '</table>';
