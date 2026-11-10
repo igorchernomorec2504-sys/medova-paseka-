@@ -17,40 +17,22 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 15px; font-size: 0.9rem; }
         .container { max-width: 500px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 20px; box-shadow: var(--card-shadow); border: 1px solid #eee; }
-        
-        /* Верхня панель навігації */
         .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .nav-header a { color: var(--text-main); text-decoration: none; font-size: 1.2rem; }
-        
-        /* Таби авторизації */
         .auth-tabs { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
         .auth-tab { font-family: 'Comfortaa', cursive; font-size: 1.1rem; color: #aaa; cursor: pointer; background: none; border: none; font-weight: 700; padding-bottom: 5px; }
         .auth-tab.active { color: var(--dark-amber); border-bottom: 3px solid var(--accent-btn); }
-
-        /* Поля форм */
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #666; font-size: 0.85rem; }
-        .form-control { width: 100%; padding: 12px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; background: #fff; outline: none; transition: border-color 0.2s; }
+        .form-control { width: 100%; padding: 12px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; background: #fff; outline: none; }
         .form-control:focus { border-color: var(--accent-btn); }
         .form-control:disabled { background: #f9f9f9; color: #888; }
-
-        /* Кнопки */
-        .btn { background: #9bc53d; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; transition: background 0.2s; text-align: center; display: block; text-decoration: none; }
+        .btn { background: #9bc53d; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; text-align: center; display: block; text-decoration: none; }
         .btn:hover { background: #87b031; }
-        .btn-social { background: #fff; color: #333; border: 1.5px solid #ddd; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; font-size: 0.9rem; }
-        .btn-social:hover { background: #f8f8f8; border-color: #ccc; }
         .btn-secondary { background: #795548; margin-top: 15px; }
-
-        /* Додаткові посилання */
-        .forgot-pass { text-align: center; margin: 15px 0; font-size: 0.85rem; }
-        .forgot-pass a { color: #666; text-decoration: none; }
-        .forgot-pass a:hover { text-decoration: underline; }
-
-        /* Таби особистого кабінету */
         .profile-tabs { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
         .profile-tab { font-family: 'Comfortaa', cursive; font-size: 1rem; color: #777; cursor: pointer; background: none; border: none; font-weight: 700; }
         .profile-tab.active { color: var(--dark-amber); border-bottom: 3px solid var(--accent-btn); padding-bottom: 4px; }
-
         .card-section { display: none; }
         .card-section.active { display: block; }
     </style>
@@ -59,46 +41,32 @@
     <div class="container">
         <div class="nav-header">
             <a href="index.html">✕</a>
-            <span id="userHeaderTitle" style="font-weight: 700; font-size: 0.95rem;">Особистий кабінет</span>
+            <span style="font-weight: 700; font-size: 0.95rem;">Особистий кабінет</span>
             <a href="index.html">🛒</a>
         </div>
 
-        <!-- БЛОК АВТОРИЗАЦІЇ / РЕЄСТРАЦІЇ -->
         <div id="authContainer">
             <div class="auth-tabs">
                 <button class="auth-tab active" onclick="switchAuthTab('login')" id="tabLoginBtn">Вхід</button>
                 <button class="auth-tab" onclick="switchAuthTab('register')" id="tabRegBtn">Реєстрація</button>
             </div>
 
-            <!-- Форма Входу -->
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label>Ел. пошта або телефон</label>
-                    <input type="text" id="loginInput" class="form-control" required placeholder="email@gmail.com або +380...">
+                    <label>Номер телефону або пошта</label>
+                    <input type="text" id="loginInput" class="form-control" required placeholder="+380...">
                 </div>
                 <div class="form-group">
                     <label>Пароль</label>
                     <input type="password" id="loginPass" class="form-control" required placeholder="••••••••">
                 </div>
                 <button type="submit" class="btn">Увійти</button>
-                
-                <div class="forgot-pass">
-                    <a href="#" onclick="alert('Функція відновлення пароля в розробці')">Забули пароль?</a>
-                </div>
-
-                <button type="button" class="btn btn-social" onclick="alert('Авторизація через Facebook')">
-                    <span style="color: #1877f2; font-weight: bold; font-size: 1.1rem;">f</span> Увійти через Facebook
-                </button>
-                <button type="button" class="btn btn-social" onclick="alert('Авторизація через Google')">
-                    <span style="color: #ea4335; font-weight: bold;">G</span> Увійти через Google
-                </button>
             </form>
 
-            <!-- Форма Реєстрації -->
             <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
                 <div class="form-group">
-                    <label>Ел. пошта або телефон</label>
-                    <input type="text" id="regInput" class="form-control" required placeholder="email@gmail.com або +380...">
+                    <label>Номер телефону або пошта</label>
+                    <input type="text" id="regInput" class="form-control" required placeholder="+380...">
                 </div>
                 <div class="form-group">
                     <label>Пароль (мін. 4 символи)</label>
@@ -108,7 +76,6 @@
             </form>
         </div>
 
-        <!-- БЛОК ОСОБИСТОГО КАБІНЕТУ (після входу) -->
         <div id="profileContainer" style="display: none;">
             <div class="profile-tabs">
                 <button class="profile-tab active" onclick="switchProfileTab('profile')" id="pTab1">Профіль</button>
@@ -116,7 +83,6 @@
                 <button class="profile-tab" onclick="switchProfileTab('wishlist')" id="pTab3">Обране</button>
             </div>
 
-            <!-- 1. Профіль -->
             <div id="sectionProfile" class="card-section active">
                 <form onsubmit="saveProfileData(event)">
                     <div class="form-group">
@@ -124,7 +90,7 @@
                         <input type="text" id="profFullName" class="form-control" placeholder="Ігор Чорноморець">
                     </div>
                     <div class="form-group">
-                        <label>Ел. пошта / Телефон (Логін)</label>
+                        <label>Логін (Телефон)</label>
                         <input type="text" id="profLoginDisplay" class="form-control" disabled>
                     </div>
                     <div class="form-group">
@@ -140,12 +106,10 @@
                 <button class="btn btn-secondary" onclick="handleLogout()">Вийти з акаунта</button>
             </div>
 
-            <!-- 2. Замовлення -->
             <div id="sectionOrders" class="card-section">
                 <div id="userOrdersList" style="color: #666; font-size: 0.85rem; text-align: center; padding: 20px;">У вас поки немає замовлень.</div>
             </div>
 
-            <!-- 3. Обране -->
             <div id="sectionWishlist" class="card-section">
                 <div id="userWishlistList" style="color: #666; font-size: 0.85rem; text-align: center; padding: 20px;">Ваш список обраного порожній.</div>
             </div>
@@ -157,7 +121,7 @@
         const SUPABASE_KEY = "sb_publishable_lG-14NlLDyfmdeJTZ-a3Lg_oxyFvv3F";
 
         let currentUser = null;
-        try { currentUser = JSON.parse(localStorage.getItem('medova_current_user')) || null; } catch(e) { currentUser = null; }
+        try { currentUser = JSON.parse(localStorage.getItem('medova_current_client')) || null; } catch(e) { currentUser = null; }
 
         function initApp() {
             if (!currentUser) {
@@ -167,13 +131,10 @@
                 document.getElementById('authContainer').style.display = 'none';
                 document.getElementById('profileContainer').style.display = 'block';
                 
-                document.getElementById('profFullName').value = currentUser.full_name || '';
-                document.getElementById('profLoginDisplay').value = currentUser.login || '';
-                document.getElementById('profCity').value = currentUser.city || '';
-                document.getElementById('profAddress').value = currentUser.address || '';
-                
-                renderWishlist();
-                renderOrders();
+                document.getElementById('profFullName').value = currentUser.profile?.full_name || '';
+                document.getElementById('profLoginDisplay').value = currentUser.phone || '';
+                document.getElementById('profCity').value = currentUser.profile?.city || '';
+                document.getElementById('profAddress').value = currentUser.profile?.address || '';
             }
         }
 
@@ -211,38 +172,22 @@
             }
         }
 
-        // РЕЄСТРАЦІЯ (ЗБЕРЕЖЕННЯ В SUPABASE)
         async function handleRegister(e) {
             e.preventDefault();
-            const login = document.getElementById('regInput').value.trim();
+            const phone = document.getElementById('regInput').value.trim();
             const pass = document.getElementById('regPass').value.trim();
 
-            if (pass.length < 4) { alert("Пароль занадто короткий (мінімум 4 символи)!"); return; }
+            if (pass.length < 4) { alert("Пароль занадто короткий!"); return; }
 
-            const newUserData = {
-                id: 'usr_' + Date.now(),
-                login: login,
+            const newClient = {
+                id: 'cli_' + Date.now(),
+                phone: phone,
                 pass: pass,
-                full_name: '',
-                city: '',
-                address: '',
-                data: { orders: [], wishlist: [] }
+                profile: { full_name: '', city: '', address: '', orders: [], wishlist: [] }
             };
 
             try {
-                // Спочатку перевіряємо, чи немає вже такого логіна в базі
-                const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/users?login=eq.${encodeURIComponent(login)}`, {
-                    method: 'GET',
-                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-                });
-                const existing = await checkRes.json();
-                if (existing && existing.length > 0) {
-                    alert("Користувач з таким логіном (телефоном/поштою) вже зареєстрований!");
-                    return;
-                }
-
-                // Виконуємо запит на створення запису
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/users`, {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -250,103 +195,77 @@
                         'Authorization': `Bearer ${SUPABASE_KEY}`,
                         'Prefer': 'return=representation'
                     },
-                    body: JSON.stringify(newUserData)
+                    body: JSON.stringify(newClient)
                 });
 
                 if (!res.ok) {
-                    const errData = await res.text();
-                    console.error("Помилка сервера Supabase:", errData);
-                    alert("Помилка реєстрації. Спробуйте ще раз.");
+                    alert("Помилка реєстрації в базі.");
                     return;
                 }
 
-                currentUser = newUserData;
-                localStorage.setItem('medova_current_user', JSON.stringify(currentUser));
-                alert("Реєстрація успішна! Дані збережено в базі.");
+                currentUser = newClient;
+                localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+                alert("Реєстрація успішна!");
                 initApp();
             } catch (err) {
-                console.error("Мережева помилка:", err);
-                alert("Помилка з'єднання з сервером.");
+                alert("Помилка зв'язку з сервером.");
             }
         }
 
-        // ВХІД ІЗ SUPABASE
         async function handleLogin(e) {
             e.preventDefault();
-            const login = document.getElementById('loginInput').value.trim();
+            const phone = document.getElementById('loginInput').value.trim();
             const pass = document.getElementById('loginPass').value.trim();
 
             try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/users?login=eq.${encodeURIComponent(login)}&pass=eq.${encodeURIComponent(pass)}`, {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients?phone=eq.${encodeURIComponent(phone)}&pass=eq.${encodeURIComponent(pass)}`, {
                     method: 'GET',
                     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
                 });
 
-                const users = await res.json();
-                if (users && users.length > 0) {
-                    currentUser = users[0];
-                    localStorage.setItem('medova_current_user', JSON.stringify(currentUser));
+                const clients = await res.json();
+                if (clients && clients.length > 0) {
+                    currentUser = clients[0];
+                    localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
                     initApp();
                 } else {
-                    alert("Невірний логін або пароль!");
+                    alert("Невірний телефон або пароль!");
                 }
             } catch (err) {
-                console.error(err);
-                alert("Помилка зв'язку з базою даних.");
+                alert("Помилка входу.");
             }
         }
 
-        // ВИХІД
         function handleLogout() {
             currentUser = null;
-            localStorage.removeItem('medova_current_user');
+            localStorage.removeItem('medova_current_client');
             initApp();
         }
 
-        // ЗБЕРЕЖЕННЯ ПРОФІЛЮ В SUPABASE
         async function saveProfileData(e) {
             e.preventDefault();
             if (!currentUser) return;
 
-            currentUser.full_name = document.getElementById('profFullName').value.trim();
-            currentUser.city = document.getElementById('profCity').value.trim();
-            currentUser.address = document.getElementById('profAddress').value.trim();
+            currentUser.profile.full_name = document.getElementById('profFullName').value.trim();
+            currentUser.profile.city = document.getElementById('profCity').value.trim();
+            currentUser.profile.address = document.getElementById('profAddress').value.trim();
 
             try {
-                await fetch(`${SUPABASE_URL}/rest/v1/users?id=eq.${currentUser.id}`, {
+                await fetch(`${SUPABASE_URL}/rest/v1/clients?id=eq.${currentUser.id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                         'apikey': SUPABASE_KEY,
                         'Authorization': `Bearer ${SUPABASE_KEY}`
                     },
-                    body: JSON.stringify({
-                        full_name: currentUser.full_name,
-                        city: currentUser.city,
-                        address: currentUser.address
-                    })
+                    body: JSON.stringify({ profile: currentUser.profile })
                 });
 
-                localStorage.setItem('medova_current_user', JSON.stringify(currentUser));
-                alert("Зміни успішно збережено в хмару!");
+                localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+                alert("Зміни збережено!");
             } catch (err) {
-                console.error(err);
                 alert("Помилка збереження.");
             }
-        }
-
-        function renderWishlist() {
-            const cont = document.getElementById('userWishlistList');
-            const items = currentUser.data?.wishlist || [];
-            if (items.length === 0) { cont.innerHTML = 'Ваш список обраного порожній.'; return; }
-            cont.innerHTML = '<ul>' + items.map(i => `<li>${i}</li>`).join('') + '</ul>';
-        }
-
-        function renderOrders() {
-            const cont = document.getElementById('userOrdersList');
-            const orders = currentUser.data?.orders || [];
-            if (orders.length === 0) { cont.innerHTML = 'У вас поки немає замовлень.'; return; }
-            cont.innerHTML = orders.map(o => `<div>${o.date} — ${o.total} грн</div>`).join('');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
