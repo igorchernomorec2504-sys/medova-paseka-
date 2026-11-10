@@ -17,59 +17,36 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 15px; font-size: 0.9rem; }
-        .container { max-width: 950px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 25px; box-shadow: var(--card-shadow); border: 1px solid #eee; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 25px; box-shadow: var(--card-shadow); border: 1px solid #eee; }
         
         h1, h2 { font-family: 'Comfortaa', cursive; color: var(--dark-amber); text-align: center; margin-bottom: 20px; }
-        h1 { font-size: 1.5rem; }
-        h2 { font-size: 1.1rem; text-align: left; margin-bottom: 15px; }
+        h1 { font-size: 1.4rem; }
 
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #666; font-size: 0.85rem; }
-        .form-control { width: 100%; padding: 11px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; background: #fff; outline: none; transition: border-color 0.2s; }
+        .form-control { width: 100%; padding: 11px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; background: #fff; outline: none; }
         .form-control:focus { border-color: var(--accent-btn); }
 
-        .btn { background: #9bc53d; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; transition: background 0.2s; text-align: center; display: block; text-decoration: none; }
+        .btn { background: #9bc53d; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1rem; text-align: center; display: block; text-decoration: none; }
         .btn:hover { background: #87b031; }
         .btn-secondary { background: #795548; margin-top: 20px; }
-        .btn-danger { background: #d32f2f; padding: 6px 10px; font-size: 0.75rem; border-radius: 6px; color: white; border: none; cursor: pointer; font-weight: 600; }
-        .btn-danger:hover { background: #b71c1c; }
-        .btn-complete { background: #059669; }
-        .btn-complete:hover { background: #047857; }
 
-        /* Табы */
-        .tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 15px; padding-bottom: 5px; }
-        .tab-btn { flex: 1; min-width: 90px; padding: 10px 6px; border: none; background: #e2e8f0; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.8rem; white-space: nowrap; color: #444; }
-        .tab-btn.active { background: var(--dark-amber); color: white; }
-
-        /* Контент вкладок */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        /* Панель массовых действий */
-        .bulk-panel { background: #fcf9f2; padding: 10px 15px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #eee; }
-        .bulk-actions { display: flex; gap: 8px; }
-
-        /* Карточки аккордеона */
-        .card { background: white; border: 1px solid #eee; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); overflow: hidden; }
-        .card-header { padding: 12px 15px; display: flex; align-items: center; gap: 10px; cursor: pointer; background: #fafafa; }
-        .card-title { flex-grow: 1; font-weight: bold; font-size: 0.95rem; color: var(--text-main); }
-        .card-body { padding: 15px; display: none; border-top: 1px solid #eee; font-size: 0.9rem; line-height: 1.5; background: #fff; }
+        /* Вертикальне меню-стовпчик */
+        .menu-column { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
         
-        input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--dark-amber); }
+        .menu-section { background: #fdfcfa; border: 1px solid #e2ded8; border-radius: 10px; overflow: hidden; transition: all 0.3s ease; }
+        .menu-header { padding: 15px 20px; font-family: 'Comfortaa', cursive; font-size: 1rem; color: var(--dark-amber); background: #f5f2eb; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .menu-header:hover { background: #efeae1; }
+        .menu-body { padding: 15px; display: none; border-top: 1px solid #e2ded8; background: #fff; }
 
-        .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
-        .table th, .table td { border: 1px solid #eee; padding: 10px; text-align: left; }
-        .table th { background: #fcf9f2; color: var(--dark-amber); font-family: 'Comfortaa', cursive; font-size: 0.85rem; }
+        /* Вкладені елементи у стовпчик */
+        .sub-item { background: #faf9f6; border: 1px solid #eee; border-radius: 8px; padding: 12px; margin-bottom: 10px; cursor: pointer; transition: background 0.2s; }
+        .sub-item:hover { background: #f4f0e6; }
+        .sub-item-title { font-weight: 600; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; }
+        .sub-item-details { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd; font-size: 0.85rem; color: #555; line-height: 1.6; }
 
         .nav-links { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; align-items: center; }
         .nav-links a { color: var(--dark-amber); text-decoration: none; font-weight: 700; font-size: 0.9rem; }
-        
-        .badge { padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; color: white; }
-        .badge-new { background: #f59e0b; }
-        .badge-done { background: #10b981; }
-
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -81,8 +58,8 @@
 
         <!-- ФОРМА ВХОДУ ДЛЯ ПЕРСОНАЛУ -->
         <div id="loginSection">
-            <h1>🛠️ Вхід для співробітників</h1>
-            <div class="card" style="max-width: 400px; margin: 20px auto; padding: 20px;">
+            <h1>🛠️ Вхід для адміністратора</h1>
+            <div style="max-width: 380px; margin: 20px auto;">
                 <form onsubmit="handleStaffLogin(event)">
                     <div class="form-group">
                         <label>Логін:</label>
@@ -97,104 +74,67 @@
             </div>
         </div>
 
-        <!-- ПАНЕЛЬ АДМІНІСТРАТОРА -->
+        <!-- ВЕРТИКАЛЬНА ПАНЕЛЬ АДМІНІСТРАТОРА -->
         <div id="adminPanel" style="display: none;">
-            <h1>👑 Панель Адміністратора</h1>
-            
-            <!-- Вкладки (Таби) -->
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('new-orders', this)">🟡 Нові замовлення</button>
-                <button class="tab-btn" onclick="switchTab('completed-orders', this)">✅ Завершені</button>
-                <button class="tab-btn" onclick="switchTab('customers', this)">👥 Покупателі</button>
-                <button class="tab-btn" onclick="switchTab('products', this)">🍯 Товари</button>
-                <button class="tab-btn" onclick="switchTab('carts', this)">🛒 Корзини</button>
-            </div>
+            <h1>👑 Панель управління «Медова Пасіка»</h1>
 
-            <!-- Панель массових дій з галочками -->
-            <div class="bulk-panel">
-                <label style="font-size: 0.85rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" onchange="toggleSelectAll(this)"> Вибрати всі
-                </label>
-                <div class="bulk-actions">
-                    <button class="btn btn-complete" id="bulk-complete-btn" style="padding: 8px 12px; font-size: 0.8rem; width: auto;" onclick="bulkComplete()">Завершити</button>
-                    <button class="btn btn-danger" style="padding: 8px 12px; font-size: 0.8rem;" onclick="bulkDelete()">🗑️ Видалити обрані</button>
-                </div>
-            </div>
-
-            <!-- 1. Нові замовлення -->
-            <div id="new-orders" class="tab-content active">
-                <div id="new-orders-list">Завантаження нових замовлень...</div>
-            </div>
-
-            <!-- 2. Завершені замовлення -->
-            <div id="completed-orders" class="tab-content">
-                <div id="completed-orders-list">Завантаження завершених замовлень...</div>
-            </div>
-
-            <!-- 3. Покупці -->
-            <div id="customers" class="tab-content">
-                <div id="customers-list">Завантаження покупців з бази...</div>
-            </div>
-
-            <!-- 4. Товари -->
-            <div id="products" class="tab-content">
-                <div id="products-list">Завантаження товарів...</div>
-            </div>
-
-            <!-- 5. Корзини -->
-            <div id="carts" class="tab-content">
-                <div id="carts-list">Завантаження збережених корзин...</div>
-            </div>
-
-            <!-- Управління співробітниками та призначеннями -->
-            <div class="grid-2" style="margin-top: 30px;">
-                <div class="card" style="margin-bottom: 0; padding: 20px;">
-                    <h2>Створити співробітника</h2>
-                    <form onsubmit="createEmployee(event)">
-                        <div class="form-group">
-                            <label>ПІБ співробітника:</label>
-                            <input type="text" id="empName" class="form-control" required placeholder="Іван Іванов">
-                        </div>
-                        <div class="form-group">
-                            <label>Посада:</label>
-                            <input type="text" id="empRole" class="form-control" required placeholder="Пасічник">
-                        </div>
-                        <div class="form-group">
-                            <label>Логін:</label>
-                            <input type="text" id="empLogin" class="form-control" required placeholder="login">
-                        </div>
-                        <div class="form-group">
-                            <label>Пароль:</label>
-                            <input type="password" id="empPass" class="form-control" required placeholder="пароль">
-                        </div>
-                        <button type="submit" class="btn">Створити</button>
-                    </form>
+            <div class="menu-column">
+                
+                <!-- 1. ЗАРЕЄСТРОВАНІ АКАУНТИ -->
+                <div class="menu-section">
+                    <div class="menu-header" onclick="toggleMenuSection('secAccounts')">
+                        <span>👥 Зареєстровані аккаунти</span>
+                        <span id="countAccounts" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
+                    </div>
+                    <div class="menu-body" id="secAccounts">
+                        <div id="accountsList">Завантаження акаунтів...</div>
+                    </div>
                 </div>
 
-                <div class="card" style="margin-bottom: 0; padding: 20px;">
-                    <h2>Призначити завдання</h2>
-                    <form onsubmit="assignOrder(event)">
-                        <div class="form-group">
-                            <label>Опис завдання / замовлення:</label>
-                            <input type="text" id="ordDesc" class="form-control" required placeholder="Мед 3л">
-                        </div>
-                        <div class="form-group">
-                            <label>Клієнт:</label>
-                            <input type="text" id="ordClient" class="form-control" required placeholder="Олександр">
-                        </div>
-                        <div class="form-group">
-                            <label>Виконавець:</label>
-                            <select id="ordEmployee" class="form-control" required></select>
-                        </div>
-                        <button type="submit" class="btn" style="margin-top: 38px;">Призначити</button>
-                    </form>
+                <!-- 2. ОФОРМЛЕНІ ЗАМОВЛЕННЯ -->
+                <div class="menu-section">
+                    <div class="menu-header" onclick="toggleMenuSection('secOrders')">
+                        <span>📦 Оформлені замовлення</span>
+                        <span id="countOrders" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
+                    </div>
+                    <div class="menu-body" id="secOrders">
+                        <div id="ordersList">Завантаження замовлень...</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" style="margin-top: 20px; padding: 20px;">
-                <h2>📋 Список співробітників та внутрішніх завдань</h2>
-                <div id="allEmployeesList" style="margin-bottom: 15px;"></div>
-                <div id="allOrdersList" style="overflow-x: auto;"></div>
+                <!-- 3. ПОКУПКИ -->
+                <div class="menu-section">
+                    <div class="menu-header" onclick="toggleMenuSection('secPurchases')">
+                        <span>🛍️ Покупки</span>
+                        <span id="countPurchases" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
+                    </div>
+                    <div class="menu-body" id="secPurchases">
+                        <div id="purchasesList">Історія покупок порожня</div>
+                    </div>
+                </div>
+
+                <!-- 4. КОРЗИНА -->
+                <div class="menu-section">
+                    <div class="menu-header" onclick="toggleMenuSection('secCarts')">
+                        <span>🛒 Корзина (активні кошики)</span>
+                        <span id="countCarts" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
+                    </div>
+                    <div class="menu-body" id="secCarts">
+                        <div id="cartsList">Активних кошиків немає</div>
+                    </div>
+                </div>
+
+                <!-- 5. ТОВАРИ -->
+                <div class="menu-section">
+                    <div class="menu-header" onclick="toggleMenuSection('secProducts')">
+                        <span>🍯 Товари</span>
+                        <span id="countProducts" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
+                    </div>
+                    <div class="menu-body" id="secProducts">
+                        <div id="productsList">Завантаження товарів...</div>
+                    </div>
+                </div>
+
             </div>
 
             <button class="btn btn-secondary" onclick="logoutStaff()">Вийти з аккаунта</button>
@@ -206,36 +146,17 @@
         const SUPABASE_KEY = "sb_publishable_lG-14NlLDyfmdeJTZ-a3Lg_oxyFvv3F";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        let activeTabId = 'new-orders';
-
-        let db = JSON.parse(localStorage.getItem('medova_staff_db')) || {
-            employees: [
-                { id: 'admin', name: 'Головний Адмін', role: 'Адміністратор', login: 'admin1', pass: 'admin123', isAdmin: true }
-            ],
-            internalOrders: []
-        };
-
-        function saveDb() {
-            localStorage.setItem('medova_staff_db', JSON.stringify(db));
-        }
-
         let currentStaff = JSON.parse(localStorage.getItem('medova_current_staff')) || null;
 
-        function initStaffApp() {
-            const loginSec = document.getElementById('loginSection');
-            const adminSec = document.getElementById('adminPanel');
-            const info = document.getElementById('currentUserInfo');
-
+        function initApp() {
             if (!currentStaff) {
-                loginSec.style.display = 'block';
-                adminSec.style.display = 'none';
-                info.innerText = '';
-            } else if (currentStaff.isAdmin) {
-                loginSec.style.display = 'none';
-                adminSec.style.display = 'block';
-                info.innerText = `Ви увійшли як: Адміністратор`;
-                loadSupabaseData();
-                renderLocalAdminData();
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('adminPanel').style.display = 'none';
+            } else {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                document.getElementById('currentUserInfo').innerText = `Адмін: ${currentStaff.name}`;
+                loadAllSupabaseData();
             }
         }
 
@@ -244,332 +165,191 @@
             const login = document.getElementById('staffLogin').value.trim();
             const pass = document.getElementById('staffPass').value.trim();
 
-            const found = db.employees.find(emp => emp.login === login && emp.pass === pass);
-            if (found) {
-                currentStaff = found;
+            // Простий переносний вхід для адміна
+            if (login === 'admin1' && pass === 'admin123') {
+                currentStaff = { name: 'Головний Адмін' };
                 localStorage.setItem('medova_current_staff', JSON.stringify(currentStaff));
-                initStaffApp();
+                initApp();
             } else {
-                alert('Невірний логін або пароль!');
+                alert('Невірний логін або пароль! (За замовчуванням: admin1 / admin123)');
             }
         }
 
         function logoutStaff() {
             currentStaff = null;
             localStorage.removeItem('medova_current_staff');
-            initStaffApp();
+            initApp();
         }
 
-        // Переключення вкладок
-        function switchTab(tabId, btn) {
-            activeTabId = tabId;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
-            btn.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-
-            // Показуємо кнопку завершення тільки на нових замовленнях
-            document.getElementById('bulk-complete-btn').style.display = (tabId === 'new-orders') ? 'inline-block' : 'none';
-            document.querySelector('.bulk-panel input[type="checkbox"]').checked = false;
-        }
-
-        // Розгортання карток (аккордеон)
-        function toggleCard(event, element) {
-            if (event.target.type === 'checkbox') return;
-            const body = element.nextElementSibling;
+        // Розгортання головних розділів у стовпчик
+        function toggleMenuSection(sectionId) {
+            const body = document.getElementById(sectionId);
             body.style.display = body.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Вибрати / зняти всі галочки у поточному табі
-        function toggleSelectAll(masterCheckbox) {
-            const activeContent = document.getElementById(activeTabId);
-            const checkboxes = activeContent.querySelectorAll('.item-checkbox');
-            checkboxes.forEach(cb => cb.checked = masterCheckbox.checked);
+        // Розгортання конкретного елемента у списку (деталі)
+        function toggleSubItem(element) {
+            const details = element.querySelector('.sub-item-details');
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
         }
 
-        function getSelectedIds() {
-            const activeContent = document.getElementById(activeTabId);
-            const checked = activeContent.querySelectorAll('.item-checkbox:checked');
-            return Array.from(checked).map(cb => cb.value);
+        // Завантаження всіх даних з бази Supabase
+        async function loadAllSupabaseData() {
+            await fetchAccounts();
+            await fetchOrders();
+            await fetchProducts();
+            await fetchCarts();
         }
 
-        // Масове видалення з Supabase
-        async function bulkDelete() {
-            const ids = getSelectedIds();
-            if (ids.length === 0) return alert('Виберіть галочками хоча б один елемент!');
-            if (!confirm(`Видалити обрані елементи (${ids.length} шт.) з бази Supabase?`)) return;
-
-            let table = 'orders';
-            if (activeTabId === 'customers') table = 'users';
-            else if (activeTabId === 'products') table = 'products';
-            else if (activeTabId === 'carts') table = 'carts';
-
+        // 1. Акаунти
+        async function fetchAccounts() {
+            const list = document.getElementById('accountsList');
             try {
-                const { error } = await _supabase.from(table).delete().in('id', ids);
-                if (error) throw error;
-                alert('Успішно видалено з бази!');
-                loadSupabaseData();
-            } catch (err) {
-                console.error(err);
-                alert('Помилка видалення з бази даних.');
-            }
-        }
-
-        // Масове завершення замовлень у Supabase
-        async function bulkComplete() {
-            const ids = getSelectedIds();
-            if (ids.length === 0) return alert('Виберіть замовлення галочками!');
-
-            try {
-                const { error } = await _supabase.from('orders').update({ status: 'completed' }).in('id', ids);
-                if (error) throw error;
-                alert('Замовлення переведено в завершені!');
-                loadSupabaseData();
-            } catch (err) {
-                console.error(err);
-                alert('Помилка оновлення статусу замовлень.');
-            }
-        }
-
-        // Завантаження всіх даних із Supabase
-        async function loadSupabaseData() {
-            fetchOrdersFromSupabase();
-            fetchCustomersFromSupabase();
-            fetchProductsFromSupabase();
-            fetchCartsFromSupabase();
-        }
-
-        // 1 & 2. Замовлення з Supabase (Нові та Завершені)
-        async function fetchOrdersFromSupabase() {
-            const newList = document.getElementById('new-orders-list');
-            const completedList = document.getElementById('completed-orders-list');
-            newList.innerHTML = 'Завантаження...';
-            completedList.innerHTML = 'Завантаження...';
-
-            try {
-                const { data: orders, error } = await _supabase.from('orders').select('*').order('created_at', { ascending: false });
+                const { data, error } = await _supabase.from('users').select('*').order('created_at', { ascending: false });
                 if (error) throw error;
 
-                newList.innerHTML = '';
-                completedList.innerHTML = '';
-
-                if (!orders || orders.length === 0) {
-                    newList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Нових замовлень немає</p>';
-                    completedList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Завершених замовлень немає</p>';
+                document.getElementById('countAccounts').innerText = data ? data.length : 0;
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Поки немає зареєстрованих акаунтів.</p>';
                     return;
                 }
 
-                orders.forEach(o => {
-                    const status = o.status || 'new';
-                    const date = new Date(o.created_at).toLocaleString();
-                    const html = `
-                        <div class="card">
-                            <div class="card-header" onclick="toggleCard(event, this)">
-                                <input type="checkbox" class="item-checkbox" value="${o.id}">
-                                <div class="card-title">Замовлення #${o.id} | ${o.customer_name || 'Клієнт'} — <b>${o.total_price || 0} грн</b></div>
-                                <span class="badge ${status === 'new' ? 'badge-new' : 'badge-done'}">
-                                    ${status === 'new' ? 'Новий' : 'Завершено'}
-                                </span>
-                            </div>
-                            <div class="card-body">
-                                <p><b>Телефон:</b> <a href="tel:${o.phone}">${o.phone || 'Не вказано'}</a></p>
-                                <p><b>Доставка:</b> ${o.city_post || 'Не вказано'}</p>
-                                <p><b>Склад замовлення:</b><br>${(o.items || '').replace(/\n/g, '<br>')}</p>
-                                ${o.comment ? `<p><b>Коментар:</b> ${o.comment}</p>` : ''}
-                                <p style="color:#888; font-size:0.75rem; margin-top: 8px;">Дата: ${date}</p>
-                            </div>
-                        </div>
-                    `;
-                    if (status === 'new') newList.innerHTML += html;
-                    else completedList.innerHTML += html;
-                });
-
-                if (!newList.innerHTML) newList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Нових замовлень немає</p>';
-                if (!completedList.innerHTML) completedList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Завершених замовлень немає</p>';
-            } catch (err) {
-                console.error(err);
-                newList.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження замовлень.</p>';
-                completedList.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження замовлень.</p>';
-            }
-        }
-
-        // 3. Покупці з Supabase (таблиця users)
-        async function fetchCustomersFromSupabase() {
-            const custList = document.getElementById('customers-list');
-            custList.innerHTML = 'Завантаження...';
-
-            try {
-                const { data: users, error } = await _supabase.from('users').select('*').order('created_at', { ascending: false });
-                if (error) throw error;
-
-                custList.innerHTML = '';
-                if (!users || users.length === 0) {
-                    custList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Поки немає зареєстрованих покупців у базі.</p>';
-                    return;
-                }
-
-                users.forEach(u => {
+                list.innerHTML = '';
+                data.forEach((u, index) => {
                     const ordersCount = u.data?.orders ? u.data.orders.length : 0;
-                    custList.innerHTML += `
-                        <div class="card">
-                            <div class="card-header" onclick="toggleCard(event, this)">
-                                <input type="checkbox" class="item-checkbox" value="${u.id}">
-                                <div class="card-title">👤 ${u.full_name || u.login}</div>
-                                <span style="font-size:0.85rem; color:#666;">${ordersCount} замовлень</span>
+                    list.innerHTML += `
+                        <div class="sub-item" onclick="toggleSubItem(this)">
+                            <div class="sub-item-title">
+                                <span>#${index + 1} — ${u.full_name || u.login}</span>
+                                <span style="font-size:0.75rem; color:#666;">Замовлень: ${ordersCount}</span>
                             </div>
-                            <div class="card-body">
-                                <p><b>Логін / Телефон:</b> ${u.login}</p>
+                            <div class="sub-item-details">
+                                <p><b>Логін (Телефон/Email):</b> ${u.login}</p>
                                 <p><b>ПІБ:</b> ${u.full_name || 'Не вказано'}</p>
-                                <p><b>Адреса:</b> ${u.address || 'Не вказано'}</p>
+                                <p><b>Адреса доставки:</b> ${u.address || 'Не вказано'}</p>
+                                <p><b>Місто:</b> ${u.city || 'Не вказано'}</p>
+                                <p><b>ID в базі:</b> <code>${u.id}</code></p>
                             </div>
                         </div>
                     `;
                 });
             } catch (err) {
                 console.error(err);
-                custList.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження покупців із бази.</p>';
+                list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження акаунтів з бази.</p>';
             }
         }
 
-        // 4. Товари з Supabase
-        async function fetchProductsFromSupabase() {
-            const prodList = document.getElementById('products-list');
-            prodList.innerHTML = 'Завантаження...';
-
+        // 2. Оформлені замовлення
+        async function fetchOrders() {
+            const list = document.getElementById('ordersList');
+            const purchasesList = document.getElementById('purchasesList');
             try {
-                const { data: products, error } = await _supabase.from('products').select('*');
+                const { data, error } = await _supabase.from('orders').select('*').order('created_at', { ascending: false });
                 if (error) throw error;
 
-                prodList.innerHTML = '';
-                if (!products || products.length === 0) {
-                    prodList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Товарів у базі поки немає</p>';
+                document.getElementById('countOrders').innerText = data ? data.length : 0;
+                document.getElementById('countPurchases').innerText = data ? data.length : 0;
+
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Замовлень поки немає.</p>';
+                    purchasesList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Покупок поки немає.</p>';
                     return;
                 }
 
-                products.forEach(p => {
-                    prodList.innerHTML += `
-                        <div class="card">
-                            <div class="card-header" onclick="toggleCard(event, this)">
-                                <input type="checkbox" class="item-checkbox" value="${p.id}">
-                                <div class="card-title">🍯 ${p.title} (${p.volume || ''})</div>
-                                <div style="font-weight:bold; color: var(--dark-amber);">${p.price} грн</div>
+                list.innerHTML = '';
+                purchasesList.innerHTML = '';
+
+                data.forEach((o, index) => {
+                    const orderHtml = `
+                        <div class="sub-item" onclick="toggleSubItem(this)">
+                            <div class="sub-item-title">
+                                <span>Замовлення #${index + 1} — ${o.customer_name || 'Клієнт'}</span>
+                                <span style="font-weight:bold; color:var(--dark-amber);">${o.total_price || 0} грн</span>
                             </div>
-                            <div class="card-body">
-                                <p>Статус наявності: <b>${p.in_stock ? 'В наявності' : 'Немає'}</b></p>
+                            <div class="sub-item-details">
+                                <p><b>Телефон:</b> <a href="tel:${o.phone}">${o.phone || 'Не вказано'}</a></p>
+                                <p><b>Адреса/Пошта:</b> ${o.city_post || 'Не вказано'}</p>
+                                <p><b>Що замовив:</b><br>${(o.items || 'Товари не вказані').replace(/\n/g, '<br>')}</p>
+                                ${o.comment ? `<p><b>Коментар:</b> ${o.comment}</p>` : ''}
+                                <p style="color:#888; font-size:0.75rem; margin-top:5px;">Дата: ${new Date(o.created_at).toLocaleString()}</p>
                             </div>
                         </div>
                     `;
+                    list.innerHTML += orderHtml;
+                    purchasesList.innerHTML += orderHtml; // Дублюємо в розділ Покупки для зручності
                 });
             } catch (err) {
                 console.error(err);
-                prodList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Таблиця товарів у Supabase ще не створена.</p>';
+                list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження замовлень.</p>';
             }
         }
 
-        // 5. Корзини з Supabase
-        async function fetchCartsFromSupabase() {
-            const cartsList = document.getElementById('carts-list');
-            cartsList.innerHTML = 'Завантаження...';
-
+        // 3. Товари
+        async function fetchProducts() {
+            const list = document.getElementById('productsList');
             try {
-                const { data: carts, error } = await _supabase.from('carts').select('*').order('created_at', { ascending: false });
+                const { data, error } = await _supabase.from('products').select('*');
                 if (error) throw error;
 
-                cartsList.innerHTML = '';
-                if (!carts || carts.length === 0) {
-                    cartsList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Збережених корзин немає</p>';
+                document.getElementById('countProducts').innerText = data ? data.length : 0;
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">У базі поки немає товарів.</p>';
                     return;
                 }
 
-                carts.forEach(ct => {
-                    cartsList.innerHTML += `
-                        <div class="card">
-                            <div class="card-header" onclick="toggleCard(event, this)">
-                                <input type="checkbox" class="item-checkbox" value="${ct.id}">
-                                <div class="card-title">🛒 Корзина #${ct.id} (${ct.total_price || 0} грн)</div>
+                list.innerHTML = '';
+                data.forEach(p => {
+                    list.innerHTML += `
+                        <div class="sub-item" onclick="toggleSubItem(this)">
+                            <div class="sub-item-title">
+                                <span>🍯 ${p.title} (${p.volume || ''})</span>
+                                <span style="font-weight:bold; color:var(--dark-amber);">${p.price} грн</span>
                             </div>
-                            <div class="card-body">
-                                <p><b>Вміст:</b><br>${(ct.items || '').replace(/\n/g, '<br>')}</p>
-                                <p style="color:#888; font-size:0.75rem; margin-top: 5px;">Створено: ${new Date(ct.created_at).toLocaleString()}</p>
+                            <div class="sub-item-details">
+                                <p>Наявність: <b>${p.in_stock ? 'В наявності' : 'Немає'}</b></p>
                             </div>
                         </div>
                     `;
                 });
             } catch (err) {
-                console.error(err);
-                cartsList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Таблиця корзин у Supabase ще не створена.</p>';
+                list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Таблиця товарів у Supabase ще створюється або відсутня.</p>';
             }
         }
 
-        // Управління співробітниками та завданнями (локально)
-        function createEmployee(e) {
-            e.preventDefault();
-            const name = document.getElementById('empName').value.trim();
-            const role = document.getElementById('empRole').value.trim();
-            const login = document.getElementById('empLogin').value.trim();
-            const pass = document.getElementById('empPass').value.trim();
+        // 4. Корзини
+        async function fetchCarts() {
+            const list = document.getElementById('cartsList');
+            try {
+                const { data, error } = await _supabase.from('carts').select('*').order('created_at', { ascending: false });
+                if (error) throw error;
 
-            if (db.employees.some(emp => emp.login === login)) {
-                alert('Співробітник з таким логіном вже існує!');
-                return;
-            }
+                document.getElementById('countCarts').innerText = data ? data.length : 0;
+                if (!data || data.length === 0) {
+                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Активних кошиків немає.</p>';
+                    return;
+                }
 
-            db.employees.push({ id: 'emp_' + Date.now(), name, role, login, pass, isAdmin: false });
-            saveDb();
-            alert('Співробітника успішно зареєстровано!');
-            e.target.reset();
-            renderLocalAdminData();
-        }
-
-        function assignOrder(e) {
-            e.preventDefault();
-            const desc = document.getElementById('ordDesc').value.trim();
-            const client = document.getElementById('ordClient').value.trim();
-            const empId = document.getElementById('ordEmployee').value;
-
-            db.internalOrders.push({
-                id: 'ord_' + Date.now(),
-                desc,
-                client,
-                empId,
-                status: 'Новий',
-                date: new Date().toLocaleDateString()
-            });
-            saveDb();
-            alert('Завдання призначено!');
-            e.target.reset();
-            renderLocalAdminData();
-        }
-
-        function renderLocalAdminData() {
-            const select = document.getElementById('ordEmployee');
-            select.innerHTML = '';
-            db.employees.filter(e => !e.isAdmin).forEach(emp => {
-                select.innerHTML += `<option value="${emp.id}">${emp.name} (${emp.role})</option>`;
-            });
-
-            let empHtml = '<h3 style="font-family: \'Comfortaa\', cursive; font-size: 0.95rem; color: var(--dark-amber); margin-bottom: 8px;">Співробітники:</h3><ul style="margin-left: 20px; font-size: 0.85rem; color: #555;">';
-            db.employees.filter(e => !e.isAdmin).forEach(emp => {
-                empHtml += `<li style="margin-bottom: 4px;"><b>${emp.name}</b> — ${emp.role} (Логін: <code>${emp.login}</code>)</li>`;
-            });
-            empHtml += '</ul>';
-            document.getElementById('allEmployeesList').innerHTML = empHtml;
-
-            let ordHtml = '<h3 style="font-family: \'Comfortaa\', cursive; font-size: 0.95rem; color: var(--dark-amber); margin-bottom: 8px;">Внутрішні завдання співробітникам:</h3>';
-            if (db.internalOrders.length === 0) {
-                ordHtml += '<p style="font-size:0.85rem; color:#666;">Поки немає завдань</p>';
-            } else {
-                ordHtml += '<table class="table"><tr><th>Дата</th><th>Опис</th><th>Клієнт</th><th>Статус</th></tr>';
-                db.internalOrders.forEach(ord => {
-                    ordHtml += `<tr><td>${ord.date}</td><td>${ord.desc}</td><td>${ord.client}</td><td><b>${ord.status}</b></td></tr>`;
+                list.innerHTML = '';
+                data.forEach((c, index) => {
+                    list.innerHTML += `
+                        <div class="sub-item" onclick="toggleSubItem(this)">
+                            <div class="sub-item-title">
+                                <span>🛒 Кошик #${index + 1}</span>
+                                <span style="font-weight:bold;">${c.total_price || 0} грн</span>
+                            </div>
+                            <div class="sub-item-details">
+                                <p><b>Вміст:</b><br>${(c.items || '').replace(/\n/g, '<br>')}</p>
+                                <p style="color:#888; font-size:0.75rem; margin-top:5px;">Оновлено: ${new Date(c.created_at).toLocaleString()}</p>
+                            </div>
+                        </div>
+                    `;
                 });
-                ordHtml += '</table>';
+            } catch (err) {
+                list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Таблиця корзин у Supabase ще не створена.</p>';
             }
-            document.getElementById('allOrdersList').innerHTML = ordHtml;
         }
 
-        document.addEventListener('DOMContentLoaded', initStaffApp);
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
