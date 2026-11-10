@@ -44,16 +44,23 @@
             font-size: 0.92rem;
         }
 
-        /* Верхня панель (Меню, Пошук, Кошик - без змін) */
+        /* Верхня панель (Меню, Пошук, Кошик - плаваюча) */
         .top-nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(252, 249, 242, 0.95);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            padding: 10px 12px 6px;
+            padding: 10px 12px;
             max-width: 960px;
             margin: 0 auto;
             flex-wrap: nowrap;
+            box-shadow: 0 4px 15px rgba(184, 107, 0, 0.05);
+            border-bottom: 1.5px solid var(--border-color);
         }
 
         .top-nav-btn {
@@ -80,6 +87,32 @@
             transform: translateY(-2px);
         }
 
+        /* Поле пошуку у верхній панелі */
+        .search-form-inline {
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .top-search-input {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1.5px solid var(--primary-amber);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            outline: none;
+            width: 140px;
+            transition: width 0.3s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .top-search-input:focus {
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(230, 138, 0, 0.2);
+        }
+
         .cart-badge {
             background: var(--accent-red);
             color: white;
@@ -93,7 +126,7 @@
             background: transparent;
             color: var(--text-main);
             text-align: center;
-            padding: 10px 20px 15px;
+            padding: 15px 20px 15px;
             box-shadow: none;
             position: relative;
         }
@@ -944,6 +977,12 @@
             font-size: 0.82rem;
             font-weight: 600;
         }
+
+        .footer-year {
+            margin-top: 4px;
+            font-size: 0.8rem;
+            color: var(--primary-amber);
+        }
         
         #consultStatus {
             margin-top: 12px;
@@ -966,10 +1005,15 @@
         <button class="widget-toggle-btn" onclick="toggleWidget()">💬</button>
     </div>
 
-    <!-- Верхня панель (Меню, Пошук, Кошик - без змін) -->
+    <!-- Верхня плаваюча панель (Меню, Пошук, Кошик) -->
     <div class="top-nav-bar">
         <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
-        <button class="top-nav-btn" onclick="focusSearch()">🔍 <span id="nav-search-text">Пошук</span></button>
+        
+        <!-- Робочий пошук -->
+        <form id="searchFormInline" class="search-form-inline" onsubmit="handleSearch(event)">
+            <input type="text" id="topSearchInput" class="top-search-input" placeholder="🔍 Пошук..." autocomplete="off">
+        </form>
+
         <button class="top-nav-btn" onclick="openCartModal()">
             🛒 <span id="cart-text-btn">Кошик</span> <span class="cart-badge" id="cartCount">0</span>
         </button>
@@ -984,8 +1028,6 @@
     </header>
 
     <div class="container">
-
-        <!-- Секція каталог та поле пошуку повністю видалені звідси -->
 
         <div class="products-grid" id="productsGrid">
 
@@ -1260,7 +1302,8 @@
         </section>
 
         <footer>
-            <p>© <span id="footer-copy">Медова Пасіка. Всі права захищено.</span></p>
+            <p><span id="footer-copy">Медова Пасіка. Всі права захищено.</span></p>
+            <p class="footer-year">2026</p>
             <div class="lang-switcher">
                 <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
                 <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
@@ -1269,7 +1312,7 @@
 
     </div>
 
-    <!-- Модальне вікно Кошика із кнопкою «Додати товар» в порожньому стані -->
+    <!-- Модальне вікно Кошика -->
     <div class="modal" id="cartModal">
         <div class="modal-content">
             <div class="modal-header-row">
@@ -1278,6 +1321,10 @@
             </div>
             
             <div id="cartItemsList" style="margin-bottom: 15px;"></div>
+
+            <!-- Блок інформування про залишок до безкоштовної доставки (поріг 1000 грн) -->
+            <div id="deliveryProgressBox" style="background: #fff3db; border: 1.5px dashed var(--primary-amber); padding: 10px 12px; border-radius: 12px; margin-bottom: 12px; font-size: 0.85rem; text-align: center; color: var(--dark-amber); font-weight: 600; display: none;">
+            </div>
 
             <div id="cartTotalBox" style="background: #fff8eb; border: 1.5px solid #fae8d2; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 0.95rem; text-align: right;">
                 <strong id="total-sum-text">Загальна сума: <span id="cartTotalSum">0</span> грн</strong>
@@ -1360,11 +1407,32 @@
             localStorage.setItem('medova_cart', JSON.stringify(cart));
         }
 
-        /* Функція кнопки Пошуку на верхній панелі (плавний скрол до товарів) */
-        function focusSearch() {
-            const grid = document.getElementById('productsGrid');
-            if(grid) {
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        /* Функція обробки пошуку по сайту (Enter в інпуті) */
+        function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('topSearchInput').value.trim().toLowerCase();
+            if (!query) return;
+
+            const cards = document.querySelectorAll('.product-card');
+            let foundCard = null;
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name') || '';
+                const text = card.innerText.toLowerCase();
+                if (name.includes(query) || text.includes(query)) {
+                    if (!foundCard) foundCard = card;
+                }
+            });
+
+            if (foundCard) {
+                foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Легке підсвічування картки
+                foundCard.style.borderColor = '#e63946';
+                setTimeout(() => {
+                    foundCard.style.borderColor = '';
+                }, 2000);
+            } else {
+                alert(currentLang === 'uk' ? 'Нічого не знайдено за вашим запитом' : 'Ничего не найдено по вашему запросу');
             }
         }
 
@@ -1444,6 +1512,7 @@
             const emptyActions = document.getElementById('cartEmptyActions');
             const orderForm = document.getElementById('orderForm');
             const totalBox = document.getElementById('cartTotalBox');
+            const progressBox = document.getElementById('deliveryProgressBox');
 
             orderForm.style.display = 'none';
             orderForm.reset();
@@ -1451,8 +1520,9 @@
             if (cart.length === 0) {
                 listContainer.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:10px;">${currentLang === 'uk' ? 'Кошик порожній' : 'Корзина пуста'}</p>`;
                 totalBox.style.display = 'none';
+                progressBox.style.display = 'none';
                 initialActions.style.display = 'none';
-                emptyActions.style.display = 'block'; /* Показуємо кнопку «Додати товар» */
+                emptyActions.style.display = 'block';
                 return;
             }
 
@@ -1483,6 +1553,22 @@
 
             listContainer.innerHTML = html;
             totalSumElement.innerText = totalSum;
+
+            // Расчет остатка до бесплатной доставки (порог 1000 грн)
+            const threshold = 1000;
+            progressBox.style.display = 'block';
+            if (totalSum >= threshold) {
+                progressBox.innerHTML = currentLang === 'uk' ? '🎉 Ура! У вас безкоштовна доставка!' : '🎉 Ура! У вас бесплатная доставка!';
+                progressBox.style.color = '#16a34a';
+                progressBox.style.borderColor = '#16a34a';
+            } else {
+                const diff = threshold - totalSum;
+                progressBox.innerHTML = currentLang === 'uk' 
+                    ? `🚚 До безкоштовної доставки не вистачає: <b>${diff} грн</b>` 
+                    : `🚚 До бесплатной доставки не хватает: <b>${diff} грн</b>`;
+                progressBox.style.color = 'var(--dark-amber)';
+                progressBox.style.borderColor = 'var(--primary-amber)';
+            }
         }
 
         async function sendOrderToTelegram(e) {
@@ -1683,7 +1769,6 @@
             uk: {
                 pageTitle: "Медова Пасіка | Натуральний мед та вироби з воску",
                 navMenu: "Меню",
-                navSearch: "Пошук",
                 cartBtn: "Кошик",
                 headerTitle: "Медова Пасіка",
                 headerSubtitle: "Натуральний мед, воскові свічки та продукти бджільництва",
@@ -1730,7 +1815,6 @@
             ru: {
                 pageTitle: "Медовая Пасека | Натуральный мед и изделия из воска",
                 navMenu: "Меню",
-                navSearch: "Поиск",
                 cartBtn: "Корзина",
                 headerTitle: "Медовая Пасека",
                 headerSubtitle: "Натуральный мед, восковые свечи и продукты пчеловодства",
@@ -1782,7 +1866,6 @@
 
             document.getElementById('page-title').innerText = t.pageTitle;
             document.getElementById('nav-menu-text').innerText = t.navMenu;
-            document.getElementById('nav-search-text').innerText = t.navSearch;
             document.getElementById('cart-text-btn').innerText = t.cartBtn;
             document.getElementById('header-title').innerText = t.headerTitle;
             document.getElementById('header-subtitle').innerText = t.headerSubtitle;
@@ -1833,6 +1916,11 @@
 
             document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
             document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+            
+            // Обновляем текст в корзине при открытом модальном окне
+            if(document.getElementById('cartModal').style.display === 'flex') {
+                renderCartModal();
+            }
         }
     </script>
 </body>
