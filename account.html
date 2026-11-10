@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-amber: #829b33; /* Близько до фірмового зеленого/оливкового на скріншоті */
+            --primary-amber: #829b33;
             --dark-amber: #5a6d22;
             --accent-btn: #8fb339;
             --bg-gradient: #fcf9f2;
@@ -145,7 +145,7 @@
                 <div id="userOrdersList" style="color: #666; font-size: 0.85rem; text-align: center; padding: 20px;">У вас поки немає замовлень.</div>
             </div>
 
-            <!-- 3. Обране (товари з галочками/сердечками) -->
+            <!-- 3. Обране -->
             <div id="sectionWishlist" class="card-section">
                 <div id="userWishlistList" style="color: #666; font-size: 0.85rem; text-align: center; padding: 20px;">Ваш список обраного порожній.</div>
             </div>
@@ -211,13 +211,13 @@
             }
         }
 
-        // РЕЄСТРАЦІЯ
+        // РЕЄСТРАЦІЯ (ЗБЕРЕЖЕННЯ В SUPABASE)
         async function handleRegister(e) {
             e.preventDefault();
             const login = document.getElementById('regInput').value.trim();
             const pass = document.getElementById('regPass').value.trim();
 
-            if (pass.length < 4) { alert("Пароль занадто короткий!"); return; }
+            if (pass.length < 4) { alert("Пароль занадто короткий (мінімум 4 символи)!"); return; }
 
             const newUserData = {
                 id: 'usr_' + Date.now(),
@@ -243,20 +243,21 @@
 
                 if (!res.ok) {
                     const err = await res.json();
-                    if (err.code === '23505') { alert("Користувач вже існує!"); return; }
+                    if (err.code === '23505') { alert("Користувач з таким логіном вже зареєстрований!"); return; }
                     throw new Error();
                 }
 
                 currentUser = newUserData;
                 localStorage.setItem('medova_current_user', JSON.stringify(currentUser));
-                alert("Реєстрація успішна!");
+                alert("Реєстрація успішна! Дані збережено в базі.");
                 initApp();
             } catch (err) {
+                console.error(err);
                 alert("Помилка реєстрації. Спробуйте ще раз.");
             }
         }
 
-        // ВХІД
+        // ВХІД ІЗ SUPABASE
         async function handleLogin(e) {
             e.preventDefault();
             const login = document.getElementById('loginInput').value.trim();
@@ -277,6 +278,7 @@
                     alert("Невірний логін або пароль!");
                 }
             } catch (err) {
+                console.error(err);
                 alert("Помилка зв'язку з базою даних.");
             }
         }
@@ -288,7 +290,7 @@
             initApp();
         }
 
-        // ЗБЕРЕЖЕННЯ ПРОФІЛЮ
+        // ЗБЕРЕЖЕННЯ ПРОФІЛЮ В SUPABASE
         async function saveProfileData(e) {
             e.preventDefault();
             if (!currentUser) return;
@@ -313,8 +315,9 @@
                 });
 
                 localStorage.setItem('medova_current_user', JSON.stringify(currentUser));
-                alert("Зміни збережено!");
+                alert("Зміни успішно збережено в хмару!");
             } catch (err) {
+                console.error(err);
                 alert("Помилка збереження.");
             }
         }
@@ -330,7 +333,7 @@
             const cont = document.getElementById('userOrdersList');
             const orders = currentUser.data?.orders || [];
             if (orders.length === 0) { cont.innerHTML = 'У вас поки немає замовлень.'; return; }
-            cont.innerHTML = orders.map(o => `<div>${o.date} - ${o.total} грн</div>`).join('');
+            cont.innerHTML = orders.map(o => `<div>${o.date} — ${o.total} грн</div>`).join('');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
