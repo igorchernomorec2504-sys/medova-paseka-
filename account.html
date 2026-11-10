@@ -321,7 +321,7 @@
             container.innerHTML = '<ul>' + wishlist.map(item => `<li>${item}</li>`).join('') + '</ul>';
         }
 
-        // ЗАВАНТАЖЕННЯ ЗАМОВЛЕНЬ НАПРЯМУ З ТАБЛИЦІ "заказы" В SUPABASE
+        // ЗАВАНТАЖЕННЯ ЗАМОВЛЕНЬ З ТАБЛИЦІ "orders" В SUPABASE
         async function renderOrders() {
             const container = document.getElementById('userOrdersList');
             if (!currentUser || !currentUser.login) return;
@@ -329,9 +329,9 @@
             container.innerHTML = 'Завантаження замовлень...';
 
             try {
-                // Запрос к таблице "заказы" Supabase по полю "телефон"
                 const encodedLogin = encodeURIComponent(currentUser.login);
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D1%8B?%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD=eq.${encodedLogin}&order=%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%BE_%D0%B2.desc`, {
+                // Запрос к английской таблице "orders" по полю "phone"
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/orders?phone=eq.${encodedLogin}&order=created_at.desc`, {
                     method: 'GET',
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -361,19 +361,19 @@
                     <tbody>`;
 
                 orders.forEach(ord => {
-                    // Форматируем дату из timestamp
                     let formattedDate = 'Не вказано';
-                    if (ord.создано_в) {
-                        const d = new Date(ord.создано_в);
+                    const dateVal = ord.created_at || ord.создано_в;
+                    if (dateVal) {
+                        const d = new Date(dateVal);
                         formattedDate = d.toLocaleDateString('uk-UA') + ' ' + d.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
                     }
 
                     html += `
                         <tr>
                             <td>${formattedDate}</td>
-                            <td>${ord.предметы || '-'}</td>
-                            <td><b>${ord.общая_цена || 0} грн</b></td>
-                            <td><span class="status-badge">${ord.статус || 'Прийнято'}</span></td>
+                            <td>${ord.items || ord.предметы || '-'}</td>
+                            <td><b>${ord.total_price || ord.общая_цена || 0} грн</b></td>
+                            <td><span class="status-badge">${ord.status || ord.статус || 'Прийнято'}</span></td>
                         </tr>`;
                 });
 
