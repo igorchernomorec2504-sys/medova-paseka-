@@ -129,9 +129,6 @@
     </div>
 
     <script>
-        const SUPABASE_URL = "https://uxhmeqgpjrkuxggxbvkq.supabase.co";
-        const SUPABASE_KEY = "Sb_publishable_MYBbdww6aCJ3vavBJdUL4g_--gXnmUK";
-
         let currentStaff = JSON.parse(localStorage.getItem('medova_current_staff')) || null;
 
         function initApp() {
@@ -151,12 +148,12 @@
             const login = document.getElementById('staffLogin').value.trim();
             const pass = document.getElementById('staffPass').value.trim();
 
-            if (login === 'admin1' && pass === 'admin123') {
+            if (login === 'admin' && pass === 'admin25041707') {
                 currentStaff = { name: 'Головний Адмін' };
                 localStorage.setItem('medova_current_staff', JSON.stringify(currentStaff));
                 initApp();
             } else {
-                alert('Невірний логін або пароль! (За замовчуванням: admin1 / admin123)');
+                alert('Невірний логін або пароль!');
             }
         }
 
@@ -176,49 +173,38 @@
             details.style.display = details.style.display === 'block' ? 'none' : 'block';
         }
 
-        async function loadAccounts() {
+        function loadAccounts() {
             const list = document.getElementById('accountsList');
             try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients?select=*`, {
-                    method: 'GET',
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    }
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById('countAccounts').innerText = data.length;
-                    if (data.length === 0) {
-                        list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Поки немає зареєстрованих акаунтів.</p>';
-                        return;
-                    }
-
-                    list.innerHTML = '';
-                    data.forEach((c, index) => {
-                        const profile = c.profile || {};
-                        list.innerHTML += `
-                            <div class="sub-item" onclick="toggleSubItem(this)">
-                                <div class="sub-item-title">
-                                    <span>#${index + 1} — ${profile.full_name || c.phone}</span>
-                                    <span style="font-size:0.75rem; color:#666;">Телефон: ${c.phone}</span>
-                                </div>
-                                <div class="sub-item-details">
-                                    <p><b>Телефон (Логін):</b> ${c.phone}</p>
-                                    <p><b>ПІБ:</b> ${profile.full_name || 'Не вказано'}</p>
-                                    <p><b>Місто:</b> ${profile.city || 'Не вказано'}</p>
-                                    <p><b>Адреса:</b> ${profile.address || 'Не вказано'}</p>
-                                    <p><b>ID в базі:</b> <code>${c.id}</code></p>
-                                </div>
-                            </div>
-                        `;
-                    });
-                } else {
-                    list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження акаунтів з бази.</p>';
+                const data = JSON.parse(localStorage.getItem('medova_clients')) || [];
+                
+                document.getElementById('countAccounts').innerText = data.length;
+                if (data.length === 0) {
+                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Поки немає зареєстрованих акаунтів.</p>';
+                    return;
                 }
+
+                list.innerHTML = '';
+                data.forEach((c, index) => {
+                    const profile = c.profile || {};
+                    list.innerHTML += `
+                        <div class="sub-item" onclick="toggleSubItem(this)">
+                            <div class="sub-item-title">
+                                <span>#${index + 1} — ${profile.full_name || c.phone}</span>
+                                <span style="font-size:0.75rem; color:#666;">Телефон: ${c.phone}</span>
+                            </div>
+                            <div class="sub-item-details">
+                                <p><b>Телефон (Логін):</b> ${c.phone}</p>
+                                <p><b>ПІБ:</b> ${profile.full_name || 'Не вказано'}</p>
+                                <p><b>Місто:</b> ${profile.city || 'Не вказано'}</p>
+                                <p><b>Адреса:</b> ${profile.address || 'Не вказано'}</p>
+                                <p><b>ID в системі:</b> <code>${c.id}</code></p>
+                            </div>
+                        </div>
+                    `;
+                });
             } catch (err) {
-                list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка зв\'язку з базою.</p>';
+                list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження акаунтів.</p>';
             }
         }
 
