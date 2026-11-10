@@ -188,10 +188,13 @@
                 data.forEach((c, index) => {
                     const profile = c.profile || {};
                     list.innerHTML += `
-                        <div class="sub-item" onclick="toggleSubItem(this)">
-                            <div class="sub-item-title">
+                        <div class="sub-item">
+                            <div class="sub-item-title" onclick="toggleSubItem(this)">
                                 <span>#${index + 1} — ${profile.full_name || c.phone}</span>
-                                <span style="font-size:0.75rem; color:#666;">Телефон: ${c.phone}</span>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="font-size:0.75rem; color:#666;">Телефон: ${c.phone}</span>
+                                    <button onclick="event.stopPropagation(); deleteAccount(${index})" title="Видалити акаунт" style="background: #ff4d4d; color: white; border: none; border-radius: 4px; width: 24px; height: 24px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 12px;">✕</button>
+                                </div>
                             </div>
                             <div class="sub-item-details">
                                 <p><b>Телефон (Логін):</b> ${c.phone}</p>
@@ -206,6 +209,21 @@
             } catch (err) {
                 list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження акаунтів.</p>';
             }
+        }
+
+        function deleteAccount(index) {
+            let data = JSON.parse(localStorage.getItem('medova_clients')) || [];
+            
+            const target = data[index];
+            const nameOrPhone = target && target.profile && target.profile.full_name ? target.profile.full_name : (target ? target.phone : 'цього користувача');
+
+            if (!confirm(`Ви дійсно хочете видалити акаунт "${nameOrPhone}"?`)) {
+                return;
+            }
+
+            data.splice(index, 1);
+            localStorage.setItem('medova_clients', JSON.stringify(data));
+            loadAccounts();
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
