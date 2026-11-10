@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Панель адміністратора — Медова Пасіка</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --primary-amber: #829b33;
@@ -31,16 +30,13 @@
         .btn:hover { background: #87b031; }
         .btn-secondary { background: #795548; margin-top: 20px; }
 
-        /* Вертикальне меню-стовпчик */
         .menu-column { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-        
-        .menu-section { background: #fdfcfa; border: 1px solid #e2ded8; border-radius: 10px; overflow: hidden; transition: all 0.3s ease; }
+        .menu-section { background: #fdfcfa; border: 1px solid #e2ded8; border-radius: 10px; overflow: hidden; }
         .menu-header { padding: 15px 20px; font-family: 'Comfortaa', cursive; font-size: 1rem; color: var(--dark-amber); background: #f5f2eb; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
         .menu-header:hover { background: #efeae1; }
         .menu-body { padding: 15px; display: none; border-top: 1px solid #e2ded8; background: #fff; }
 
-        /* Вкладені елементи у стовпчик */
-        .sub-item { background: #faf9f6; border: 1px solid #eee; border-radius: 8px; padding: 12px; margin-bottom: 10px; cursor: pointer; transition: background 0.2s; }
+        .sub-item { background: #faf9f6; border: 1px solid #eee; border-radius: 8px; padding: 12px; margin-bottom: 10px; cursor: pointer; }
         .sub-item:hover { background: #f4f0e6; }
         .sub-item-title { font-weight: 600; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; }
         .sub-item-details { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd; font-size: 0.85rem; color: #555; line-height: 1.6; }
@@ -56,7 +52,6 @@
             <span id="currentUserInfo" style="font-weight: 600; font-size: 0.85rem; color: #555;"></span>
         </div>
 
-        <!-- ФОРМА ВХОДУ ДЛЯ ПЕРСОНАЛУ -->
         <div id="loginSection">
             <h1>🛠️ Вхід для адміністратора</h1>
             <div style="max-width: 380px; margin: 20px auto;">
@@ -74,13 +69,10 @@
             </div>
         </div>
 
-        <!-- ВЕРТИКАЛЬНА ПАНЕЛЬ АДМІНІСТРАТОРА -->
         <div id="adminPanel" style="display: none;">
             <h1>👑 Панель управління «Медова Пасіка»</h1>
 
             <div class="menu-column">
-                
-                <!-- 1. ЗАРЕЄСТРОВАНІ АКАУНТИ -->
                 <div class="menu-section">
                     <div class="menu-header" onclick="toggleMenuSection('secAccounts')">
                         <span>👥 Зареєстровані аккаунти</span>
@@ -91,50 +83,45 @@
                     </div>
                 </div>
 
-                <!-- 2. ОФОРМЛЕНІ ЗАМОВЛЕННЯ -->
                 <div class="menu-section">
                     <div class="menu-header" onclick="toggleMenuSection('secOrders')">
                         <span>📦 Оформлені замовлення</span>
                         <span id="countOrders" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
                     </div>
                     <div class="menu-body" id="secOrders">
-                        <div id="ordersList">Завантаження замовлень...</div>
+                        <div id="ordersList">Замовлень поки немає.</div>
                     </div>
                 </div>
 
-                <!-- 3. ПОКУПКИ -->
                 <div class="menu-section">
                     <div class="menu-header" onclick="toggleMenuSection('secPurchases')">
                         <span>🛍️ Покупки</span>
                         <span id="countPurchases" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
                     </div>
                     <div class="menu-body" id="secPurchases">
-                        <div id="purchasesList">Історія покупок порожня</div>
+                        <div id="purchasesList">Покупок поки немає.</div>
                     </div>
                 </div>
 
-                <!-- 4. КОРЗИНА -->
                 <div class="menu-section">
                     <div class="menu-header" onclick="toggleMenuSection('secCarts')">
                         <span>🛒 Корзина (активні кошики)</span>
                         <span id="countCarts" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
                     </div>
                     <div class="menu-body" id="secCarts">
-                        <div id="cartsList">Активних кошиків немає</div>
+                        <div id="cartsList">Активних кошиків немає.</div>
                     </div>
                 </div>
 
-                <!-- 5. ТОВАРИ -->
                 <div class="menu-section">
                     <div class="menu-header" onclick="toggleMenuSection('secProducts')">
                         <span>🍯 Товари</span>
                         <span id="countProducts" style="font-size: 0.85rem; background: #e2ded8; padding: 2px 8px; border-radius: 6px;">0</span>
                     </div>
                     <div class="menu-body" id="secProducts">
-                        <div id="productsList">Завантаження товарів...</div>
+                        <div id="productsList">Товарів поки немає.</div>
                     </div>
                 </div>
-
             </div>
 
             <button class="btn btn-secondary" onclick="logoutStaff()">Вийти з аккаунта</button>
@@ -144,7 +131,6 @@
     <script>
         const SUPABASE_URL = "https://uxhmeqgpjrkuxggxbvkq.supabase.co";
         const SUPABASE_KEY = "Sb_publishable_MYBbdww6aCJ3vavBJdUL4g_--gXnmUK";
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let currentStaff = JSON.parse(localStorage.getItem('medova_current_staff')) || null;
 
@@ -156,7 +142,7 @@
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 document.getElementById('currentUserInfo').innerText = `Адмін: ${currentStaff.name}`;
-                loadAllSupabaseData();
+                loadAccounts();
             }
         }
 
@@ -190,157 +176,49 @@
             details.style.display = details.style.display === 'block' ? 'none' : 'block';
         }
 
-        async function loadAllSupabaseData() {
-            await fetchAccounts();
-            await fetchOrders();
-            await fetchProducts();
-            await fetchCarts();
-        }
-
-        // 1. Акаунти з нової таблиці clients
-        async function fetchAccounts() {
+        async function loadAccounts() {
             const list = document.getElementById('accountsList');
             try {
-                const { data, error } = await _supabase.from('clients').select('*').order('created_at', { ascending: false });
-                if (error) throw error;
-
-                document.getElementById('countAccounts').innerText = data ? data.length : 0;
-                if (!data || data.length === 0) {
-                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Поки немає зареєстрованих акаунтів.</p>';
-                    return;
-                }
-
-                list.innerHTML = '';
-                data.forEach((c, index) => {
-                    const profile = c.profile || {};
-                    list.innerHTML += `
-                        <div class="sub-item" onclick="toggleSubItem(this)">
-                            <div class="sub-item-title">
-                                <span>#${index + 1} — ${profile.full_name || c.phone}</span>
-                                <span style="font-size:0.75rem; color:#666;">Телефон: ${c.phone}</span>
-                            </div>
-                            <div class="sub-item-details">
-                                <p><b>Телефон (Логін):</b> ${c.phone}</p>
-                                <p><b>ПІБ:</b> ${profile.full_name || 'Не вказано'}</p>
-                                <p><b>Місто:</b> ${profile.city || 'Не вказано'}</p>
-                                <p><b>Адреса:</b> ${profile.address || 'Не вказано'}</p>
-                                <p><b>ID в базі:</b> <code>${c.id}</code></p>
-                            </div>
-                        </div>
-                    `;
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients?select=*`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
                 });
-            } catch (err) {
-                console.error(err);
-                list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження акаунтів з бази.</p>';
-            }
-        }
 
-        // 2. Оформлені замовлення
-        async function fetchOrders() {
-            const list = document.getElementById('ordersList');
-            const purchasesList = document.getElementById('purchasesList');
-            try {
-                const { data, error } = await _supabase.from('orders').select('*').order('created_at', { ascending: false });
-                if (error) throw error;
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('countAccounts').innerText = data.length;
+                    if (data.length === 0) {
+                        list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Поки немає зареєстрованих акаунтів.</p>';
+                        return;
+                    }
 
-                document.getElementById('countOrders').innerText = data ? data.length : 0;
-                document.getElementById('countPurchases').innerText = data ? data.length : 0;
-
-                if (!data || data.length === 0) {
-                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Замовлень поки немає.</p>';
-                    purchasesList.innerHTML = '<p style="color:#666; font-size:0.85rem;">Покупок поки немає.</p>';
-                    return;
+                    list.innerHTML = '';
+                    data.forEach((c, index) => {
+                        const profile = c.profile || {};
+                        list.innerHTML += `
+                            <div class="sub-item" onclick="toggleSubItem(this)">
+                                <div class="sub-item-title">
+                                    <span>#${index + 1} — ${profile.full_name || c.phone}</span>
+                                    <span style="font-size:0.75rem; color:#666;">Телефон: ${c.phone}</span>
+                                </div>
+                                <div class="sub-item-details">
+                                    <p><b>Телефон (Логін):</b> ${c.phone}</p>
+                                    <p><b>ПІБ:</b> ${profile.full_name || 'Не вказано'}</p>
+                                    <p><b>Місто:</b> ${profile.city || 'Не вказано'}</p>
+                                    <p><b>Адреса:</b> ${profile.address || 'Не вказано'}</p>
+                                    <p><b>ID в базі:</b> <code>${c.id}</code></p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка завантаження акаунтів з бази.</p>';
                 }
-
-                list.innerHTML = '';
-                purchasesList.innerHTML = '';
-
-                data.forEach((o, index) => {
-                    const orderHtml = `
-                        <div class="sub-item" onclick="toggleSubItem(this)">
-                            <div class="sub-item-title">
-                                <span>Замовлення #${index + 1} — ${o.customer_name || 'Клієнт'}</span>
-                                <span style="font-weight:bold; color:var(--dark-amber);">${o.total_price || 0} грн</span>
-                            </div>
-                            <div class="sub-item-details">
-                                <p><b>Телефон:</b> <a href="tel:${o.phone}">${o.phone || 'Не вказано'}</a></p>
-                                <p><b>Адреса/Пошта:</b> ${o.city_post || 'Не вказано'}</p>
-                                <p><b>Що замовив:</b><br>${(o.items || 'Товари не вказані').replace(/\n/g, '<br>')}</p>
-                                ${o.comment ? `<p><b>Коментар:</b> ${o.comment}</p>` : ''}
-                                <p style="color:#888; font-size:0.75rem; margin-top:5px;">Дата: ${new Date(o.created_at).toLocaleString()}</p>
-                            </div>
-                        </div>
-                    `;
-                    list.innerHTML += orderHtml;
-                    purchasesList.innerHTML += orderHtml;
-                });
             } catch (err) {
-                list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Замовлень поки немає.</p>';
-            }
-        }
-
-        // 3. Товари
-        async function fetchProducts() {
-            const list = document.getElementById('productsList');
-            try {
-                const { data, error } = await _supabase.from('products').select('*');
-                if (error) throw error;
-
-                document.getElementById('countProducts').innerText = data ? data.length : 0;
-                if (!data || data.length === 0) {
-                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">У базі поки немає товарів.</p>';
-                    return;
-                }
-
-                list.innerHTML = '';
-                data.forEach(p => {
-                    list.innerHTML += `
-                        <div class="sub-item" onclick="toggleSubItem(this)">
-                            <div class="sub-item-title">
-                                <span>🍯 ${p.title} (${p.volume || ''})</span>
-                                <span style="font-weight:bold; color:var(--dark-amber);">${p.price} грн</span>
-                            </div>
-                            <div class="sub-item-details">
-                                <p>Наявність: <b>${p.in_stock ? 'В наявності' : 'Немає'}</b></p>
-                            </div>
-                        </div>
-                    `;
-                });
-            } catch (err) {
-                list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Таблиця товарів відсутня.</p>';
-            }
-        }
-
-        // 4. Корзини
-        async function fetchCarts() {
-            const list = document.getElementById('cartsList');
-            try {
-                const { data, error } = await _supabase.from('carts').select('*').order('created_at', { ascending: false });
-                if (error) throw error;
-
-                document.getElementById('countCarts').innerText = data ? data.length : 0;
-                if (!data || data.length === 0) {
-                    list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Активних кошиків немає.</p>';
-                    return;
-                }
-
-                list.innerHTML = '';
-                data.forEach((c, index) => {
-                    list.innerHTML += `
-                        <div class="sub-item" onclick="toggleSubItem(this)">
-                            <div class="sub-item-title">
-                                <span>🛒 Кошик #${index + 1}</span>
-                                <span style="font-weight:bold;">${c.total_price || 0} грн</span>
-                            </div>
-                            <div class="sub-item-details">
-                                <p><b>Вміст:</b><br>${(c.items || '').replace(/\n/g, '<br>')}</p>
-                                <p style="color:#888; font-size:0.75rem; margin-top:5px;">Оновлено: ${new Date(c.created_at).toLocaleString()}</p>
-                            </div>
-                        </div>
-                    `;
-                });
-            } catch (err) {
-                list.innerHTML = '<p style="color:#666; font-size:0.85rem;">Таблиця корзин відсутня.</p>';
+                list.innerHTML = '<p style="color:#d32f2f; font-size:0.85rem;">Помилка зв\'язку з базою.</p>';
             }
         }
 
