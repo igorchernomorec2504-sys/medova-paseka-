@@ -177,7 +177,7 @@
             const phone = document.getElementById('regInput').value.trim();
             const pass = document.getElementById('regPass').value.trim();
 
-            if (pass.length < 4) { alert("Пароль занадто короткий!"); return; }
+            if (pass.length < 4) { alert("Пароль занадто короткий (мін. 4 символи)!"); return; }
 
             const newClient = {
                 id: 'cli_' + Date.now(),
@@ -192,23 +192,23 @@
                     headers: {
                         'Content-Type': 'application/json',
                         'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`,
-                        'Prefer': 'return=representation'
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
                     },
                     body: JSON.stringify(newClient)
                 });
 
-                if (!res.ok) {
-                    alert("Помилка реєстрації в базі.");
-                    return;
+                if (res.status >= 200 && res.status < 300) {
+                    currentUser = newClient;
+                    localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+                    alert("Реєстрація успішна!");
+                    initApp();
+                } else {
+                    const err = await res.text();
+                    console.log(err);
+                    alert("Помилка створення акаунта.");
                 }
-
-                currentUser = newClient;
-                localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
-                alert("Реєстрація успішна!");
-                initApp();
             } catch (err) {
-                alert("Помилка зв'язку з сервером.");
+                alert("Помилка з'єднання.");
             }
         }
 
