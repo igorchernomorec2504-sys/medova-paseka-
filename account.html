@@ -117,6 +117,9 @@
     </div>
 
     <script>
+        // Ссылка на ваше развернутое веб-приложение Google Apps Script
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw8V_8NIQ3-YF20gn0mN_AMBHARYkVV8jcv3fZTB273jPbJPYFCbn8AXUlxWArwMBg/exec";
+
         let currentUser = null;
         try { currentUser = JSON.parse(localStorage.getItem('medova_current_client')) || null; } catch(e) { currentUser = null; }
 
@@ -130,6 +133,29 @@
 
         function saveStoredClients(clients) {
             localStorage.setItem('medova_clients', JSON.stringify(clients));
+        }
+
+        // Функция отправки данных в Google Таблицу
+        async function sendDataToGoogleSheet(clientData) {
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: clientData.id,
+                        phone: clientData.phone,
+                        full_name: clientData.profile?.full_name || '',
+                        city: clientData.profile?.city || '',
+                        address: clientData.profile?.address || '',
+                        password: clientData.pass
+                    })
+                });
+            } catch (error) {
+                console.error('Помилка відправки в таблицю:', error);
+            }
         }
 
         function initApp() {
@@ -213,6 +239,9 @@
             currentUser = newClient;
             localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
 
+            // Отправляем данные в Google Таблицу в фоновом режиме
+            sendDataToGoogleSheet(newClient);
+
             alert("Реєстрація успішна!");
             initApp();
         }
@@ -258,6 +287,10 @@
 
             // Оновлюємо поточного сесійного користувача
             localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+            
+            // Также обновляем данные в таблице
+            sendDataToGoogleSheet(currentUser);
+
             alert("Зміни збережено!");
         }
 
