@@ -117,11 +117,20 @@
     </div>
 
     <script>
-        const SUPABASE_URL = "https://uxhmeqgpjrkuxggxbvkq.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_MYBbdww6aCJ3vavBJdUL4g_--gXnmUK";
-
         let currentUser = null;
         try { currentUser = JSON.parse(localStorage.getItem('medova_current_client')) || null; } catch(e) { currentUser = null; }
+
+        function getStoredClients() {
+            try {
+                return JSON.parse(localStorage.getItem('medova_clients')) || [];
+            } catch(e) {
+                return [];
+            }
+        }
+
+        function saveStoredClients(clients) {
+            localStorage.setItem('medova_clients', JSON.stringify(clients));
+        }
 
         function initApp() {
             if (!currentUser) {
@@ -172,70 +181,56 @@
             }
         }
 
-        async function handleRegister(e) {
+        function handleRegister(e) {
             e.preventDefault();
             const phone = document.getElementById('regInput').value.trim();
             const pass = document.getElementById('regPass').value.trim();
 
-            if (pass.length < 4) { alert("Пароль занадто короткий (мін. 4 символи)!"); return; }
+            if (pass.length < 4) { 
+                alert("Пароль занадто короткий (мін. 4 символи)!"); 
+                return; 
+            }
+
+            const clients = getStoredClients();
+            const exists = clients.some(c => c.phone === phone);
+
+            if (exists) {
+                alert("Користувач із таким номером вже існує!");
+                return;
+            }
 
             const newClient = {
                 id: 'cli_' + Date.now(),
                 phone: phone,
                 pass: pass,
+                created_at: new Date().toISOString(),
                 profile: { full_name: '', city: '', address: '', orders: [], wishlist: [] }
             };
 
-            try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    },
-                    body: JSON.stringify(newClient)
-                });
+            clients.push(newClient);
+            saveStoredClients(clients);
 
-                if (res.ok || res.status === 201) {
-                    currentUser = newClient;
-                    localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
-                    alert("Реєстрація успішна!");
-                    initApp();
-                } else {
-                    const errBody = await res.text();
-                    alert("Помилка бази даних: " + errBody);
-                }
-            } catch (err) {
-                alert("Помилка мережі: " + err.message);
-            }
+            currentUser = newClient;
+            localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+
+            alert("Реєстрація успішна!");
+            initApp();
         }
 
-        async function handleLogin(e) {
+        function handleLogin(e) {
             e.preventDefault();
             const phone = document.getElementById('loginInput').value.trim();
             const pass = document.getElementById('loginPass').value.trim();
 
-            try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients?phone=eq.${encodeURIComponent(phone)}&pass=eq.${encodeURIComponent(pass)}`, {
-                    method: 'GET',
-                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-                });
+            const clients = getStoredClients();
+            const user = clients.find(c => c.phone === phone && c.pass === pass);
 
-                if (res.ok) {
-                    const clients = await res.json();
-                    if (clients && clients.length > 0) {
-                        currentUser = clients[0];
-                        localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
-                        initApp();
-                    } else {
-                        alert("Невірний телефон або пароль!");
-                    }
-                } else {
-                    alert("Помилка входу з бази.");
-                }
-            } catch (err) {
-                alert("Помилка з'єднання.");
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+                initApp();
+            } else {
+                alert("Невірний телефон або пароль!");
             }
         }
 
@@ -245,7 +240,7 @@
             initApp();
         }
 
-        async function saveProfileData(e) {
+        function saveProfileData(e) {
             e.preventDefault();
             if (!currentUser) return;
 
@@ -253,26 +248,17 @@
             currentUser.profile.city = document.getElementById('profCity').value.trim();
             currentUser.profile.address = document.getElementById('profAddress').value.trim();
 
-            try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/clients?id=eq.${currentUser.id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    },
-                    body: JSON.stringify({ profile: currentUser.profile })
-                });
-
-                if (res.ok) {
-                    localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
-                    alert("Зміни збережено в хмару!");
-                } else {
-                    alert("Помилка збереження профілю.");
-                }
-            } catch (err) {
-                alert("Помилка збереження.");
+            // Оновлюємо в загальному списку клієнтів
+            const clients = getStoredClients();
+            const index = clients.findIndex(c => c.id === currentUser.id);
+            if (index !== -1) {
+                clients[index] = currentUser;
+                saveStoredClients(clients);
             }
+
+            // Оновлюємо поточного сесійного користувача
+            localStorage.setItem('medova_current_client', JSON.stringify(currentUser));
+            alert("Зміни збережено!");
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
