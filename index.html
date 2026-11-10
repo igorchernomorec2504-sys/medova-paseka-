@@ -44,7 +44,7 @@
             font-size: 0.92rem;
         }
 
-        /* Верхня панель (Меню, Пошук, Кошик - плаваюча) */
+        /* Верхня плаваюча панель (тільки Меню та Кошик в один ряд) */
         .top-nav-bar {
             position: sticky;
             top: 0;
@@ -52,13 +52,11 @@
             background-color: rgba(252, 249, 242, 0.95);
             backdrop-filter: blur(8px);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
-            padding: 10px 12px;
+            padding: 10px 16px;
             max-width: 960px;
             margin: 0 auto;
-            flex-wrap: nowrap;
             box-shadow: 0 4px 15px rgba(184, 107, 0, 0.05);
             border-bottom: 1.5px solid var(--border-color);
         }
@@ -67,15 +65,15 @@
             background: #ffffff;
             color: var(--dark-amber);
             border: 1.5px solid var(--primary-amber);
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             cursor: pointer;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             text-decoration: none;
             white-space: nowrap;
             transition: all 0.25s ease;
@@ -85,32 +83,6 @@
             background: var(--primary-amber);
             color: white;
             transform: translateY(-2px);
-        }
-
-        /* Поле пошуку у верхній панелі */
-        .search-form-inline {
-            display: inline-flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .top-search-input {
-            background: #ffffff;
-            color: var(--text-main);
-            border: 1.5px solid var(--primary-amber);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            outline: none;
-            width: 140px;
-            transition: width 0.3s ease, box-shadow 0.2s ease;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .top-search-input:focus {
-            width: 200px;
-            box-shadow: 0 4px 12px rgba(230, 138, 0, 0.2);
         }
 
         .cart-badge {
@@ -1005,15 +977,10 @@
         <button class="widget-toggle-btn" onclick="toggleWidget()">💬</button>
     </div>
 
-    <!-- Верхня плаваюча панель (Меню, Пошук, Кошик) -->
+    <!-- Верхня плаваюча панель (Тільки Меню і Кошик в один ряд) -->
     <div class="top-nav-bar">
         <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
         
-        <!-- Робочий пошук -->
-        <form id="searchFormInline" class="search-form-inline" onsubmit="handleSearch(event)">
-            <input type="text" id="topSearchInput" class="top-search-input" placeholder="🔍 Пошук..." autocomplete="off">
-        </form>
-
         <button class="top-nav-btn" onclick="openCartModal()">
             🛒 <span id="cart-text-btn">Кошик</span> <span class="cart-badge" id="cartCount">0</span>
         </button>
@@ -1407,35 +1374,6 @@
             localStorage.setItem('medova_cart', JSON.stringify(cart));
         }
 
-        /* Функція обробки пошуку по сайту (Enter в інпуті) */
-        function handleSearch(event) {
-            event.preventDefault();
-            const query = document.getElementById('topSearchInput').value.trim().toLowerCase();
-            if (!query) return;
-
-            const cards = document.querySelectorAll('.product-card');
-            let foundCard = null;
-
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name') || '';
-                const text = card.innerText.toLowerCase();
-                if (name.includes(query) || text.includes(query)) {
-                    if (!foundCard) foundCard = card;
-                }
-            });
-
-            if (foundCard) {
-                foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Легке підсвічування картки
-                foundCard.style.borderColor = '#e63946';
-                setTimeout(() => {
-                    foundCard.style.borderColor = '';
-                }, 2000);
-            } else {
-                alert(currentLang === 'uk' ? 'Нічого не знайдено за вашим запитом' : 'Ничего не найдено по вашему запросу');
-            }
-        }
-
         function updatePollen() {
             const selected = document.querySelector('input[name="pollen-weight"]:checked');
             document.getElementById('pollen-price').innerText = selected.value;
@@ -1554,7 +1492,6 @@
             listContainer.innerHTML = html;
             totalSumElement.innerText = totalSum;
 
-            // Расчет остатка до бесплатной доставки (порог 1000 грн)
             const threshold = 1000;
             progressBox.style.display = 'block';
             if (totalSum >= threshold) {
@@ -1787,7 +1724,7 @@
                 addToCart: "🛒 Додати в кошик",
                 detailsBtn: "Детальніше / Обрати об'єм",
                 aboutHeading: "Про нашу пасіку",
-                aboutText1: "Від вуликів до баночки — мы працюємо з власною пасікою. Мед качаємо своїми руками, свічки виготовляємо з натуральної вощини, а прополіс та пилок збираємо невеликими партіями.",
+                aboutText1: "Від вуликів до баночки — ми працюємо з власною пасікою. Мед качаємо своїми руками, свічки виготовляємо з натуральної вощини, а прополіс та пилок збираємо невеликими партіями.",
                 aboutText2: "Усі роботи робимо самі, з турботою про якість для вашої родини! При великих замовленнях можлива індивідуальна домовленість.",
                 contactsHeading: "Швидкий зв'язок з нами:",
                 footerCopy: "Медова Пасіка. Всі права захищено.",
@@ -1842,7 +1779,7 @@
                 labelName: "ФИО (Фамилия и Имя):",
                 labelPhone: "Номер телефона:",
                 labelDelivery: "Способ доставки:",
-                labelComment: "Комментарий к заказу:",
+                labelКомментарий: "Комментарий к заказу:",
                 delPlaceholder: "Выберите способ доставки",
                 delNp: "Новая почта",
                 delUkr: "Укрпочта",
@@ -1917,7 +1854,6 @@
             document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
             document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
             
-            // Обновляем текст в корзине при открытом модальном окне
             if(document.getElementById('cartModal').style.display === 'flex') {
                 renderCartModal();
             }
