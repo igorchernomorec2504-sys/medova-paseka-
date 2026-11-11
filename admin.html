@@ -22,7 +22,8 @@
         .form-control { width: 100%; padding: 10px 12px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-size: 0.9rem; background: #fff9e6; outline: none; }
         .btn { background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; }
         .btn-secondary { background: #795548; margin-top: 20px; }
-        .btn-danger { background: #d32f2f; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; }
+        .btn-success { background: #2e7d32; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; font-weight: 600; margin-right: 4px; }
+        .btn-danger { background: #d32f2f; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; font-weight: 600; }
         .card { background: #fff9e6; border: 1px solid #ffe0b2; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
         .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; background: #fff; }
         .table th, .table td { border: 1px solid #ffe0b2; padding: 8px; text-align: left; }
@@ -255,6 +256,48 @@
             }
         }
 
+        // ЗМІНА СТАТУСУ ЗАМОВЛЕННЯ НА "COMPLETED" (ВИКОНАНО)
+        async function markOrderCompleted(orderId) {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    },
+                    body: JSON.stringify({ status: 'completed' })
+                });
+
+                if (!response.ok) throw new Error("Помилка при виконанні");
+                renderAdminData();
+            } catch (err) {
+                console.error(err);
+                alert("Помилка оновлення статусу замовлення.");
+            }
+        }
+
+        // ПОВНЕ ВИДАЛЕННЯ ЗАМОВЛЕННЯ З БАЗИ SUPABASE
+        async function deleteOrder(orderId) {
+            if (confirm('Ви впевнені, що хочете остаточно видалити це замовлення?')) {
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${orderId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    });
+
+                    if (!response.ok) throw new Error("Помилка видалення замовлення");
+                    renderAdminData();
+                } catch (err) {
+                    console.error(err);
+                    alert("Помилка при видаленні замовлення.");
+                }
+            }
+        }
+
         function createEmployee(e) {
             e.preventDefault();
             const name = document.getElementById('empName').value.trim();
@@ -317,7 +360,7 @@
                 usersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #d32f2f;">Помилка завантаження користувачів із бази даних.</p>';
             }
 
-            // 2. Загрузка заказов из таблицы "orders" в Supabase с точными колонками
+            // 2. Загрузка заказов из таблицы "orders" в Supabase
             try {
                 const ordResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=*&order=created_at.desc`, {
                     method: 'GET',
@@ -333,7 +376,7 @@
                 if (!allOrders || allOrders.length === 0) {
                     ordersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #666;">У базі даних поки немає замовлень (0 замовлень).</p>';
                 } else {
-                    let ordHtml = '<table class="table"><tr><th>Дата</th><th>Клієнт</th><th>Телефон</th><th>Місто / Пошта</th><th>Товари</th><th>Сума</th><th>Статус</th></tr>';
+                    let ordHtml = '<table class="table"><tr><th>Дата</th><th>Клієнт</th><th>Телефон</th><th>Місто / Пошта</th><th>Товари</th><th>Сума</th><th>Статус</th><th>Дії</th></tr>';
                     
                     allOrders.forEach(ord => {
                         let formattedDate = 'Не вказано';
@@ -342,14 +385,27 @@
                             formattedDate = d.toLocaleDateString('uk-UA') + ' ' + d.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
                         }
 
-                        ordHtml += `<tr>
+                        const isCompleted = ord.status === 'completed';
+                        const statusBadge = isCompleted 
+                            ? `<span style="background: #c8e6c9; color: #2e7d32; padding: 2px 6px; border-radius: 4px; font-weight: 700;">✅ Виконано</span>`
+                            : `<span style="background: #ffe0b2; color: #e65100; padding: 2px 6px; border-radius: 4px; font-weight: 700;">🆕 Нове</span>`;
+
+                        const completeBtn = isCompleted 
+                            ? '' 
+                            : `<button class="btn-success" onclick="markOrderCompleted('${ord.id}')">✅ Виконано</button>`;
+
+                        ordHtml += `<tr style="${isCompleted ? 'background: #f1f8e9;' : ''}">
                             <td>${formattedDate}</td>
                             <td><b>${ord.customer_name || '-'}</b></td>
                             <td>${ord.phone || '-'}</td>
                             <td>${ord.city_post || '-'}</td>
                             <td>${ord.items || '-'}</td>
                             <td><b>${ord.total_price || 0} грн</b></td>
-                            <td><span style="background: #e0f2f1; color: #00796b; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${ord.status || 'Нове'}</span></td>
+                            <td>${statusBadge}</td>
+                            <td style="white-space: nowrap;">
+                                ${completeBtn}
+                                <button class="btn-danger" onclick="deleteOrder('${ord.id}')">🗑️ Видалити</button>
+                            </td>
                         </tr>`;
                     });
                     ordHtml += '</table>';
