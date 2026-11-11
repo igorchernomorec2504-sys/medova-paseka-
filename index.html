@@ -44,7 +44,6 @@
             font-size: 0.92rem;
         }
 
-        /* Верхня плаваюча панель (тільки Меню та Кошик в один ряд) */
         .top-nav-bar {
             position: sticky;
             top: 0;
@@ -977,7 +976,6 @@
         <button class="widget-toggle-btn" onclick="toggleWidget()">💬</button>
     </div>
 
-    <!-- Верхня плаваюча панель (Тільки Меню і Кошик в один ряд) -->
     <div class="top-nav-bar">
         <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
         
@@ -1162,7 +1160,6 @@
 
         </div>
 
-        <!-- Акція про безкоштовну доставку внизу -->
         <div class="bottom-notice-banner">
             ✨ Безкоштовна доставка замовлень від 1000 грн! Свіжий збір меду та крафтові свічки з натуральної вощини
         </div>
@@ -1289,7 +1286,6 @@
             
             <div id="cartItemsList" style="margin-bottom: 15px;"></div>
 
-            <!-- Блок інформування про залишок до безкоштовної доставки (поріг 1000 грн) -->
             <div id="deliveryProgressBox" style="background: #fff3db; border: 1.5px dashed var(--primary-amber); padding: 10px 12px; border-radius: 12px; margin-bottom: 12px; font-size: 0.85rem; text-align: center; color: var(--dark-amber); font-weight: 600; display: none;">
             </div>
 
@@ -1297,13 +1293,11 @@
                 <strong id="total-sum-text">Загальна сума: <span id="cartTotalSum">0</span> грн</strong>
             </div>
 
-            <!-- Початкові кнопки в кошику (якщо є товари) -->
             <div id="cartInitialActions" class="cart-action-buttons">
                 <button type="button" class="btn-checkout-start" onclick="showCheckoutForm()">Оформити замовлення</button>
                 <button type="button" class="btn-continue-shopping" onclick="closeCartModal()">Продовжити покупку</button>
             </div>
 
-            <!-- Кнопка додавання товару для порожнього кошика -->
             <div id="cartEmptyActions" style="display: none; margin-top: 15px;">
                 <button type="button" class="btn-continue-shopping" style="width: 100%;" onclick="closeCartModal()">Додати товар</button>
             </div>
@@ -1523,8 +1517,6 @@
 
             let totalSum = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             let itemsDetails = cart.map(item => `• ${item.name} — ${item.qty} шт. (${item.price * item.qty} грн)`).join('\n');
-
-            const fullCityInfo = `${delivery}${comment ? ' (' + comment + ')' : ''}`;
             const fullItemsStr = cart.map(item => `${item.name} (${item.qty} шт.)`).join(', ');
 
             const submitBtn = document.getElementById('submitBtn');
@@ -1533,7 +1525,7 @@
             statusDiv.innerText = '';
 
             try {
-                // 1. Зберігаємо замовлення в англійську таблицю "orders" в Supabase
+                // 1. Відправляємо дані в Supabase з точними іменами колонок з вашої бази
                 const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
                     method: 'POST',
                     headers: {
@@ -1544,17 +1536,17 @@
                     },
                     body: JSON.stringify({
                         id: 'ord_' + Date.now(),
-                        client_name: name,
+                        customer_name: name,
                         phone: phone,
-                        city: fullCityInfo,
+                        city_post: delivery,
                         items: fullItemsStr,
                         total_price: totalSum,
-                        status: 'Нове'
+                        comment: comment || ''
                     })
                 });
 
                 if (!dbResponse.ok) {
-                    console.error("Помилка збереження в Supabase");
+                    console.error("Помилка збереження в Supabase", await dbResponse.json());
                 }
 
                 // 2. Надсилаємо сповіщення в Telegram
@@ -1809,7 +1801,7 @@
                 labelName: "ФИО (Фамилия и Имя):",
                 labelPhone: "Номер телефона:",
                 labelDelivery: "Способ доставки:",
-                labelКомментарий: "Комментарий к заказу:",
+                labelComment: "Комментарий к заказу:",
                 delPlaceholder: "Выберите способ доставки",
                 delNp: "Новая почта",
                 delUkr: "Укрпочта",
