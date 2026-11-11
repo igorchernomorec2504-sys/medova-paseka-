@@ -15,7 +15,7 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
         body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-main); min-height: 100vh; padding: 20px; font-size: 0.9rem; }
-        .container { max-width: 950px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 25px; box-shadow: var(--card-shadow); border: 1.5px solid #fff3e0; }
+        .container { max-width: 1050px; margin: 0 auto; background: #fff; border-radius: 16px; padding: 25px; box-shadow: var(--card-shadow); border: 1.5px solid #fff3e0; }
         h1, h2 { font-family: 'Comfortaa', cursive; color: var(--dark-amber); text-align: center; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: var(--dark-amber); }
@@ -24,9 +24,10 @@
         .btn-secondary { background: #795548; margin-top: 20px; }
         .btn-success { background: #2e7d32; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; font-weight: 600; margin-right: 4px; }
         .btn-danger { background: #d32f2f; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; font-weight: 600; }
+        .btn-password { background: #795548; padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; color: white; border: none; cursor: pointer; font-weight: 600; margin-left: 4px; }
         .card { background: #fff9e6; border: 1px solid #ffe0b2; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
         .table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; background: #fff; }
-        .table th, .table td { border: 1px solid #ffe0b2; padding: 8px; text-align: left; }
+        .table th, .table td { border: 1px solid #ffe0b2; padding: 8px; text-align: left; vertical-align: middle; }
         .table th { background: #fff3e0; color: var(--dark-amber); }
         .nav-links { display: flex; justify-content: space-between; margin-bottom: 20px; }
         .nav-links a { color: var(--dark-amber); text-decoration: none; font-weight: 700; }
@@ -66,7 +67,7 @@
             display: block;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .admin-tabs { grid-template-columns: 1fr; }
         }
     </style>
@@ -233,6 +234,44 @@
             });
         }
 
+        // ПРИМУСОВА ЗМІНА ПАРОЛЯ КОРИСТУВАЧА АДМІНІСТРАТОРОМ
+        async function adminChangePassword(userId, userLogin) {
+            const inputField = document.getElementById(`admin_new_pass_${userId}`);
+            if (!inputField) return;
+
+            const newPassword = inputField.value.trim();
+            if (newPassword.length < 4) {
+                alert('Пароль занадто короткий! Мінімум 4 символи.');
+                return;
+            }
+
+            if (!confirm(`Ви дійсно хочете змінити пароль для користувача: ${userLogin}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/users?id=eq.${userId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify({ pass: newPassword })
+                });
+
+                if (!response.ok) throw new Error("Помилка оновлення пароля");
+
+                alert(`Пароль для користувача ${userLogin} успішно оновлено!`);
+                inputField.value = '';
+                renderAdminData();
+            } catch (err) {
+                console.error(err);
+                alert("Помилка зв'язку з базою даних при зміні пароля.");
+            }
+        }
+
         // ВИДАЛЕННЯ КОРИСТУВАЧА З БАЗИ SUPABASE
         async function deleteClientUser(userId) {
             if (confirm('Ви впевнені, що хочете видалити цього користувача з хмарної бази даних?')) {
@@ -341,14 +380,23 @@
                 if (!allUsers || allUsers.length === 0) {
                     usersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #666;">Поки немає зареєстрованих покупців у базі.</p>';
                 } else {
-                    let html = '<table class="table"><tr><th>№</th><th>Логін (Телефон / Email)</th><th>ПІБ</th><th>Адреса</th><th>Дія</th></tr>';
+                    let html = '<table class="table"><tr><th>№</th><th>Логін (Телефон / Email)</th><th>ПІБ</th><th>Адреса</th><th>Змінити пароль</th><th>Дія</th></tr>';
                     
                     allUsers.forEach((u, index) => {
+                        const isGoogleUser = u.pass === 'google_oauth_secure';
+                        const passwordSection = isGoogleUser 
+                            ? '<span style="color: #888; font-size: 0.75rem;">Google акаунт</span>'
+                            : `<div style="display: flex; gap: 4px; align-items: center;">
+                                 <input type="text" id="admin_new_pass_${u.id}" placeholder="Новий пароль" class="form-control" style="padding: 5px; font-size: 0.8rem; width: 110px;">
+                                 <button class="btn-password" onclick="adminChangePassword('${u.id}', '${u.login}')">Змінити</button>
+                               </div>`;
+
                         html += `<tr>
                             <td style="text-align: center; font-weight: bold;">${index + 1}</td>
                             <td><b>${u.login || u.phone || '-'}</b></td>
                             <td>${u.full_name || u.name || 'Не вказано'}</td>
                             <td>${u.address || 'Не вказано'}</td>
+                            <td>${passwordSection}</td>
                             <td><button class="btn-danger" onclick="deleteClientUser('${u.id}')">🗑️ Видалити</button></td>
                         </tr>`;
                     });
