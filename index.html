@@ -1525,7 +1525,19 @@
             statusDiv.innerText = '';
 
             try {
-                // 1. Зберігаємо замовлення в Supabase (виправлено client_name на customer_name)
+                // 1. Зберігаємо замовлення в Supabase з детальним логуванням
+                const orderPayload = {
+                    id: 'ord_' + Date.now(),
+                    customer_name: name,
+                    phone: phone,
+                    city_post: delivery,
+                    items: fullItemsStr,
+                    total_price: totalSum,
+                    comment: comment || ''
+                };
+
+                console.log("Відправляємо в Supabase:", orderPayload);
+
                 const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
                     method: 'POST',
                     headers: {
@@ -1534,19 +1546,14 @@
                         'Authorization': `Bearer ${SUPABASE_KEY}`,
                         'Prefer': 'return=representation'
                     },
-                    body: JSON.stringify({
-                        id: 'ord_' + Date.now(),
-                        customer_name: name,
-                        phone: phone,
-                        city_post: delivery,
-                        items: fullItemsStr,
-                        total_price: totalSum,
-                        comment: comment || ''
-                    })
+                    body: JSON.stringify(orderPayload)
                 });
 
+                const responseText = await dbResponse.text();
+                console.log("Відповідь Supabase (Статус:", dbResponse.status, "):", responseText);
+
                 if (!dbResponse.ok) {
-                    console.error("Помилка збереження в Supabase", await dbResponse.json());
+                    throw new Error("Помилка бази Supabase: " + responseText);
                 }
 
                 // 2. Надсилаємо сповіщення в Telegram
@@ -1581,12 +1588,12 @@
                         statusDiv.innerText = '';
                     }, 2500);
                 } else {
-                    throw new Error(data.description || 'Помилка');
+                    throw new Error(data.description || 'Помилка Telegram');
                 }
             } catch (error) {
                 statusDiv.style.color = '#dc2626';
-                statusDiv.innerText = '❌ Помилка відправки. Спробуйте ще раз.';
-                console.error(error);
+                statusDiv.innerText = '❌ Помилка відправки. Дивіться консоль (F12).';
+                console.error("Деталі помилки:", error);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = 'Надіслати замовлення';
