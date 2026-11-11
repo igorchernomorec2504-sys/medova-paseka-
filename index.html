@@ -138,6 +138,36 @@
             font-weight: 500;
         }
 
+        /* Панель ссылок под шапкой (по вашим черточкам) */
+        .site-nav-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 8px auto 20px auto;
+            flex-wrap: wrap;
+            padding: 0 16px;
+        }
+
+        .site-nav-link {
+            background: #fff3db;
+            border: 1.5px solid #fae8d2;
+            color: var(--dark-amber);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(184, 107, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .site-nav-link:hover {
+            background: var(--primary-amber);
+            color: white;
+            border-color: var(--primary-amber);
+        }
+
         .container {
             max-width: 960px;
             margin: 0 auto;
@@ -294,6 +324,14 @@
             margin: 14px 0 10px;
         }
 
+        .old-price {
+            text-decoration: line-through;
+            color: #a39382;
+            font-size: 0.95rem;
+            margin-right: 6px;
+            font-weight: 400;
+        }
+
         .qty-controls {
             display: flex;
             justify-content: center;
@@ -356,6 +394,361 @@
             opacity: 0.95;
             transform: translateY(-1px);
             box-shadow: 0 6px 18px rgba(230, 138, 0, 0.35);
+        }
+
+        .card-link-btn {
+            background: linear-gradient(135deg, #ffb703 0%, #e68a00 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 14px rgba(230, 138, 0, 0.25);
+            transition: all 0.2s ease;
+        }
+        .card-link-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        .timer-box { 
+            background: #fff3e0; 
+            border: 1px dashed var(--primary-amber); 
+            padding: 6px; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-size: 0.78rem; 
+            font-weight: 700; 
+            color: #d84315; 
+            margin-bottom: 12px; 
+        }
+
+        .bottom-notice-banner {
+            background: #d32f2f;
+            color: #fff;
+            text-align: center;
+            font-size: 0.88rem;
+            padding: 12px 16px;
+            font-weight: 600;
+            border-radius: 16px;
+            margin-top: 35px;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.2);
+        }
+
+        .delivery-section, .reviews-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px 24px;
+            margin-top: 35px;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .delivery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 15px; 
+            margin-top: 15px; 
+            text-align: left; 
+        }
+        .delivery-card { 
+            background: #fffbf5; 
+            border: 1.5px solid #fae8d2; 
+            border-radius: 14px; 
+            padding: 18px; 
+        }
+        .delivery-card h4 { 
+            font-family: 'Comfortaa', cursive; 
+            color: var(--dark-amber); 
+            font-size: 1.05rem; 
+            margin-bottom: 8px; 
+        }
+        .delivery-card p { 
+            font-size: 0.88rem; 
+            color: var(--text-muted); 
+            margin-bottom: 0; 
+            line-height: 1.5;
+        }
+
+        .reviews-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 15px; 
+            margin-top: 15px; 
+            text-align: left; 
+        }
+        .review-card { 
+            background: #fffbf5; 
+            border: 1.5px solid #fae8d2; 
+            border-radius: 14px; 
+            padding: 16px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        .review-text { 
+            font-size: 0.86rem; 
+            color: var(--text-main); 
+            font-style: italic; 
+            margin-bottom: 10px; 
+            line-height: 1.5; 
+        }
+        .review-author { 
+            font-size: 0.82rem; 
+            font-weight: 700; 
+            color: var(--dark-amber); 
+            text-align: right; 
+        }
+        .review-stars { 
+            color: #f57c00; 
+            font-size: 0.95rem; 
+            margin-bottom: 6px; 
+        }
+
+        .reviews-controls { 
+            margin-top: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .btn-show-all { 
+            background: #fff3db; 
+            border: 1.5px solid var(--primary-amber); 
+            color: var(--dark-amber); 
+            padding: 10px 20px; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.88rem; 
+            transition: all 0.2s; 
+        }
+        .btn-show-all:hover { 
+            background: var(--primary-amber);
+            color: white;
+        }
+        .pagination-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 6px; 
+            flex-wrap: wrap; 
+        }
+        .page-btn { 
+            background: #fff3db; 
+            border: 1.5px solid #e8d5bc; 
+            color: var(--dark-amber); 
+            width: 34px; 
+            height: 34px; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.88rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.2s; 
+        }
+        .page-btn.active { 
+            background: var(--dark-amber); 
+            color: white; 
+            border-color: var(--dark-amber); 
+        }
+        .page-btn:hover:not(.active) { 
+            background: var(--primary-amber);
+            color: white;
+        }
+
+        .add-review-form { 
+            margin-top: 25px; 
+            text-align: left; 
+            background: #fffbf5; 
+            padding: 20px; 
+            border-radius: 14px; 
+            border: 1.5px solid #fae8d2; 
+        }
+        .add-review-form h4 { 
+            font-family: 'Comfortaa', cursive; 
+            color: var(--dark-amber); 
+            margin-bottom: 12px; 
+            font-size: 1.05rem; 
+            text-align: center; 
+        }
+
+        .floating-widget { 
+            position: fixed; 
+            bottom: 25px; 
+            right: 20px; 
+            z-index: 9999; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-end; 
+        }
+        .widget-toggle-btn { 
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #ffb703 0%, #e68a00 100%); 
+            color: white; 
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            box-shadow: 0 6px 20px rgba(230, 138, 0, 0.4); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: transform 0.2s;
+        }
+        .widget-toggle-btn:hover {
+            transform: scale(1.05);
+        }
+        .widget-items { 
+            display: none; 
+            flex-direction: column; 
+            gap: 8px; 
+            margin-bottom: 12px; 
+        }
+        .widget-items.open { 
+            display: flex; 
+        }
+        .widget-btn { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            padding: 10px 16px; 
+            border-radius: 25px; 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+            white-space: nowrap; 
+            transition: transform 0.2s;
+        }
+        .widget-btn:hover {
+            transform: translateX(-3px);
+        }
+        .widget-btn.tg { background: #0088cc; }
+        .widget-btn.viber { background: #7360f2; }
+        .widget-btn.wa { background: #25D366; }
+        .widget-btn.insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .widget-btn.phone { background: #2980b9; }
+
+        .info-article-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px 24px;
+            margin-top: 35px;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .info-article-section h2, .info-article-section h3 {
+            font-family: 'Comfortaa', cursive;
+            color: var(--dark-amber);
+        }
+
+        .info-article-section h2 {
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .info-article-section h3 {
+            font-size: 1.1rem;
+            margin: 18px 0 8px;
+        }
+
+        .info-article-section p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .consultation-section {
+            background: linear-gradient(135deg, #fff8eb 0%, #fff3db 100%);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-top: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--primary-amber);
+        }
+
+        .consultation-section h2 {
+            font-family: 'Comfortaa', cursive;
+            color: var(--dark-amber);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .consultation-section p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .about-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 28px 24px;
+            margin-top: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .about-section h2 {
+            font-family: 'Comfortaa', cursive;
+            color: var(--dark-amber);
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .contacts-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 24px;
+            margin-top: 24px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 4px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .btn-social:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         .modal {
@@ -551,6 +944,33 @@
             transition: background 0.2s;
         }
 
+        .lang-switcher {
+            margin-top: 14px;
+            display: inline-flex;
+            gap: 6px;
+            background: #fff;
+            padding: 4px 8px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 14px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-amber);
+            color: white;
+        }
+
         footer {
             text-align: center;
             margin-top: 36px;
@@ -564,12 +984,30 @@
             font-size: 0.8rem;
             color: var(--primary-amber);
         }
+        
+        #consultStatus {
+            margin-top: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
+    <div class="floating-widget" id="floatingWidget">
+        <div class="widget-items" id="widgetItems">
+            <a href="https://t.me/+380968980543" target="_blank" class="widget-btn tg">📱 Telegram</a>
+            <a href="viber://chat?number=%2B380968980543" target="_blank" class="widget-btn viber">💬 Viber</a>
+            <a href="https://wa.me/380968980543" target="_blank" class="widget-btn wa">🟢 WhatsApp</a>
+            <a href="https://www.instagram.com/wax_candles_eco_honey" target="_blank" class="widget-btn insta">📸 Instagram</a>
+            <a href="tel:+380968980543" class="widget-btn phone">📞 Зателефонувати</a>
+        </div>
+        <button class="widget-toggle-btn" onclick="toggleWidget()">💬</button>
+    </div>
+
     <div class="top-nav-bar">
-        <a href="index.html" class="top-nav-btn">← <span id="nav-back-text">Повернутися до каталогу</span></a>
+        <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
         
         <button class="top-nav-btn" onclick="openCartModal()">
             🛒 <span id="cart-text-btn">Кошик</span> <span class="cart-badge" id="cartCount">0</span>
@@ -584,13 +1022,294 @@
         </div>
     </header>
 
+    <!-- Панель ссылок под шапкой (по вашим черточкам на фото) -->
+    <div class="site-nav-bar">
+        <a href="#about-section" class="site-nav-link">🍯 Про пасеку</a>
+        <a href="#productsGrid" class="site-nav-link">📦 Товары</a>
+    </div>
+
     <div class="container">
-        <!-- Контент сторінки товару залишається тут -->
+
+        <div class="products-grid" id="productsGrid">
+
+            <!-- Мед Травневий -->
+            <div class="product-card" data-category="honey" data-name="мед травневий">
+                <span class="badge-highlight" id="badge-may">ВЕСНЯНИЙ СМАК</span>
+                <div>
+                    <img src="may1.jpg" alt="Мед Травневий" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="may-honey-title">Мед Травневий</h3>
+                    <p id="may-honey-desc">Ароматний і ніжний мед із перших весняних квітів. Найперший збір року — солодкий, запашний та дуже корисний!</p>
+                </div>
+                <div>
+                    <div class="product-price">від 350 грн</div>
+                    <a href="product.html?id=may-honey" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати об'єм</a>
+                </div>
+            </div>
+
+            <!-- Мед Соняшниковий -->
+            <div class="product-card" data-category="honey" data-name="мед соняшниковий">
+                <span class="badge-highlight" id="badge-sun">ХІТ ПРОДАЖ</span>
+                <div>
+                    <img src="med.jpg" alt="Мед Соняшниковий" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="honey-title">Мед Соняшниковий</h3>
+                    <p id="honey-desc">Густий, сонячний та найсолодший мед! Натуральна кристалізація — знак справжньої якості та зрілості з власної пасіки.</p>
+                </div>
+                <div>
+                    <div class="product-price">від 250 грн</div>
+                    <a href="product.html?id=sunflower-honey" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати об'єм</a>
+                </div>
+            </div>
+
+            <!-- Свічки з вощини -->
+            <div class="product-card" data-category="candles" data-name="свічка з вощини">
+                <span class="badge-highlight" id="badge-candle">РУЧНА РОБОТА</span>
+                <div>
+                    <img src="svecha.jpg" alt="Свічки з вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="candle-title">Свічка з вощини</h3>
+                    <p id="candle-desc">100% чистий пасічний віск. Дарують затишок, натуральний медовий аромат та очищають повітря в домі.</p>
+                </div>
+                <div>
+                    <div class="product-price">від 40 грн</div>
+                    <a href="product.html?id=candle" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати розмір</a>
+                </div>
+            </div>
+
+            <!-- Прополіс -->
+            <div class="product-card" data-category="propolis other" data-name="прополіс">
+                <span class="badge-highlight" id="badge-prop">МІЦНИЙ ІМУНІТЕТ</span>
+                <div>
+                    <img src="propolis1.jpg" alt="Прополіс" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="propolis-title">Прополіс</h3>
+                    <p id="propolis-desc">Сильний природний антисептик та захисник здоров'я. Натуральний смолистий продукт прямо з вулика.</p>
+                </div>
+                <div>
+                    <div class="product-price">від 300 грн</div>
+                    <a href="product.html?id=propolis" class="card-link-btn" data-translate="details-btn">Детальніше / Обрати вагу</a>
+                </div>
+            </div>
+
+            <!-- Бджолиний Пилок -->
+            <div class="product-card" data-category="pollen other" data-name="бджолиний пилок">
+                <span class="badge-highlight" id="badge-pollen">ЗАРЯД ЕНЕРГІЇ</span>
+                <div>
+                    <img src="pollen.jpg" alt="Бджолиний пилок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="pollen-title">Бджолиний Пилок</h3>
+                    <p id="pollen-desc">Натуральний мікс вітамінів, амінокислот та мікроелементів. Повертає бадьорість, тонус та силу кожен день!</p>
+                    
+                    <div class="options-group">
+                        <label class="group-label" id="lbl-weight">ФАСУВАННЯ:</label>
+                        <div class="pollen-grid-row">
+                            <label class="radio-option"><input type="radio" name="pollen-weight" value="70" data-label="100 г" checked="" onchange="updatePollen()"> 100г (70₴)</label>
+                            <label class="radio-option"><input type="radio" name="pollen-weight" value="140" data-label="200 г" onchange="updatePollen()"> 200г (140₴)</label>
+                            <label class="radio-option" style="grid-column: span 2;"><input type="radio" name="pollen-weight" value="200" data-label="300 г" onchange="updatePollen()"> 300г (200₴)</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="product-price"><span id="pollen-price">70</span> грн</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty('qty-pollen', -1)">-</button>
+                        <input type="number" id="qty-pollen" class="qty-input" value="1" min="1">
+                        <button class="qty-btn" onclick="changeQty('qty-pollen', 1)">+</button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addPollenToCart()" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                </div>
+            </div>
+
+            <!-- Стільниковий мед -->
+            <div class="product-card" data-category="honey other" data-name="стільниковий мед">
+                <span class="badge-highlight" id="badge-comb">100% ЕКО</span>
+                <div>
+                    <img src="sotu.jpg" alt="Стільниковий мед" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="comb-title">Стільниковий Мед 🍯</h3>
+                    <p id="comb-desc">Натуральний продукт найвищої якості, неймовірно смачний та корисний. Ціна за 1 кг.</p>
+                </div>
+                <div>
+                    <div class="product-price">150 грн / кг</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty('qty-comb', -1)">-</button>
+                        <input type="number" id="qty-comb" class="qty-input" value="1" min="1">
+                        <button class="qty-btn" onclick="changeQty('qty-comb', 1)">+</button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('Стільниковий мед (1 кг)', 150, 'qty-comb')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                </div>
+            </div>
+
+            <!-- Подарунковий набір 1 -->
+            <div class="product-card" data-category="gifts" data-name="подарунковий набір медовий затишок свічки">
+                <span class="badge-highlight">🔥 АКЦІЯ</span>
+                <div>
+                    <img src="svechi-podarok.jpg" alt="Набір Медовий затишок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3>Набір «Медовий затишок»</h3>
+                    <p>Чудовий комплект свічок ручної роботи. Розміри свічей: 20×3 см.</p>
+                    <div class="timer-box" id="promoTimer1">⏳ Акція до кінця місяця!</div>
+                </div>
+                <div>
+                    <div class="product-price"><span class="old-price">300 грн</span> <span>250</span> грн</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty('qty-gift1', -1)">-</button>
+                        <input type="number" id="qty-gift1" class="qty-input" value="1" min="1">
+                        <button class="qty-btn" onclick="changeQty('qty-gift1', 1)">+</button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('Набір «Медовий затишок» (20×3 см)', 250, 'qty-gift1')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                </div>
+            </div>
+
+            <!-- Подарунковий набір 2 -->
+            <div class="product-card" data-category="gifts" data-name="патріотичний набір свічки">
+                <span class="badge-highlight" id="badge-gift2">ХІТ / АКЦІЯ</span>
+                <div>
+                    <img src="nabor3.jpg" alt="Патріотичний набір" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="gift2-title">Патріотичний набір свічок</h3>
+                    <p id="gift2-desc">Синьо-жовті свічки з вощини. Розміри свічей: 20×3 см.</p>
+                    <div class="timer-box" id="promoTimer">⏳ До кінця акції: завантаження...</div>
+                </div>
+                <div>
+                    <div class="product-price"><span class="old-price">220 грн</span> <span>200</span> грн</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty('qty-gift2', -1)">-</button>
+                        <input type="number" id="qty-gift2" class="qty-input" value="1" min="1">
+                        <button class="qty-btn" onclick="changeQty('qty-gift2', 1)">+</button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('Патріотичний набір свічок (20×3 см)', 200, 'qty-gift2')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                </div>
+            </div>
+
+            <!-- Подарунковий набір 3 -->
+            <div class="product-card" data-category="gifts" data-name="набір з натуральної вощини свічки">
+                <span class="badge-highlight">-15%</span>
+                <div>
+                    <img src="svecha3.jpg" alt="Набір з натуральної вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <h3 id="gift3-title">Набір з натуральної вощини</h3>
+                    <p id="gift3-desc">З медовим запахом та ніжним природним ароматом.</p>
+                </div>
+                <div>
+                    <div class="product-price"><span class="old-price">200 грн</span> <span>170</span> грн</div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty('qty-gift3', -1)">-</button>
+                        <input type="number" id="qty-gift3" class="qty-input" value="1" min="1">
+                        <button class="qty-btn" onclick="changeQty('qty-gift3', 1)">+</button>
+                    </div>
+                    <button class="btn-add-cart" onclick="addToCart('Набір з натуральної вощини з медовим ароматом', 170, 'qty-gift3')" data-translate="add-to-cart">🛒 Додати в кошик</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bottom-notice-banner">
+            ✨ Безкоштовна доставка замовлень від 1000 грн! Свіжий збір меду та крафтові свічки з натуральної вощини
+        </div>
+
+        <section class="delivery-section">
+            <h2>🚚 Доставка та оплата</h2>
+            <p>Ми дбаємо про те, щоб ваше замовлення прибуло швидко та в ідеальному стані. Оберіть зручний для себе спосіб доставки та оплати:</p>
+            
+            <div class="delivery-grid">
+                <div class="delivery-card">
+                    <h4>📦 Способи доставки</h4>
+                    <p>• <b>Нова Пошта</b> (щоденна відправка за тарифами перевізника).<br>• <b>Укрпошта</b> (доставка 2-4 дні).<br>• <b>Самовивіз</b> (з нашої пасіки за попередньою домовленістю).<br><br>✨ <i>Безкоштовна доставка</i> замовлень на суму від 1000 грн!</p>
+                </div>
+                <div class="delivery-card">
+                    <h4>💳 Варіанти оплати</h4>
+                    <p>• <b>Visa / Mastercard</b> (оплата онлайн або на банківський рахунок).<br>• <b>Передоплата</b> (зручний розрахунок перед відправкою посилки).<br>• <b>Накладений платіж</b> (оплата готівкою або карткою при отриманні на пошті).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews-section" id="reviewsSection">
+            <h2>⭐ Що кажуть наші клієнти</h2>
+            
+            <div class="reviews-grid" id="reviewsGrid"></div>
+
+            <div class="reviews-controls">
+                <button type="button" class="btn-show-all" id="showAllBtn" onclick="toggleShowAll()">📖 Показати всі відгуки</button>
+                <div class="pagination-container" id="paginationContainer"></div>
+            </div>
+
+            <div class="add-review-form">
+                <h4>Залишити свій відгук</h4>
+                <form id="commentForm" onsubmit="addNewComment(event)">
+                    <div class="form-group">
+                        <label>Ваше ім'я:</label>
+                        <input type="text" id="commentAuthor" required placeholder="Наприклад: Олександр">
+                    </div>
+                    <div class="form-group">
+                        <label>Оцінка:</label>
+                        <select id="commentRating">
+                            <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (5/5)</option>
+                            <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ (4/5)</option>
+                            <option value="⭐⭐⭐">⭐⭐⭐ (3/5)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ваш коментар:</label>
+                        <textarea id="commentText" required placeholder="Напишіть ваші враження про продукцію..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-add-cart">Надіслати відгук</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="info-article-section">
+            <h2>Користь живого меду та продуктів бджільництва</h2>
+            <p>Натуральні продукти з власної пасіки — це не просто ласощі, а справжнє джерело природної сили, вітамінів і здоров'я для всієї родини.</p>
+            
+            <h3>🌼 Травневий мед</h3>
+            <p>Перший і найочікуваніший збір року. Збирається бджолами з перших весняних квітів і садів. Має неймовірний легкий аромат, м'який смак і багатий вітамінний склад. Ідеально підходить для підтримки імунітету навесні.</p>
+
+            <h3>🌻 Соняшниковий мед</h3>
+            <p>Насичений, яскраво-сонячний мед із глибоким солодким смаком. Відрізняється швидкою та природною кристалізацією, що є головним знаком його зрілості та 100% натуральності. Багатий на глюкозу та ферменти, корисний для серцево-судинної системи.</p>
+
+            <h3>🌾 Бджолиний пилок та перга</h3>
+            <p>«Бджолиний хліб» та пилок — це потужний природний концентрати амінокислот, мікроелементів і вітамінів групи B. Вони чудово відновлюють сили після фізичних і розумових навантажень, підвищують тонус і заряджають енергією на весь день.</p>
+        </section>
+
+        <section class="consultation-section">
+            <h2>💬 Бажаєте проконсультуватися чи підібрати мед?</h2>
+            <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі запитання!</p>
+            
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label>ПІБ (Прізвище, Ім'я, По батькові):</label>
+                    <input type="text" id="consultFio" required="" placeholder="Іванов Іван Іванович">
+                </div>
+                <div class="form-group">
+                    <label>Номер телефону:</label>
+                    <input type="tel" id="consultPhone" required="" placeholder="+380XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Ваше запитання чи коментар:</label>
+                    <textarea id="consultQuestion" rows="3" placeholder="Який мед краще обрати для дитини / є питання по доставці..."></textarea>
+                </div>
+                <button type="submit" id="consultSubmitBtn" class="btn-submit" style="width: 100%;">Надіслати запит на консультацію</button>
+                <div id="consultStatus"></div>
+            </form>
+        </section>
+
+        <section class="about-section" id="about-section">
+            <h2 id="about-heading">Про нашу пасіку</h2>
+            <p id="about-text-1">Від вуликів до баночки — ми працюємо з власною пасікою. Мед качаємо своїми руками, свічки виготовляємо з натуральної вощини, а прополіс та пилок збираємо невеликими партіями.</p>
+            <p id="about-text-2">Усі роботи робимо самі, з турботою про якість для вашої родини! При великих замовленнях можлива індивідуальна домовленість.</p>
+        </section>
+
+        <section class="contacts-section">
+            <p style="margin-bottom: 12px;"><strong id="contacts-heading">Швидкий зв'язок з нами:</strong></p>
+            <a href="https://t.me/+380968980543" class="btn-social" style="background: #0088cc;" target="_blank">📱 Telegram</a>
+            <a href="viber://chat?number=%2B380968980543" class="btn-social" style="background: #7360f2;" target="_blank">💬 Viber</a>
+            <a href="https://wa.me/380968980543" class="btn-social" style="background: #25D366;" target="_blank">WhatsApp</a>
+            <a href="https://www.instagram.com/wax_candles_eco_honey?cplk=MTM5ZTRiM2UyazVwMA==" class="btn-social" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);" target="_blank">Instagram</a>
+            <a href="tel:+380968980543" class="btn-social" style="background: #2980b9;">📞 +380968980543</a>
+        </section>
 
         <footer>
             <p><span id="footer-copy">Медова Пасіка. Всі права захищено.</span></p>
             <p class="footer-year">© 2026</p>
+            <div class="lang-switcher">
+                <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
+                <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
+            </div>
         </footer>
+
     </div>
 
     <!-- Модальне вікно Кошика -->
@@ -665,6 +1384,11 @@
         let cart = [];
         let currentLang = 'uk';
 
+        function toggleWidget() {
+            const items = document.getElementById('widgetItems');
+            items.classList.toggle('open');
+        }
+
         window.onload = function() {
             const savedCart = localStorage.getItem('medova_cart');
             if (savedCart) {
@@ -675,10 +1399,28 @@
                 }
             }
             updateCartUI();
+            renderReviews();
         };
 
         function saveCart() {
             localStorage.setItem('medova_cart', JSON.stringify(cart));
+        }
+
+        function updatePollen() {
+            const selected = document.querySelector('input[name="pollen-weight"]:checked');
+            document.getElementById('pollen-price').innerText = selected.value;
+        }
+
+        function addPollenToCart() {
+            const selected = document.querySelector('input[name="pollen-weight"]:checked');
+            const weightLabel = selected.getAttribute('data-label');
+            const price = parseInt(selected.value);
+            const name = `Бджолиний Пилок (${weightLabel})`;
+            const qtyId = 'qty-pollen';
+            const qty = parseInt(document.getElementById(qtyId).value) || 1;
+            
+            addToCartCommon(name, price, qty);
+            document.getElementById(qtyId).value = 1;
         }
 
         function addToCartCommon(name, price, qty) {
@@ -819,6 +1561,7 @@
             statusDiv.innerText = '';
 
             try {
+                // 1. Зберігаємо замовлення в Supabase з детальним логуванням
                 const orderPayload = {
                     id: 'ord_' + Date.now(),
                     customer_name: name,
@@ -828,6 +1571,8 @@
                     total_price: totalSum,
                     comment: comment || ''
                 };
+
+                console.log("Відправляємо в Supabase:", orderPayload);
 
                 const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
                     method: 'POST',
@@ -840,11 +1585,14 @@
                     body: JSON.stringify(orderPayload)
                 });
 
+                const responseText = await dbResponse.text();
+                console.log("Відповідь Supabase (Статус:", dbResponse.status, "):", responseText);
+
                 if (!dbResponse.ok) {
-                    const responseText = await dbResponse.text();
                     throw new Error("Помилка бази Supabase: " + responseText);
                 }
 
+                // 2. Надсилаємо сповіщення в Telegram
                 const text = `<b>🛒 Нове замовлення в інтернет-магазині!</b>\n\n` +
                              `<b>👤 ПІБ:</b> ${name}\n` +
                              `<b>📞 Телефон:</b> ${phone}\n` +
@@ -880,11 +1628,299 @@
                 }
             } catch (error) {
                 statusDiv.style.color = '#dc2626';
-                statusDiv.innerText = '❌ Помилка відправки. Спробуйте ще раз.';
+                statusDiv.innerText = '❌ Помилка відправки. Дивіться консоль (F12).';
                 console.error("Деталі помилки:", error);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = 'Надіслати замовлення';
+            }
+        }
+
+        document.getElementById('consultationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fio = document.getElementById('consultFio').value.trim();
+            const phone = document.getElementById('consultPhone').value.trim();
+            const question = document.getElementById('consultQuestion').value.trim();
+            const statusDiv = document.getElementById('consultStatus');
+            const submitBtn = document.getElementById('consultSubmitBtn');
+
+            const text = `<b>🐝 Нова заявка на консультацію!</b>\n\n` +
+                         `<b>👤 ПІБ:</b> ${fio}\n` +
+                         `<b>📞 Телефон:</b> ${phone}\n` +
+                         `<b>❓ Запитання:</b>\n${question || 'Без коментаря'}`;
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Відправка...';
+            statusDiv.innerText = '';
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                const data = await response.json();
+                if (data.ok) {
+                    statusDiv.style.color = '#16a34a';
+                    statusDiv.innerText = '✅ Запит успішно надіслано!';
+                    document.getElementById('consultationForm').reset();
+                } else {
+                    throw new Error(data.description || 'Помилка');
+                }
+            } catch (error) {
+                statusDiv.style.color = '#dc2626';
+                statusDiv.innerText = '❌ Помилка відправки. Спробуйте ще раз.';
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Надіслати запит на консультацію';
+            }
+        });
+
+        const defaultReviews = [
+            { author: "— Олена, м. Одеса", rating: "⭐⭐⭐⭐⭐", text: "«Замовляла подарунковий набір з горішком та травневим медом. Усе дуже гарно запаковано, а смак просто неперевершений! Дякую за якість.»" },
+            { author: "— Максим, м. Київ", rating: "⭐⭐⭐⭐⭐", text: "«Брав свічки та прополіс. Свічки горять довго, приємно пахнуть натуральним воском. Сервіс на висоті, рекомендую!»" },
+            { author: "— Наталія, м. Роздільна", rating: "⭐⭐⭐⭐⭐", text: "«Пилок та мед свіжі, відчувається домашнє виробництво. Швидко зв'язалися і відправили. Тепер купуватиму тільки тут.»" }
+        ];
+
+        let currentPage = 1;
+        const reviewsPerPage = 1;
+        let isShowingAll = false;
+
+        function getAllReviews() {
+            let userComments = [];
+            try { userComments = JSON.parse(localStorage.getItem('medova_user_comments')) || []; } catch(e) {}
+            return [...userComments, ...defaultReviews];
+        }
+
+        function toggleShowAll() {
+            isShowingAll = !isShowingAll;
+            const btn = document.getElementById('showAllBtn');
+            btn.innerText = isShowingAll ? (currentLang === 'uk' ? '🔼 Згорнути відгуки' : '🔼 Свернуть отзывы') : (currentLang === 'uk' ? '📖 Показати всі відгуки' : '📖 Показать все отзывы');
+            renderReviews();
+        }
+
+        function renderReviews() {
+            const allReviews = getAllReviews();
+            const grid = document.getElementById('reviewsGrid');
+            const paginationContainer = document.getElementById('paginationContainer');
+            if(!grid || !paginationContainer) return;
+
+            grid.innerHTML = '';
+            paginationContainer.innerHTML = '';
+
+            if (isShowingAll) {
+                allReviews.forEach(comment => {
+                    const card = document.createElement('div');
+                    card.className = 'review-card';
+                    card.innerHTML = `<div><div class="review-stars">${comment.rating}</div><p class="review-text">«${comment.text.replace(/^[«»]/g, '')}»</p></div><div class="review-author">${comment.author}</div>`;
+                    grid.appendChild(card);
+                });
+                return;
+            }
+
+            const totalPages = allReviews.length || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const start = (currentPage - 1) * reviewsPerPage;
+            const end = start + reviewsPerPage;
+            allReviews.slice(start, end).forEach(comment => {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `<div><div class="review-stars">${comment.rating}</div><p class="review-text">«${comment.text.replace(/^[«»]/g, '')}»</p></div><div class="review-author">${comment.author}</div>`;
+                grid.appendChild(card);
+            });
+
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                    btn.innerText = i;
+                    btn.onclick = () => { currentPage = i; renderReviews(); };
+                    paginationContainer.appendChild(btn);
+                }
+            }
+        }
+
+        function addNewComment(e) {
+            e.preventDefault();
+            const author = document.getElementById('commentAuthor').value.trim();
+            const rating = document.getElementById('commentRating').value;
+            const text = document.getElementById('commentText').value.trim();
+            if (!author || !text) return;
+
+            const newComment = { author: `— ${author}`, rating, text };
+            let userComments = [];
+            try { userComments = JSON.parse(localStorage.getItem('medova_user_comments')) || []; } catch(e) {}
+            userComments.unshift(newComment);
+            try { localStorage.setItem('medova_user_comments', JSON.stringify(userComments)); } catch(e) {}
+
+            currentPage = 1;
+            isShowingAll = false;
+            renderReviews();
+            document.getElementById('commentForm').reset();
+        }
+
+        const translations = {
+            uk: {
+                pageTitle: "Медова Пасіка | Натуральний мед та вироби з воску",
+                navMenu: "Меню",
+                cartBtn: "Кошик",
+                headerTitle: "Медова Пасіка",
+                headerSubtitle: "Натуральний мед, воскові свічки та продукти бджільництва",
+                mayHoneyTitle: "Мед Травневий",
+                mayHoneyDesc: "Ароматний і ніжний мед із перших весняних квітів. Найперший збір року — солодкий, запашний та дуже корисний!",
+                honeyTitle: "Мед Соняшниковий",
+                honeyDesc: "Густий, сонячний та найсолодший мед! Натуральна кристалізація — знак справжньої якості та зрілості з власної пасіки.",
+                candleTitle: "Свічка з вощини",
+                candleDesc: "100% чистий пасічний віск. Дарують затишок, натуральний медовий аромат та очищають повітря в домі.",
+                pollenTitle: "Бджолиний Пилок",
+                pollenDesc: "Натуральний мікс вітамінів, амінокислот та мікроелементів. Повертає бадьорість, тонус та силу кожен день!",
+                propolisTitle: "Прополіс",
+                propolisDesc: "Сильний природний антисептик та захисник здоров'я. Натуральний смолистий продукт прямо з вулика.",
+                combTitle: "Стільниковий Мед",
+                combDesc: "Найчистіший делікатес у запечатаних воскових сотах. Максимум користі, прополісу та задоволення!",
+                addToCart: "🛒 Додати в кошик",
+                detailsBtn: "Детальніше / Обрати об'єм",
+                aboutHeading: "Про нашу пасіку",
+                aboutText1: "Від вуликів до баночки — ми працюємо з власною пасікою. Мед качаємо своїми руками, свічки виготовляємо з натуральної вощини, а прополіс та пилок збираємо невеликими партіями.",
+                aboutText2: "Усі роботи робимо самі, з турботою про якість для вашої родини! При великих замовленнях можлива індивідуальна домовленість.",
+                contactsHeading: "Швидкий зв'язок з нами:",
+                footerCopy: "Медова Пасіка. Всі права захищено.",
+                modalTitle: "Ваш Кошик",
+                totalSum: "Загальна сума:",
+                labelName: "ПІБ (Прізвище та Ім'я):",
+                labelPhone: "Номер телефону:",
+                labelDelivery: "Спосіб доставки:",
+                labelComment: "Коментар до замовлення:",
+                delPlaceholder: "Оберіть спосіб доставки",
+                delNp: "Нова пошта",
+                delUkr: "Укрпошта",
+                delPickup: "Самовивіз",
+                btnCloseModal: "Закрити",
+                submitBtn: "Надіслати замовлення",
+                lblWeight: "Фасування:",
+                badgeMay: "ВЕСНЯНИЙ СМАК",
+                badgeSun: "ХІТ ПРОДАЖ",
+                badgeCandle: "РУЧНА РОБОТА",
+                badgePollen: "ЗАРЯД ЕНЕРГІЇ",
+                badgeProp: "МІЦНИЙ ІМУНІТЕТ",
+                badgeComb: "100% ЕКО",
+                badgeGift2: "ЗАТИШОК"
+            },
+            ru: {
+                pageTitle: "Медовая Пасека | Натуральный мед и изделия из воска",
+                navMenu: "Меню",
+                cartBtn: "Корзина",
+                headerTitle: "Медовая Пасека",
+                headerSubtitle: "Натуральный мед, восковые свечи и продукты пчеловодства",
+                mayHoneyTitle: "Мед Майский",
+                mayHoneyDesc: "Ароматный и нежный мед с первых весенних цветов. Самый первый сбор года — сладкий, душистый и очень полезный!",
+                honeyTitle: "Мед Подсолнечный",
+                honeyDesc: "Густой, солнечный и самый сладкий мед! Натуральная кристаллизация — знак настоящего качества и зрелости с собственной пасеки.",
+                candleTitle: "Свеча из вощины",
+                candleDesc: "100% чистый пасечный воск. Дарят уют, натуральный медовый аромат и очищают воздух в доме.",
+                pollenTitle: "Пчелиная Пыльца",
+                pollenDesc: "Натуральный микс витаминов, аминокислот и микроэлементов. Возвращает бодрость, тонус и силу каждый день!",
+                propolisTitle: "Прополис",
+                propolisDesc: "Сильный природный антисептик и защитник здоровья. Натуральный смолистый продукт прямо из улья.",
+                combTitle: "Сотовый Мед",
+                combDesc: "Чистейший деликатес в запечатанных восковых сотах. Максимум пользы, прополиса и удовольствия!",
+                addToCart: "🛒 Добавить в корзину",
+                detailsBtn: "Подробнее / Выбрать объем",
+                aboutHeading: "О нашей пасеке",
+                aboutText1: "От ульев до баночки — мы работаем с собственной пасекой. Мед качаем своими руками, свечи изготавливаем из натуральной вощины, а прополис и пыльцу собираем небольшими партиями.",
+                aboutText2: "Все работы делаем сами, с заботой о качестве для вашей семьи! При крупных заказах возможна индивидуальная договоренность.",
+                contactsHeading: "Быстрая связь с нами:",
+                footerCopy: "Медовая Пасека. Все права защищены.",
+                modalTitle: "Ваша Корзина",
+                totalSum: "Общая сумма:",
+                labelName: "ФИО (Фамилия и Имя):",
+                labelPhone: "Номер телефона:",
+                labelDelivery: "Способ доставки:",
+                labelComment: "Комментарий к заказу:",
+                delPlaceholder: "Выберите способ доставки",
+                delNp: "Новая почта",
+                delUkr: "Укрпочта",
+                delPickup: "Самовывоз",
+                btnCloseModal: "Закрыть",
+                submitBtn: "Отправить заказ",
+                lblWeight: "Фасовка:",
+                badgeMay: "ВЕСЕННИЙ ВКУС",
+                badgeSun: "ХИТ ПРОДАЖ",
+                badgeCandle: "РУЧНАЯ РАБОТА",
+                badgePollen: "ЗАРЯД ЭНЕРГИИ",
+                badgeProp: "КРЕПКИЙ ИММУНИТЕТ",
+                badgeComb: "100% ЭКО",
+                badgeGift2: "УЮТ"
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            document.getElementById('page-title').innerText = t.pageTitle;
+            document.getElementById('nav-menu-text').innerText = t.navMenu;
+            document.getElementById('cart-text-btn').innerText = t.cartBtn;
+            document.getElementById('header-title').innerText = t.headerTitle;
+            document.getElementById('header-subtitle').innerText = t.headerSubtitle;
+
+            document.getElementById('may-honey-title').innerText = t.mayHoneyTitle;
+            document.getElementById('may-honey-desc').innerText = t.mayHoneyDesc;
+            document.getElementById('honey-title').innerText = t.honeyTitle;
+            document.getElementById('honey-desc').innerText = t.honeyDesc;
+            document.getElementById('candle-title').innerText = t.candleTitle;
+            document.getElementById('candle-desc').innerText = t.candleDesc;
+            document.getElementById('pollen-title').innerText = t.pollenTitle;
+            document.getElementById('pollen-desc').innerText = t.pollenDesc;
+            document.getElementById('propolis-title').innerText = t.propolisTitle;
+            document.getElementById('propolis-desc').innerText = t.propolisDesc;
+            document.getElementById('comb-title').innerText = t.combTitle;
+            document.getElementById('comb-desc').innerText = t.combDesc;
+
+            document.querySelectorAll('[data-translate="add-to-cart"]').forEach(el => el.innerText = t.addToCart);
+            document.querySelectorAll('[data-translate="details-btn"]').forEach(el => el.innerText = t.detailsBtn);
+
+            document.getElementById('about-heading').innerText = t.aboutHeading;
+            document.getElementById('about-text-1').innerText = t.aboutText1;
+            document.getElementById('about-text-2').innerText = t.aboutText2;
+            document.getElementById('contacts-heading').innerText = t.contactsHeading;
+            document.getElementById('footer-copy').innerText = t.footerCopy;
+
+            document.getElementById('modal-title').innerText = t.modalTitle;
+            document.getElementById('label-name').innerText = t.labelName;
+            document.getElementById('label-phone').innerText = t.labelPhone;
+            document.getElementById('label-delivery').innerText = t.labelDelivery;
+            document.getElementById('label-comment').innerText = t.labelComment;
+            document.getElementById('del-placeholder').innerText = t.delPlaceholder;
+            document.getElementById('del-np').innerText = t.delNp;
+            document.getElementById('del-ukr').innerText = t.delUkr;
+            document.getElementById('del-pickup').innerText = t.delPickup;
+            document.getElementById('btn-close-modal').innerText = t.btnCloseModal || "Закрити";
+            document.getElementById('submitBtn').innerText = t.submitBtn;
+
+            document.getElementById('lbl-weight').innerText = t.lblWeight;
+
+            document.getElementById('badge-may').innerText = t.badgeMay;
+            document.getElementById('badge-sun').innerText = t.badgeSun;
+            document.getElementById('badge-candle').innerText = t.badgeCandle;
+            document.getElementById('badge-pollen').innerText = t.badgePollen;
+            document.getElementById('badge-prop').innerText = t.badgeProp;
+            document.getElementById('badge-comb').innerText = t.badgeComb;
+            document.getElementById('badge-gift2').innerText = t.badgeGift2;
+
+            document.getElementById('btn-uk').classList.toggle('active', lang === 'uk');
+            document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+            
+            if(document.getElementById('cartModal').style.display === 'flex') {
+                renderCartModal();
             }
         }
     </script>
