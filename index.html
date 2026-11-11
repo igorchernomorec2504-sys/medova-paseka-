@@ -138,7 +138,7 @@
             font-weight: 500;
         }
 
-        /* Статичная панель ссылок под шапкой (по вашим черточкам) */
+        /* Панель ссылок под шапкой (по вашим черточкам) */
         .site-nav-bar {
             display: flex;
             justify-content: center;
@@ -979,28 +979,6 @@
             font-weight: 600;
         }
 
-        /* Оформление значка копирайта с буквой S в кружочке */
-        .footer-copy-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            justify-content: center;
-        }
-
-        .copyright-circle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            border: 1.5px solid var(--primary-amber);
-            border-radius: 50%;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--dark-amber);
-            background: #fff3db;
-        }
-
         .footer-year {
             margin-top: 4px;
             font-size: 0.8rem;
@@ -1325,11 +1303,7 @@
 
         <footer>
             <p><span id="footer-copy">Медова Пасіка. Всі права захищено.</span></p>
-            <p class="footer-year">
-                <span class="footer-copy-box">
-                    <span class="copyright-circle">S</span> 2026
-                </span>
-            </p>
+            <p class="footer-year">© 2026</p>
             <div class="lang-switcher">
                 <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
                 <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
