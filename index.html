@@ -44,7 +44,6 @@
             font-size: 0.92rem;
         }
 
-        /* Верхняя липкая панель (только Меню и Кошик) */
         .top-nav-bar {
             position: sticky;
             top: 0;
@@ -59,6 +58,24 @@
             margin: 0 auto;
             box-shadow: 0 4px 15px rgba(184, 107, 0, 0.05);
             border-bottom: 1.5px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-amber);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-amber);
         }
 
         .top-nav-btn {
@@ -98,7 +115,7 @@
             background: transparent;
             color: var(--text-main);
             text-align: center;
-            padding: 25px 20px 15px;
+            padding: 25px 20px 20px;
             position: relative;
         }
 
@@ -136,45 +153,6 @@
             max-width: 600px;
             margin: 0 auto;
             font-weight: 500;
-        }
-
-        /* Статичная панель ссылок под шапкой */
-        .site-nav-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin: 10px auto 25px auto;
-            flex-wrap: wrap;
-            padding: 0 16px;
-        }
-
-        .site-nav-link {
-            background: #fff3db;
-            border: 1.5px solid var(--border-color);
-            color: var(--dark-amber);
-            padding: 7px 16px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .site-nav-link:hover {
-            background: var(--primary-amber);
-            color: white;
-            border-color: var(--primary-amber);
-        }
-
-        .desktop-only-link {
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            .desktop-only-link {
-                display: inline-block;
-            }
         }
 
         .container {
@@ -728,7 +706,6 @@
             transform: translateY(-1px);
         }
 
-        /* Отступ сверху для модального окна корзины */
         .modal {
             display: none;
             position: fixed;
@@ -739,7 +716,6 @@
             justify-content: center;
             align-items: center;
             padding: 16px;
-            padding-top: 60px;
         }
 
         .modal-content {
@@ -750,7 +726,7 @@
             max-width: 480px;
             width: 100%;
             box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-            max-height: 85vh;
+            max-height: 90vh;
             overflow-y: auto;
             color: var(--text-main);
             position: relative;
@@ -962,7 +938,7 @@
         .footer-copy-box {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             justify-content: center;
         }
 
@@ -1007,10 +983,13 @@
         <button class="widget-toggle-btn" onclick="toggleWidget()">💬</button>
     </div>
 
-    <!-- Верхняя липкая панель (только Меню и Кошик) -->
+    <!-- Стильна навігаційна шапка -->
     <div class="top-nav-bar">
-        <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
-        
+        <div class="nav-links">
+            <a href="menu.html" class="top-nav-btn">📋 <span id="nav-menu-text">Меню</span></a>
+            <a href="#about-section" class="nav-link">Про нас</a>
+            <a href="#productsGrid" class="nav-link">Товари</a>
+        </div>
         <button class="top-nav-btn" onclick="openCartModal()">
             🛒 <span id="cart-text-btn">Кошик</span> <span class="cart-badge" id="cartCount">0</span>
         </button>
@@ -1023,14 +1002,6 @@
             <p id="header-subtitle">Натуральний мед, воскові свічки та продукти бджільництва прямо з сімейної пасіки</p>
         </div>
     </header>
-
-    <!-- Статичная панель ссылок под шапкой -->
-    <div class="site-nav-bar">
-        <a href="#about-section" class="site-nav-link">🍯 Про пасеку</a>
-        <a href="#productsGrid" class="site-nav-link">📦 Товари</a>
-        <a href="#reviewsSection" class="site-nav-link desktop-only-link">⭐ Відгуки</a>
-        <a href="#consultationForm" class="site-nav-link desktop-only-link">💬 Консультація</a>
-    </div>
 
     <div class="container">
 
@@ -1275,11 +1246,11 @@
             <p>«Бджолиний хліб» та пилок — це потужний природний концентрати амінокислот, мікроелементів і вітамінів групи B. Вони чудово відновлюють сили після фізичних і розумових навантажень, підвищують тонус і заряджають енергією на весь день.</p>
         </section>
 
-        <section class="consultation-section" id="consultationForm">
+        <section class="consultation-section">
             <h2>💬 Бажаєте проконсультуватися чи підібрати мед?</h2>
             <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі запитання!</p>
             
-            <form id="consultFormInner">
+            <form id="consultationForm">
                 <div class="form-group">
                     <label>ПІБ (Прізвище, Ім'я, По батькові):</label>
                     <input type="text" id="consultFio" required="" placeholder="Іванов Іван Іванович">
@@ -1307,10 +1278,11 @@
         </section>
 
         <footer>
-            <p><span id="footer-copy">Медова Пасіка. Всі права захищено.</span></p>
-            <p class="footer-year">
-                <span class="copyright-circle">C</span> 2026
-            </p>
+            <div class="footer-copy-box">
+                <span class="copyright-circle">C</span>
+                <span id="footer-copy">Медова Пасіка. Всі права захищено.</span>
+            </div>
+            <p class="footer-year">2026</p>
             <div class="lang-switcher">
                 <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
                 <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
@@ -1637,7 +1609,7 @@
             }
         }
 
-        document.getElementById('consultFormInner').addEventListener('submit', async function(e) {
+        document.getElementById('consultationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const fio = document.getElementById('consultFio').value.trim();
@@ -1670,7 +1642,7 @@
                 if (data.ok) {
                     statusDiv.style.color = '#16a34a';
                     statusDiv.innerText = '✅ Запит успішно надіслано!';
-                    document.getElementById('consultFormInner').reset();
+                    document.getElementById('consultationForm').reset();
                 } else {
                     throw new Error(data.description || 'Помилка');
                 }
@@ -1926,4 +1898,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
