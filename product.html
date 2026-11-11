@@ -39,48 +39,85 @@
             padding-bottom: 50px;
             font-size: 0.92rem;
         }
+
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 16px 5px 16px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .top-nav-btn {
+            background: #ffffff;
+            color: var(--dark-amber);
+            border: 1.5px solid var(--primary-amber);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+        }
+
+        .top-nav-btn:hover {
+            background: var(--primary-amber);
+            color: white;
+            transform: translateY(-2px);
+        }
         
         header { 
             background: transparent; 
             color: var(--text-main); 
             text-align: center; 
-            padding: 15px 20px 10px; 
+            padding: 10px 20px 15px; 
             box-shadow: none; 
             position: relative; 
         }
 
+        /* Капсула без оранжевого заповнення (світла/прозора плашка) */
         .header-brand-box {
-            display: flex;
-            flex-direction: column;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 24px 8px 14px;
+            border-radius: 50px;
+            box-shadow: 0 6px 20px rgba(184, 107, 0, 0.08);
             max-width: 100%;
             margin: 0 auto;
         }
 
         .header-logo-img {
-            height: 80px;
+            height: 48px;
             width: auto;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
         header h1 { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 1.7rem; 
+            font-size: 1.5rem; 
             font-weight: 700;
             color: var(--dark-amber);
             letter-spacing: 0.3px;
             line-height: 1;
-            margin-bottom: 2px;
+            margin: 0;
         }
         
-        .top-cart-btn { position: fixed; top: 15px; right: 15px; background: #fff; color: var(--dark-amber); border: 2px solid var(--primary-amber); padding: 8px 14px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 150; display: flex; align-items: center; gap: 6px; }
         .cart-badge { background: var(--accent-red); color: white; border-radius: 50%; padding: 1px 6px; font-size: 0.7rem; font-weight: 700; }
         
-        .container { max-width: 650px; margin: 20px auto; padding: 0 15px; }
+        .container { max-width: 650px; margin: 10px auto; padding: 0 15px; }
         .back-link { display: inline-block; margin-bottom: 15px; color: var(--dark-amber); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
         .back-link:hover { text-decoration: underline; }
 
@@ -156,18 +193,21 @@
         <button class="widget-toggle-btn" onclick="toggleWidget()" id="widgetMainBtn">💬</button>
     </div>
 
-    <button class="top-cart-btn" onclick="openCartModal()">🛒 Кошик <span class="cart-badge" id="cartCount">0</span></button>
+    <div class="top-nav-bar">
+        <a href="index.html" class="top-nav-btn">← Повернутися до каталогу</a>
+        <button class="top-nav-btn" onclick="openCartModal()">
+            🛒 Кошик <span class="cart-badge" id="cartCount">0</span>
+        </button>
+    </div>
 
     <header>
         <div class="header-brand-box">
-            <h1 id="header-title">Медова Пасіка</h1>
             <img src="11431.png" alt="Ведмедик з медом" class="header-logo-img">
-            <p id="header-subtitle" style="font-size:0.95rem; color:var(--text-muted); font-weight:500;">Натуральний мед, воскові свічки та продукти бджільництва</p>
+            <h1 id="header-title">Медова Пасіка</h1>
         </div>
     </header>
 
     <div class="container">
-        <a href="index.html" class="back-link">← Повернутися до каталогу</a>
         <div class="product-detail-card" id="productCard"></div>
     </div>
 
