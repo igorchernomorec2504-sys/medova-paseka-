@@ -64,6 +64,8 @@
             gap: 6px;
             text-decoration: none;
             white-space: nowrap;
+            width: auto;
+            flex: initial;
             transition: all 0.25s ease;
         }
 
@@ -82,7 +84,6 @@
             position: relative; 
         }
 
-        /* Капсула без оранжевого заповнення (світла/прозора плашка) */
         .header-brand-box {
             display: inline-flex;
             align-items: center;
@@ -118,8 +119,6 @@
         .cart-badge { background: var(--accent-red); color: white; border-radius: 50%; padding: 1px 6px; font-size: 0.7rem; font-weight: 700; }
         
         .container { max-width: 650px; margin: 10px auto; padding: 0 15px; }
-        .back-link { display: inline-block; margin-bottom: 15px; color: var(--dark-amber); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-        .back-link:hover { text-decoration: underline; }
 
         .product-detail-card { background: var(--bg-card); border-radius: 20px; padding: 22px 18px; box-shadow: var(--card-shadow); border: 1.5px solid var(--border-color); }
         
@@ -165,6 +164,24 @@
         .btn-submit { flex: 1; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; border: none; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25); }
         .btn-close { background: #f0f0f0; color: #444; border: none; padding: 14px 20px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
         
+        .btn-continue-shopping {
+            background: #fff3db;
+            color: var(--dark-amber);
+            border: 1.5px solid var(--primary-amber);
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            transition: all 0.2s;
+        }
+        .btn-continue-shopping:hover {
+            background: var(--primary-amber);
+            color: white;
+        }
+
         footer { text-align: center; margin-top: 36px; color: var(--text-muted); font-size: 0.82rem; font-weight: 600; }
         .footer-year { margin-top: 4px; font-size: 0.8rem; color: var(--primary-amber); }
 
@@ -233,6 +250,10 @@
             <div id="cartInitialActions" class="cart-action-buttons">
                 <button type="button" class="btn-submit" style="width:100%; margin-bottom:8px;" onclick="showCheckoutForm()">Оформити замовлення</button>
                 <button type="button" class="btn-close" style="width:100%; background:#fff3db; color:var(--dark-amber); border:1.5px solid var(--primary-amber);" onclick="closeCartModal()">Продовжити покупку</button>
+            </div>
+
+            <div id="cartEmptyActions" style="display: none; margin-top: 15px;">
+                <button type="button" class="btn-continue-shopping" onclick="closeCartModal()">Додати товар</button>
             </div>
 
             <form id="orderForm" style="display: none;" onsubmit="submitOrder(event)">
@@ -486,6 +507,7 @@
             const listContainer = document.getElementById('cartItemsList');
             const totalSumElement = document.getElementById('cartTotalSum');
             const initialActions = document.getElementById('cartInitialActions');
+            const emptyActions = document.getElementById('cartEmptyActions');
             const orderForm = document.getElementById('orderForm');
             const totalBox = document.getElementById('cartTotalBox');
             const progressBox = document.getElementById('deliveryProgressBox');
@@ -498,11 +520,13 @@
                 totalBox.style.display = 'none';
                 progressBox.style.display = 'none';
                 initialActions.style.display = 'none';
+                emptyActions.style.display = 'block';
                 return;
             }
 
             totalBox.style.display = 'block';
             initialActions.style.display = 'block';
+            emptyActions.style.display = 'none';
 
             let html = '';
             let totalSum = 0;
