@@ -317,7 +317,7 @@
                 usersContainer.innerHTML = '<p style="font-size: 0.85rem; color: #d32f2f;">Помилка завантаження користувачів із бази даних.</p>';
             }
 
-            // 2. Загрузка заказов из английской таблицы "orders" в Supabase
+            // 2. Загрузка заказов из таблицы "orders" в Supabase с точными колонками
             try {
                 const ordResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=*&order=created_at.desc`, {
                     method: 'GET',
@@ -337,20 +337,19 @@
                     
                     allOrders.forEach(ord => {
                         let formattedDate = 'Не вказано';
-                        const dateVal = ord.created_at || ord.создано_в;
-                        if (dateVal) {
-                            const d = new Date(dateVal);
+                        if (ord.created_at) {
+                            const d = new Date(ord.created_at);
                             formattedDate = d.toLocaleDateString('uk-UA') + ' ' + d.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
                         }
 
                         ordHtml += `<tr>
                             <td>${formattedDate}</td>
-                            <td><b>${ord.client_name || ord.имя_клиента || '-'}</b></td>
-                            <td>${ord.phone || ord.телефон || '-'}</td>
-                            <td>${ord.city || ord.город_пост || '-'}</td>
-                            <td>${ord.items || ord.предметы || '-'}</td>
-                            <td><b>${ord.total_price || ord.общая_цена || 0} грн</b></td>
-                            <td><span style="background: #e0f2f1; color: #00796b; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${ord.status || ord.статус || 'Нове'}</span></td>
+                            <td><b>${ord.customer_name || '-'}</b></td>
+                            <td>${ord.phone || '-'}</td>
+                            <td>${ord.city_post || '-'}</td>
+                            <td>${ord.items || '-'}</td>
+                            <td><b>${ord.total_price || 0} грн</b></td>
+                            <td><span style="background: #e0f2f1; color: #00796b; padding: 2px 6px; border-radius: 4px; font-weight: 600;">${ord.status || 'Нове'}</span></td>
                         </tr>`;
                     });
                     ordHtml += '</table>';
