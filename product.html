@@ -12,109 +12,130 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-amber: #ff9800;
-            --dark-amber: #e65100;
-            --bg-gradient: linear-gradient(135deg, #fff9e6 0%, #ffecb3 50%, #ffe082 100%);
-            --card-shadow: 0 8px 20px rgba(216, 112, 147, 0.08), 0 4px 10px rgba(230, 81, 0, 0.1);
-            --text-main: #3e2723;
+            --bg-light: #fcf9f2;
+            --bg-card: #ffffff;
+            --primary-amber: #e68a00;
+            --dark-amber: #995200;
+            --accent-gold: #ffb703;
+            --card-shadow: 0 10px 30px rgba(184, 107, 0, 0.07);
+            --card-shadow-hover: 0 14px 35px rgba(184, 107, 0, 0.15);
+            --text-main: #332417;
+            --text-muted: #7a6552;
+            --border-color: #eedcc8;
+            --accent-red: #e63946;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
-        body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-main); min-height: 100vh; padding-bottom: 50px; font-size: 0.9rem; }
+        
+        body {
+            background-color: var(--bg-light);
+            background-image: 
+                radial-gradient(rgba(230, 138, 0, 0.08) 1px, transparent 1px), 
+                radial-gradient(rgba(230, 138, 0, 0.08) 1px, var(--bg-light) 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-bottom: 50px;
+            font-size: 0.92rem;
+        }
         
         header { 
-            background: linear-gradient(135deg, #f57c00 0%, #e65100 100%); 
-            color: #fff; 
+            background: transparent; 
+            color: var(--text-main); 
             text-align: center; 
-            padding: 25px 15px 20px; 
-            border-bottom-left-radius: 20px; 
-            border-bottom-right-radius: 20px; 
-            box-shadow: 0 8px 25px rgba(230, 81, 0, 0.25); 
+            padding: 15px 20px 10px; 
+            box-shadow: none; 
             position: relative; 
         }
 
         .header-brand-box {
-            display: inline-flex;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.35);
-            padding: 8px 24px 8px 16px;
-            border-radius: 50px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            white-space: nowrap;
+            gap: 10px;
             max-width: 100%;
+            margin: 0 auto;
         }
 
         .header-logo-img {
-            height: 48px;
+            height: 80px;
             width: auto;
             display: block;
             object-fit: contain;
-            mix-blend-mode: multiply;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
         header h1 { 
             font-family: 'Comfortaa', cursive; 
-            font-size: 1.5rem; 
-            color: #ffffff;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            font-size: 1.7rem; 
+            font-weight: 700;
+            color: var(--dark-amber);
+            letter-spacing: 0.3px;
+            line-height: 1;
+            margin-bottom: 2px;
         }
         
         .top-cart-btn { position: fixed; top: 15px; right: 15px; background: #fff; color: var(--dark-amber); border: 2px solid var(--primary-amber); padding: 8px 14px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 150; display: flex; align-items: center; gap: 6px; }
-        .cart-badge { background: var(--dark-amber); color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.78rem; }
+        .cart-badge { background: var(--accent-red); color: white; border-radius: 50%; padding: 1px 6px; font-size: 0.7rem; font-weight: 700; }
         
         .container { max-width: 650px; margin: 20px auto; padding: 0 15px; }
         .back-link { display: inline-block; margin-bottom: 15px; color: var(--dark-amber); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
         .back-link:hover { text-decoration: underline; }
 
-        .product-detail-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: var(--card-shadow); border: 1.5px solid #fff3e0; }
+        .product-detail-card { background: var(--bg-card); border-radius: 20px; padding: 22px 18px; box-shadow: var(--card-shadow); border: 1.5px solid var(--border-color); }
         
-        .gallery-main { width: 100%; height: 280px; object-fit: cover; border-radius: 12px; border: 2px solid var(--primary-amber); margin-bottom: 10px; }
+        .gallery-main { width: 100%; height: 280px; object-fit: cover; border-radius: 14px; border: 1.5px solid var(--border-color); margin-bottom: 10px; }
         .gallery-thumbs { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
-        .thumb-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 2px solid #ffe0b2; cursor: pointer; transition: 0.2s; }
-        .thumb-img:hover, .thumb-img.active { border-color: var(--dark-amber); transform: scale(1.05); }
+        .thumb-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1.5px solid var(--border-color); cursor: pointer; transition: 0.2s; }
+        .thumb-img:hover, .thumb-img.active { border-color: var(--primary-amber); transform: scale(1.05); }
 
-        .product-title { font-family: 'Comfortaa', cursive; font-size: 1.4rem; color: var(--dark-amber); margin-bottom: 10px; }
-        .product-desc { font-size: 0.95rem; color: #5d4037; line-height: 1.5; margin-bottom: 12px; }
-        .product-extended-desc { font-size: 0.88rem; color: #795548; line-height: 1.5; background: #fff8e1; padding: 12px; border-radius: 10px; border-left: 4px solid var(--primary-amber); margin-bottom: 15px; }
-        .product-price { font-weight: 700; font-size: 1.3rem; color: var(--dark-amber); margin-bottom: 15px; }
+        .product-title { font-family: 'Comfortaa', cursive; font-size: 1.3rem; color: var(--dark-amber); margin-bottom: 8px; }
+        .product-desc { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.45; }
+        .product-extended-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; background: #fffbf5; padding: 12px; border-radius: 14px; border: 1.5px solid #fae8d2; margin-bottom: 15px; }
+        .product-price { font-weight: 700; font-size: 1.25rem; color: var(--dark-amber); margin: 14px 0 10px; }
         
         .volume-options { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
-        .volume-label { flex: 1; min-width: 70px; text-align: center; background: #fff3e0; padding: 10px 8px; border-radius: 12px; border: 1.5px solid #ffe0b2; font-weight: 700; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .volume-label { flex: 1; min-width: 70px; text-align: center; background: #fff3db; padding: 10px 8px; border-radius: 12px; border: 1.5px solid #e8d5bc; font-weight: 700; cursor: pointer; font-size: 0.85rem; color: var(--dark-amber); transition: 0.2s; }
         .volume-label input { display: none; }
-        .volume-label.selected { background: var(--primary-amber); color: white; border-color: var(--dark-amber); box-shadow: 0 4px 10px rgba(230,81,0,0.2); }
+        .volume-label.selected { background: var(--primary-amber); color: white; border-color: var(--primary-amber); box-shadow: 0 4px 10px rgba(230,138,0,0.25); }
 
-        .candle-options-section { margin-bottom: 15px; background: #fff9e6; padding: 14px; border-radius: 12px; border: 1.5px solid #ffe0b2; }
-        .candle-options-section label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.88rem; color: var(--dark-amber); }
+        .candle-options-section { margin-bottom: 15px; background: #fffbf5; padding: 14px; border-radius: 14px; border: 1.5px solid #fae8d2; }
+        .candle-options-section label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.85rem; color: var(--dark-amber); }
         
-        .qty-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-        .qty-btn { background: #ffe0b2; color: var(--dark-amber); border: none; width: 35px; height: 35px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
-        .qty-input { width: 60px; text-align: center; padding: 8px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-weight: 700; font-size: 1rem; }
+        .qty-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; justify-content: center; }
+        .qty-btn { background: #fff3db; color: var(--dark-amber); border: 1.5px solid #e8d5bc; width: 32px; height: 32px; border-radius: 10px; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .qty-btn:hover { background: var(--primary-amber); color: white; border-color: var(--primary-amber); }
+        .qty-input { width: 48px; height: 32px; text-align: center; padding: 4px; border: 1.5px solid #e8d5bc; border-radius: 10px; font-weight: 700; font-size: 0.9rem; background: #fff; color: var(--text-main); outline: none; }
 
-        .btn-add-cart { background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; text-align: center; box-shadow: 0 4px 15px rgba(230,81,0,0.2); }
+        .btn-add-cart { background: linear-gradient(135deg, #ffb703 0%, #e68a00 100%); color: white; border: none; padding: 12px 16px; border-radius: 14px; font-weight: 700; font-size: 0.9rem; cursor: pointer; width: 100%; box-shadow: 0 4px 14px rgba(230, 138, 0, 0.25); transition: all 0.2s ease; }
+        .btn-add-cart:hover { opacity: 0.95; transform: translateY(-1px); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 200; justify-content: center; align-items: center; padding: 15px; }
-        .modal-content { background: white; padding: 22px; border-radius: 18px; max-width: 450px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
-        .modal-content h3 { font-family: 'Comfortaa', cursive; color: var(--dark-amber); margin-bottom: 12px; text-align: center; font-size: 1.2rem; }
-        .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #ffe0b2; font-size: 0.85rem; }
-        .remove-btn { background: #ff4d4d; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-weight: 700; font-size: 0.75rem; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.82rem; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1.5px solid #ffe0b2; border-radius: 8px; font-size: 0.9rem; background: #fff; outline: none; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); z-index: 200; justify-content: center; align-items: center; padding: 16px; }
+        .modal-content { background: var(--bg-card); border: 1.5px solid var(--border-color); padding: 24px; border-radius: 24px; max-width: 480px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; color: var(--text-main); position: relative; }
+        .modal-content h3 { font-family: 'Comfortaa', cursive; color: var(--dark-amber); font-size: 1.3rem; margin-bottom: 16px; text-align: left; }
+        .modal-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-close-x { background: #f0f0f0; color: #444; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--border-color); font-size: 0.88rem; }
+        .cart-item-row small { color: var(--text-muted); }
+        .remove-btn { background: #ef4444; color: white; border: none; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.84rem; color: var(--text-muted); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1.5px solid var(--border-color); border-radius: 12px; font-size: 0.92rem; background: #fff; color: var(--text-main); outline: none; }
         .form-group textarea { resize: vertical; height: 70px; }
-        .modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
-        .btn-submit { flex: 1; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
-        .btn-close { background: #eee; color: #333; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+        .modal-buttons { display: flex; gap: 12px; margin-top: 20px; }
+        .btn-submit { flex: 1; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: white; border: none; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25); }
+        .btn-close { background: #f0f0f0; color: #444; border: none; padding: 14px 20px; border-radius: 14px; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
         
-        footer { text-align: center; margin-top: 30px; color: #8d6e63; font-size: 0.85rem; font-weight: 600; }
+        footer { text-align: center; margin-top: 36px; color: var(--text-muted); font-size: 0.82rem; font-weight: 600; }
+        .footer-year { margin-top: 4px; font-size: 0.8rem; color: var(--primary-amber); }
 
         .floating-widget { position: fixed; bottom: 25px; right: 20px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; }
-        .widget-toggle-btn { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #ff9800 0%, #e65100 100%); color: white; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(230, 81, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+        .widget-toggle-btn { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #ffb703 0%, #e68a00 100%); color: white; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 6px 20px rgba(230, 138, 0, 0.4); display: flex; align-items: center; justify-content: center; }
         .widget-items { display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; }
         .widget-items.open { display: flex; }
-        .widget-btn { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 25px; color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); white-space: nowrap; }
+        .widget-btn { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 25px; color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); white-space: nowrap; }
         .widget-btn.tg { background: #0088cc; }
         .widget-btn.viber { background: #7360f2; }
         .widget-btn.wa { background: #25D366; }
@@ -139,8 +160,9 @@
 
     <header>
         <div class="header-brand-box">
-            <img src="11431.png" alt="Вінні Пух" class="header-logo-img">
-            <h1>Медова Пасіка</h1>
+            <h1 id="header-title">Медова Пасіка</h1>
+            <img src="11431.png" alt="Ведмедик з медом" class="header-logo-img">
+            <p id="header-subtitle" style="font-size:0.95rem; color:var(--text-muted); font-weight:500;">Натуральний мед, воскові свічки та продукти бджільництва</p>
         </div>
     </header>
 
@@ -150,17 +172,30 @@
     </div>
 
     <footer>
-        <p>© Медова Пасіка. Всі права захищено.</p>
+        <p>Медова Пасіка. Всі права захищено.</p>
+        <p class="footer-year">(©) 2026</p>
     </footer>
 
     <div class="modal" id="cartModal">
         <div class="modal-content">
-            <h3>Ваш Кошик</h3>
+            <div class="modal-header-row">
+                <h3>Ваш Кошик</h3>
+                <button type="button" class="modal-close-x" onclick="closeCartModal()">✕</button>
+            </div>
             <div id="cartItemsList" style="margin-bottom: 15px;"></div>
-            <div style="background: #fff3e0; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: right;">
+            
+            <div id="deliveryProgressBox" style="background: #fff3db; border: 1.5px dashed var(--primary-amber); padding: 10px 12px; border-radius: 12px; margin-bottom: 12px; font-size: 0.85rem; text-align: center; color: var(--dark-amber); font-weight: 600; display: none;"></div>
+
+            <div id="cartTotalBox" style="background: #fff8eb; border: 1.5px solid #fae8d2; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 0.95rem; text-align: right;">
                 <strong>Загальна сума: <span id="cartTotalSum">0</span> грн</strong>
             </div>
-            <form id="orderForm" onsubmit="submitOrder(event)">
+
+            <div id="cartInitialActions" class="cart-action-buttons">
+                <button type="button" class="btn-submit" style="width:100%; margin-bottom:8px;" onclick="showCheckoutForm()">Оформити замовлення</button>
+                <button type="button" class="btn-close" style="width:100%; background:#fff3db; color:var(--dark-amber); border:1.5px solid var(--primary-amber);" onclick="closeCartModal()">Продовжити покупку</button>
+            </div>
+
+            <form id="orderForm" style="display: none;" onsubmit="submitOrder(event)">
                 <div class="form-group">
                     <label>ПІБ (Прізвище та Ім'я):</label>
                     <input type="text" name="ПІБ" required placeholder="Іванов Іван">
@@ -262,13 +297,13 @@
         function renderProductPage() {
             const container = document.getElementById('productCard');
             
-            let imagesHtml = `<img src="${product.images[0]}" id="mainImage" class="gallery-main" alt="${product.title}">`;
+            let imagesHtml = `<img src="${product.images[0]}" id="mainImage" class="gallery-main" alt="${product.title}" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">`;
             let thumbsHtml = '';
             
             if (product.images.length > 1) {
                 thumbsHtml = '<div class="gallery-thumbs">';
                 product.images.forEach((img, index) => {
-                    thumbsHtml += `<img src="${img}" class="thumb-img ${index === 0 ? 'active' : ''}" onclick="changeImage('${img}', this)">`;
+                    thumbsHtml += `<img src="${img}" class="thumb-img ${index === 0 ? 'active' : ''}" onclick="changeImage('${img}', this)" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">`;
                 });
                 thumbsHtml += '</div>';
             }
@@ -393,8 +428,6 @@
                 cart.push({ name: fullName, price: selectedPrice, qty: qty });
             }
             saveCart();
-            
-            // Скидаємо лічильник кількості на 1 без жодних повідомлень
             document.getElementById('prodQty').value = 1;
         }
 
@@ -404,15 +437,32 @@
             renderCartModal();
         }
 
+        function showCheckoutForm() {
+            document.getElementById('cartInitialActions').style.display = 'none';
+            document.getElementById('orderForm').style.display = 'block';
+        }
+
         function renderCartModal() {
             const listContainer = document.getElementById('cartItemsList');
             const totalSumElement = document.getElementById('cartTotalSum');
+            const initialActions = document.getElementById('cartInitialActions');
+            const orderForm = document.getElementById('orderForm');
+            const totalBox = document.getElementById('cartTotalBox');
+            const progressBox = document.getElementById('deliveryProgressBox');
+
+            orderForm.style.display = 'none';
+            orderForm.reset();
 
             if (cart.length === 0) {
-                listContainer.innerHTML = `<p style="text-align:center; color:#888;">Кошик порожній</p>`;
-                totalSumElement.innerText = '0';
+                listContainer.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:10px;">Кошик порожній</p>`;
+                totalBox.style.display = 'none';
+                progressBox.style.display = 'none';
+                initialActions.style.display = 'none';
                 return;
             }
+
+            totalBox.style.display = 'block';
+            initialActions.style.display = 'block';
 
             let html = '';
             let totalSum = 0;
@@ -420,16 +470,36 @@
             cart.forEach((item, index) => {
                 const itemTotal = item.price * item.qty;
                 totalSum += itemTotal;
+                const priceText = `${itemTotal} грн (${item.qty} шт x ${item.price} грн)`;
+
                 html += `
                     <div class="cart-item-row">
-                        <div><strong>${item.name}</strong><br><small>${item.qty} шт x ${item.price} грн = ${itemTotal} грн</small></div>
-                        <button type="button" class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>${priceText}</small>
+                        </div>
+                        <div>
+                            <button type="button" class="remove-btn" onclick="removeFromCart(${index})">✕</button>
+                        </div>
                     </div>
                 `;
             });
 
             listContainer.innerHTML = html;
             totalSumElement.innerText = totalSum;
+
+            const threshold = 1000;
+            progressBox.style.display = 'block';
+            if (totalSum >= threshold) {
+                progressBox.innerHTML = '🎉 Ура! У вас безкоштовна доставка!';
+                progressBox.style.color = '#16a34a';
+                progressBox.style.borderColor = '#16a34a';
+            } else {
+                const diff = threshold - totalSum;
+                progressBox.innerHTML = `🚚 До безкоштовної доставки не вистачає: <b>${diff} грн</b>`;
+                progressBox.style.color = 'var(--dark-amber)';
+                progressBox.style.borderColor = 'var(--primary-amber)';
+            }
         }
 
         function openCartModal() {
