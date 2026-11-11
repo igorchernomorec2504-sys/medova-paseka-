@@ -28,7 +28,6 @@
         .switch-mode { text-align: center; margin-top: 12px; font-size: 0.85rem; color: #666; }
         .switch-mode a { color: var(--dark-amber); font-weight: 700; cursor: pointer; text-decoration: underline; }
         
-        /* Стили для таблицы заказов */
         .orders-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; border-radius: 8px; overflow: hidden; }
         .orders-table th { background: #ffe0b2; color: #e65100; padding: 8px; font-size: 0.85rem; text-align: left; }
         .orders-table td { border-bottom: 1px solid #ffe0b2; padding: 8px; font-size: 0.85rem; }
@@ -175,7 +174,6 @@
             return null;
         }
 
-        // РЕЄСТРАЦІЯ ЧЕРЕЗ SUPABASE
         async function handleRegister(e) {
             e.preventDefault();
             const loginInput = document.getElementById('regLogin').value;
@@ -232,7 +230,6 @@
             }
         }
 
-        // ВХІД ЧЕРЕЗ SUPABASE
         async function handleLogin(e) {
             e.preventDefault();
             const loginInput = document.getElementById('loginLogin').value;
@@ -270,14 +267,12 @@
             }
         }
 
-        // ВИХІД
         function handleLogout() {
             currentUser = null;
             localStorage.removeItem('medova_current_user');
             initAccountPage();
         }
 
-        // ЗБЕРЕЖЕННЯ ДАНИХ ПРОФІЛЮ В SUPABASE
         async function saveProfileData(e) {
             e.preventDefault();
             if (!currentUser) return;
@@ -321,7 +316,6 @@
             container.innerHTML = '<ul>' + wishlist.map(item => `<li>${item}</li>`).join('') + '</ul>';
         }
 
-        // ЗАВАНТАЖЕННЯ ЗАМОВЛЕНЬ З ТАБЛИЦІ "orders" В SUPABASE
         async function renderOrders() {
             const container = document.getElementById('userOrdersList');
             if (!currentUser || !currentUser.login) return;
@@ -330,7 +324,6 @@
 
             try {
                 const encodedLogin = encodeURIComponent(currentUser.login);
-                // Запрос к английской таблице "orders" по полю "phone"
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/orders?phone=eq.${encodedLogin}&order=created_at.desc`, {
                     method: 'GET',
                     headers: {
@@ -362,18 +355,17 @@
 
                 orders.forEach(ord => {
                     let formattedDate = 'Не вказано';
-                    const dateVal = ord.created_at || ord.создано_в;
-                    if (dateVal) {
-                        const d = new Date(dateVal);
+                    if (ord.created_at) {
+                        const d = new Date(ord.created_at);
                         formattedDate = d.toLocaleDateString('uk-UA') + ' ' + d.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
                     }
 
                     html += `
                         <tr>
                             <td>${formattedDate}</td>
-                            <td>${ord.items || ord.предметы || '-'}</td>
-                            <td><b>${ord.total_price || ord.общая_цена || 0} грн</b></td>
-                            <td><span class="status-badge">${ord.status || ord.статус || 'Прийнято'}</span></td>
+                            <td>${ord.items || '-'}</td>
+                            <td><b>${ord.total_price || 0} грн</b></td>
+                            <td><span class="status-badge">${ord.status || 'Нове'}</span></td>
                         </tr>`;
                 });
 
