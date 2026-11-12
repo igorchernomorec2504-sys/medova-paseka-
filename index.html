@@ -42,13 +42,12 @@
             min-height: 100vh;
             padding-bottom: 50px;
             font-size: 0.92rem;
-            padding-top: 60px; /* Невеликий відступ зверху, щоб плаваючі кнопки не перекривали шапку */
+            padding-top: 55px;
         }
 
-        /* Плаваюча кнопка Меню (зліва вгорі) */
         .floating-menu-btn {
             position: fixed;
-            top: 12px;
+            top: 10px;
             left: max(16px, calc((100vw - 960px) / 2 + 16px));
             z-index: 1000;
             background: #ffffff;
@@ -74,10 +73,9 @@
             transform: translateY(-2px);
         }
 
-        /* Плаваюча кнопка Кошик (справа вгорі) */
         .floating-cart-btn {
             position: fixed;
-            top: 12px;
+            top: 10px;
             right: max(16px, calc((100vw - 960px) / 2 + 16px));
             z-index: 1000;
             background: #ffffff;
@@ -1035,7 +1033,7 @@
     <!-- Плаваюча кнопка Меню (зліва) -->
     <a href="menu.html" class="floating-menu-btn">📋 <span id="nav-menu-text">Меню</span></a>
 
-    <!-- Плавающая кнопка Кошик (справа) -->
+    <!-- Плаваюча кнопка Кошик (справа) -->
     <button class="floating-cart-btn" onclick="openCartModal()">
         🛒 <span id="cart-text-btn">Кошик</span> <span class="cart-badge" id="cartCount">0</span>
     </button>
