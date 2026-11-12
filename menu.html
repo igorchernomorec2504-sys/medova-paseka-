@@ -41,7 +41,6 @@
             font-size: 0.92rem;
         }
 
-        /* Верхня панель */
         .top-nav-bar {
             display: flex;
             justify-content: flex-start;
@@ -80,7 +79,6 @@
             padding: 0 16px;
         }
 
-        /* Особистий кабінет — виділена картка з градієнтом */
         .menu-link-highlight {
             background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
             border-radius: 20px;
@@ -293,13 +291,13 @@
 
     <div class="container" style="margin-top: 10px;">
 
-        <!-- 0. Особистий кабінет -->
+        <!-- 0. Акаунт -->
         <a href="cabinet.html" class="menu-link-highlight">
-            <span>👤 <span id="menu-account">Особистий кабінет</span></span>
+            <span>👤 <span id="menu-account">Акаунт</span></span>
             <span>➔</span>
         </a>
 
-        <!-- 1. Каталог товарів (випадаючий список) -->
+        <!-- 1. Каталог товарів -->
         <div class="menu-card" id="catalogCard">
             <div class="menu-title" onclick="toggleSubmenu('catalogSub', 'catalogCard')">
                 <div class="menu-title-left">
@@ -318,7 +316,7 @@
             </div>
         </div>
 
-        <!-- 2. Акції -->
+        <!-- 2. Акції та знижки -->
         <a href="index.html#promoSection" class="menu-link-direct">
             <span>🔥 <span id="menu-promo">Акції та знижки</span></span>
             <span>➔</span>
@@ -370,7 +368,7 @@
             </div>
         </div>
 
-        <!-- Футер с правильным порядком и датой в кружочке (как на фото 11917.jpg) -->
+        <!-- Футер -->
         <div style="text-align: center; margin-top: 25px;">
             <footer>
                 <p id="footer-copy">Медова Пасіка. Всі права захищено.</p>
@@ -398,7 +396,7 @@
             uk: {
                 pageTitle: "Меню | Медова Пасіка",
                 navHome: "Головна",
-                menuAccount: "Особистий кабінет",
+                menuAccount: "Акаунт",
                 menuCatalog: "Каталог товарів",
                 catMay: "🌿 Мед травневий",
                 catSun: "🌻 Мед соняшниковий",
@@ -425,7 +423,7 @@
             ru: {
                 pageTitle: "Меню | Медовая Пасека",
                 navHome: "Главная",
-                menuAccount: "Личный кабинет",
+                menuAccount: "Аккаунт",
                 menuCatalog: "Каталог товаров",
                 catMay: "🌿 Мед майский",
                 catSun: "🌻 Мед подсолнечный",
