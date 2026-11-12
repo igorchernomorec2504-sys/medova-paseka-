@@ -13,8 +13,8 @@
             --bg-card: #ffffff;
             --primary-amber: #ff9800;
             --dark-amber: #e65100;
-            --card-shadow: 0 10px 30px rgba(230, 152, 0, 0.08);
-            --card-shadow-hover: 0 14px 35px rgba(230, 152, 0, 0.15);
+            --card-shadow: 0 10px 25px rgba(230, 152, 0, 0.1);
+            --card-shadow-hover: 0 14px 30px rgba(230, 152, 0, 0.18);
             --text-main: #3e2723;
             --text-muted: #795548;
             --border-color: #ffe0b2;
@@ -266,7 +266,7 @@
             text-align: center;
             margin-top: 25px;
             color: var(--text-muted);
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 600;
             line-height: 1.5;
         }
@@ -281,13 +281,13 @@
 
     <div class="container" style="margin-top: 10px;">
 
-        <!-- 0. Особистий кабінет (Виділений акцент) -->
-        <a href="account.html" class="menu-link-highlight">
+        <!-- 0. Особистий кабінет -->
+        <a href="cabinet.html" class="menu-link-highlight">
             <span>👤 <span id="menu-account">Особистий кабінет</span></span>
             <span>➔</span>
         </a>
 
-        <!-- 1. Каталог товарів -->
+        <!-- 1. Каталог товарів (випадаючий список) -->
         <div class="menu-card" id="catalogCard">
             <div class="menu-title" onclick="toggleSubmenu('catalogSub', 'catalogCard')">
                 <div class="menu-title-left">
@@ -300,38 +300,38 @@
                 <a href="product.html?id=sunflower-honey" class="submenu-item"><span id="cat-sun">🌻 Мед соняшниковий</span> <span>➔</span></a>
                 <a href="product.html?id=candle" class="submenu-item"><span id="cat-candle">🕯️ Свічки з вощини</span> <span>➔</span></a>
                 <a href="product.html?id=propolis" class="submenu-item"><span id="cat-prop">🛡️ Прополіс</span> <span>➔</span></a>
-                <a href="index.html" class="submenu-item"><span id="cat-pollen">🌾 Бджолиний пилок</span> <span>➔</span></a>
-                <a href="index.html" class="submenu-item"><span id="cat-comb">🍯 Стільниковий мед</span> <span>➔</span></a>
-                <a href="index.html" class="submenu-item"><span id="cat-gifts">🎁 Подарункові набори</span> <span>➔</span></a>
+                <a href="index.html#productsGrid" class="submenu-item"><span id="cat-pollen">🌾 Бджолиний пилок</span> <span>➔</span></a>
+                <a href="index.html#productsGrid" class="submenu-item"><span id="cat-comb">🍯 Стільниковий мед</span> <span>➔</span></a>
+                <a href="index.html#productsGrid" class="submenu-item"><span id="cat-gifts">🎁 Подарункові набори</span> <span>➔</span></a>
             </div>
         </div>
 
         <!-- 2. Акції -->
-        <a href="index.html" class="menu-link-direct">
+        <a href="index.html#promoSection" class="menu-link-direct">
             <span>🔥 <span id="menu-promo">Акції та знижки</span></span>
             <span>➔</span>
         </a>
 
         <!-- 3. Доставка та оплата -->
-        <a href="index.html" class="menu-link-direct">
+        <a href="index.html#deliverySection" class="menu-link-direct">
             <span>🚚 <span id="menu-delivery">Доставка та оплата</span></span>
             <span>➔</span>
         </a>
 
         <!-- 4. Консультація бджоляра -->
-        <a href="index.html" class="menu-link-direct">
+        <a href="index.html#consultationSection" class="menu-link-direct">
             <span>👨‍🌾 <span id="menu-consult">Консультація бджоляра</span></span>
             <span>➔</span>
         </a>
 
         <!-- 5. Контакти -->
-        <a href="index.html" class="menu-link-direct">
+        <a href="index.html#contactsSection" class="menu-link-direct">
             <span>📞 <span id="menu-contacts">Контакти</span></span>
             <span>➔</span>
         </a>
 
         <!-- 6. Про нашу пасіку -->
-        <a href="index.html" class="menu-link-direct">
+        <a href="index.html#about-section" class="menu-link-direct">
             <span>🏡 <span id="menu-about">Про нашу пасіку</span></span>
             <span>➔</span>
         </a>
@@ -358,14 +358,14 @@
             </div>
         </div>
 
-        <!-- Перемикач мов та футер -->
+        <!-- Перемикач мов та футер с датой в кружочке © 2026 -->
         <div style="text-align: center; margin-top: 20px;">
             <div class="lang-switcher">
                 <button class="lang-btn active" id="btn-uk" onclick="setLanguage('uk')">УКР</button>
                 <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">РУС</button>
             </div>
             <footer>
-                <p>© <span id="footer-copy">2026 Медова Пасіка. Всі права захищено.</span></p>
+                <p id="footer-copy">© 2026 Медова Пасіка. Всі права захищено.</p>
             </footer>
         </div>
 
@@ -407,7 +407,7 @@
                 hRow4: "В телефонному режимі",
                 hRow5: "• Пн-Пт: 09:00 - 21:00",
                 hRow6: "• Сб: 09:00 - 14:00",
-                footerCopy: "2026 Медова Пасіка. Всі права захищено."
+                footerCopy: "© 2026 Медова Пасіка. Всі права захищено."
             },
             ru: {
                 pageTitle: "Меню | Медовая Пасека",
@@ -434,7 +434,7 @@
                 hRow4: "В телефонном режиме",
                 hRow5: "• Пн-Пт: 09:00 - 21:00",
                 hRow6: "• Сб: 09:00 - 14:00",
-                footerCopy: "2026 Медовая Пасека. Все права защищены."
+                footerCopy: "© 2026 Медовая Пасека. Все права защищены."
             }
         };
 
