@@ -138,7 +138,6 @@
             font-weight: 500;
         }
 
-        /* Панель ссылок под шапкой (по вашим черточкам) */
         .site-nav-bar {
             display: flex;
             justify-content: center;
@@ -430,16 +429,29 @@
             margin-bottom: 12px; 
         }
 
-        .bottom-notice-banner {
-            background: #d32f2f;
+        /* Стильный банер акции по образу 11888.jpg */
+        .promo-banner-card {
+            background: linear-gradient(135deg, #e63946 0%, #c52233 100%);
             color: #fff;
             text-align: center;
-            font-size: 0.88rem;
-            padding: 12px 16px;
-            font-weight: 600;
-            border-radius: 16px;
-            margin-top: 35px;
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.2);
+            padding: 22px 20px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.25);
+            border: 2px solid #ff6b76;
+        }
+        .promo-banner-card h3 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .promo-banner-card p {
+            font-size: 0.92rem;
+            color: #ffe5e7;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 500;
         }
 
         .delivery-section, .reviews-section {
@@ -1022,7 +1034,6 @@
         </div>
     </header>
 
-    <!-- Панель ссылок под шапкой (по вашим черточкам на фото) -->
     <div class="site-nav-bar">
         <a href="#about-section" class="site-nav-link">🍯 Про пасеку</a>
         <a href="#productsGrid" class="site-nav-link">📦 Товары</a>
@@ -1196,9 +1207,34 @@
 
         </div>
 
-        <div class="bottom-notice-banner">
-            ✨ Безкоштовна доставка замовлень від 1000 грн! Свіжий збір меду та крафтові свічки з натуральної вощини
+        <!-- Рекламный блок Акции (сразу после товаров, как на скриншоте 11888.jpg) -->
+        <div class="promo-banner-card">
+            <h3>✨ Акція: Безкоштовна доставка!</h3>
+            <p>Оформлюйте замовлення на суму від 1000 грн — і доставка за наш рахунок! Свіжий збір меду та крафтові свічки з натуральної вощини.</p>
         </div>
+
+        <!-- Блок консультации бджоляра (сразу после акции) -->
+        <section class="consultation-section">
+            <h2>💬 Бажаєте проконсультуватися чи підібрати мед?</h2>
+            <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі запитання!</p>
+            
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label>ПІБ (Прізвище, Ім'я, По батькові):</label>
+                    <input type="text" id="consultFio" required="" placeholder="Іванов Іван Іванович">
+                </div>
+                <div class="form-group">
+                    <label>Номер телефону:</label>
+                    <input type="tel" id="consultPhone" required="" placeholder="+380XXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Ваше запитання чи коментар:</label>
+                    <textarea id="consultQuestion" rows="3" placeholder="Який мед краще обрати для дитини / є питання по доставці..."></textarea>
+                </div>
+                <button type="submit" id="consultSubmitBtn" class="btn-submit" style="width: 100%;">Надіслати запит на консультацію</button>
+                <div id="consultStatus"></div>
+            </form>
+        </section>
 
         <section class="delivery-section">
             <h2>🚚 Доставка та оплата</h2>
@@ -1262,28 +1298,6 @@
 
             <h3>🌾 Бджолиний пилок та перга</h3>
             <p>«Бджолиний хліб» та пилок — це потужний природний концентрати амінокислот, мікроелементів і вітамінів групи B. Вони чудово відновлюють сили після фізичних і розумових навантажень, підвищують тонус і заряджають енергією на весь день.</p>
-        </section>
-
-        <section class="consultation-section">
-            <h2>💬 Бажаєте проконсультуватися чи підібрати мед?</h2>
-            <p>Залиште свої дані, і ми зв'яжемося з вами найближчим часом, щоб відповісти на всі запитання!</p>
-            
-            <form id="consultationForm">
-                <div class="form-group">
-                    <label>ПІБ (Прізвище, Ім'я, По батькові):</label>
-                    <input type="text" id="consultFio" required="" placeholder="Іванов Іван Іванович">
-                </div>
-                <div class="form-group">
-                    <label>Номер телефону:</label>
-                    <input type="tel" id="consultPhone" required="" placeholder="+380XXXXXXXXX">
-                </div>
-                <div class="form-group">
-                    <label>Ваше запитання чи коментар:</label>
-                    <textarea id="consultQuestion" rows="3" placeholder="Який мед краще обрати для дитини / є питання по доставці..."></textarea>
-                </div>
-                <button type="submit" id="consultSubmitBtn" class="btn-submit" style="width: 100%;">Надіслати запит на консультацію</button>
-                <div id="consultStatus"></div>
-            </form>
         </section>
 
         <section class="about-section" id="about-section">
@@ -1561,7 +1575,6 @@
             statusDiv.innerText = '';
 
             try {
-                // 1. Зберігаємо замовлення в Supabase з детальним логуванням
                 const orderPayload = {
                     id: 'ord_' + Date.now(),
                     customer_name: name,
@@ -1571,8 +1584,6 @@
                     total_price: totalSum,
                     comment: comment || ''
                 };
-
-                console.log("Відправляємо в Supabase:", orderPayload);
 
                 const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
                     method: 'POST',
@@ -1585,14 +1596,11 @@
                     body: JSON.stringify(orderPayload)
                 });
 
-                const responseText = await dbResponse.text();
-                console.log("Відповідь Supabase (Статус:", dbResponse.status, "):", responseText);
-
                 if (!dbResponse.ok) {
+                    const responseText = await dbResponse.text();
                     throw new Error("Помилка бази Supabase: " + responseText);
                 }
 
-                // 2. Надсилаємо сповіщення в Telegram
                 const text = `<b>🛒 Нове замовлення в інтернет-магазині!</b>\n\n` +
                              `<b>👤 ПІБ:</b> ${name}\n` +
                              `<b>📞 Телефон:</b> ${phone}\n` +
@@ -1844,7 +1852,7 @@
                 labelName: "ФИО (Фамилия и Имя):",
                 labelPhone: "Номер телефона:",
                 labelDelivery: "Способ доставки:",
-                labelComment: "Комментарий к заказу:",
+                labelКомментарий: "Комментарий к заказу:",
                 delPlaceholder: "Выберите способ доставки",
                 delNp: "Новая почта",
                 delUkr: "Укрпочта",
