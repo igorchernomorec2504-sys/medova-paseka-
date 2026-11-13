@@ -199,7 +199,7 @@
             padding: 0 16px;
         }
 
-        /* Переливающиеся баннеры (анимация градиента) */
+        /* Переливающиеся анимированные баннеры над товарами */
         .features-banner-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -294,7 +294,7 @@
             border: 1.5px solid var(--border-color);
         }
 
-        /* Увеличенная высота фотографий для 3 акционных наборов со свечами */
+        /* Увеличенная высота фотографий для 3 акционных наборов */
         .tall-product-img {
             height: 260px !important;
         }
@@ -1112,7 +1112,7 @@
 
     <div class="container">
 
-        <!-- 3 переливающихся баннера -->
+        <!-- 3 переливающихся баннера над товарами -->
         <div class="features-banner-grid">
             <div class="shimmer-banner">
                 <h4>✨ 100% натуральный</h4>
@@ -1233,7 +1233,7 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 1 (Набір «Медовий затишок») - увеличенная картинка + таймер -->
+            <!-- Подарунковий набір 1 (Набір «Медовий затишок») - высокая картинка + циклический таймер -->
             <div class="product-card" data-category="gifts" data-name="подарунковий набір медовий затишок свічки" id="candlesSection">
                 <span class="badge-highlight">🔥 АКЦІЯ</span>
                 <div>
@@ -1253,7 +1253,7 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 2 (Патріотичний набір) - увеличенная картинка + таймер -->
+            <!-- Подарунковий набір 2 (Патріотичний набір) - высокая картинка + циклический таймер -->
             <div class="product-card" data-category="gifts" data-name="патріотичний набір свічки">
                 <span class="badge-highlight" id="badge-gift2">ХІТ / АКЦІЯ</span>
                 <div>
@@ -1273,7 +1273,7 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 3 (Набір з натуральної вощини) - увеличенная картинка + таймер -->
+            <!-- Подарунковий набір 3 (Набір з натуральної вощини) - высокая картинка + циклический таймер -->
             <div class="product-card" data-category="gifts" data-name="набір з натуральної вощини свічки">
                 <span class="badge-highlight">-15%</span>
                 <div>
@@ -1507,45 +1507,27 @@
             startPromoTimers();
         };
 
-        // Живой таймер на 15 дней с уходом в минус и сменой текста на акции
+        // Циклический таймер ровно на 23 часа 59 минут 3 секунды (автоматически перезапускается)
         function startPromoTimers() {
-            // Устанавливаем конечную дату акции (текущий момент + 15 дней)
-            let promoDeadline = localStorage.getItem('medova_promo_deadline');
-            if (!promoDeadline) {
-                promoDeadline = new Date().getTime() + (15 * 24 * 60 * 60 * 1000);
-                localStorage.setItem('medova_promo_deadline', promoDeadline);
-            } else {
-                promoDeadline = parseInt(promoDeadline);
-            }
+            // Длительность цикла: 23 часа 59 минут 3 секунды в миллисекундах
+            const cycleDuration = (23 * 60 * 60 * 1000) + (59 * 60 * 1000) + (3 * 1000);
 
             function updateTimers() {
                 const now = new Date().getTime();
-                const distance = promoDeadline - now;
+                // Остаток времени до конца текущего цикла
+                let timeLeft = cycleDuration - (now % cycleDuration);
 
-                let timeString = "";
-                const absDistance = Math.abs(distance);
-                
-                const days = Math.floor(absDistance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((absDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((absDistance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((absDistance % (1000 * 60)) / 1000);
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                if (distance < 0) {
-                    // Время вышло — переключаем на акционное сообщение
-                    timeString = `🔥 Акция активна! Спеццена действует (${days}дн ${hours}ч назад)`;
-                } else {
-                    timeString = `⏳ До кінця акції: ${days} днів ${hours} годин ${minutes} хв`;
-                }
+                const timeString = `⏳ До кінця акції: ${hours} год ${minutes} хв ${seconds} сек`;
 
                 const timerElements = ['promoTimer1', 'promoTimer', 'promoTimer3'];
                 timerElements.forEach(id => {
                     const el = document.getElementById(id);
                     if (el) {
                         el.innerText = timeString;
-                        if (distance < 0) {
-                            el.style.color = '#e63946';
-                            el.style.borderColor = '#e63946';
-                        }
                     }
                 });
             }
