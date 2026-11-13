@@ -198,35 +198,76 @@
             padding: 0 20px;
         }
 
-        /* Переливающиеся анимированные баннеры над товарами */
-        .features-banner-grid {
+        /* Аккуратные плашки преимуществ внизу с плавной анимацией появления */
+        .benefits-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin: 40px 0 20px 0;
         }
 
-        .shimmer-banner {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            border-radius: 20px;
-            padding: 20px;
-            color: #fff;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(217, 119, 6, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .benefit-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: rgba(245, 166, 35, 0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        .shimmer-banner h4 {
+        .benefit-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-card:nth-child(1) { transition-delay: 0.1s; }
+        .benefit-card:nth-child(2) { transition-delay: 0.25s; }
+        .benefit-card:nth-child(3) { transition-delay: 0.4s; }
+
+        .benefit-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+
+        .benefit-text h4 {
+            margin: 0 0 2px 0;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--dark-amber);
             font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            margin-bottom: 6px;
         }
 
-        .shimmer-banner p {
-            font-size: 0.88rem;
-            color: #fef3c7;
+        .benefit-text p {
             margin: 0;
-            font-weight: 500;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Статус "Нет в наличии" / "Немає в наявності" */
+        .out-of-stock-label {
+            display: inline-block;
+            color: var(--accent-red);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin: 8px 0 4px 0;
+            background: rgba(220, 38, 38, 0.08);
+            padding: 3px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
         }
 
         .products-grid {
@@ -288,7 +329,6 @@
             transform: scale(1.02);
         }
 
-        /* Увеличенная высота фотографий для 3 акционных наборов */
         .tall-product-img {
             height: 280px !important;
         }
@@ -303,7 +343,7 @@
         .product-card p {
             font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             line-height: 1.5;
         }
 
@@ -386,7 +426,7 @@
             font-weight: 700;
             font-size: 1.35rem;
             color: var(--dark-amber);
-            margin: 16px 0 12px;
+            margin: 12px 0 12px;
             font-family: 'Playfair Display', serif;
         }
 
@@ -1109,31 +1149,16 @@
 
     <div class="container">
 
-        <!-- 3 переливающихся баннера над товарами -->
-        <div class="features-banner-grid">
-            <div class="shimmer-banner">
-                <h4>✨ 100% натуральный</h4>
-                <p>Якісний мед без домішок</p>
-            </div>
-            <div class="shimmer-banner">
-                <h4>🐝 Власна пасіка</h4>
-                <p>Власне виробництво та догляд</p>
-            </div>
-            <div class="shimmer-banner">
-                <h4>🛡️ Без антибіотиків</h4>
-                <p>Екологічно чистий продукт</p>
-            </div>
-        </div>
-
         <div class="products-grid" id="productsGrid">
 
-            <!-- Мед Травневий -->
+            <!-- Мед Травневий (Нет в наличии) -->
             <div class="product-card" data-category="honey" data-name="мед травневий">
                 <span class="badge-highlight" id="badge-may">ВЕСНЯНИЙ СМАК</span>
                 <div>
                     <img src="may1.jpg" alt="Мед Травневий" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="may-honey-title">Мед Травневий</h3>
                     <p id="may-honey-desc">Ароматний і ніжний мед із перших весняних квітів. Найперший збір року — солодкий, запашний та дуже корисний!</p>
+                    <div class="out-of-stock-label" id="stock-may" data-uk="Немає в наявності" data-ru="Нет в наличии">Немає в наявності</div>
                 </div>
                 <div>
                     <div class="product-price">від 350 грн</div>
@@ -1183,13 +1208,14 @@
                 </div>
             </div>
 
-            <!-- Бджолиний Пилок -->
+            <!-- Бджолиний Пилок (Нет в наличии) -->
             <div class="product-card" data-category="pollen other" data-name="бджолиний пилок">
                 <span class="badge-highlight" id="badge-pollen">ЗАРЯД ЕНЕРГІЇ</span>
                 <div>
                     <img src="pollen.jpg" alt="Бджолиний пилок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="pollen-title">Бджолиний Пилок</h3>
                     <p id="pollen-desc">Натуральний мікс вітамінів, амінокислот та мікроелементів. Повертає бадьорість, тонус та силу кожен день!</p>
+                    <div class="out-of-stock-label" id="stock-pollen" data-uk="Немає в наявності" data-ru="Нет в наличии">Немає в наявності</div>
                     
                     <div class="options-group">
                         <label class="group-label" id="lbl-weight">ФАСУВАННЯ:</label>
@@ -1386,6 +1412,33 @@
             <p>«Бджолиний хліб» та пилок — це потужний природний концентрати амінокислот, мікроелементів і вітамінів групи B. Вони чудово відновлюють сили після фізичних і розумових навантажень, підвищують тонус і заряджають енергією на весь день.</p>
         </section>
 
+        <!-- Перенесені в самий низ плашки преимуществ с анимацией скролла -->
+        <section class="benefits-section">
+            <div class="benefit-card">
+                <div class="benefit-icon">✨</div>
+                <div class="benefit-text">
+                    <h4 id="ben-1-title">100% натуральный</h4>
+                    <p id="ben-1-desc">Якісний мед без домішок</p>
+                </div>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🐝</div>
+                <div class="benefit-text">
+                    <h4 id="ben-2-title">Власна пасіка</h4>
+                    <p id="ben-2-desc">Власне виробництво та догляд</p>
+                </div>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <div class="benefit-text">
+                    <h4 id="ben-3-title">Без антибіотиків</h4>
+                    <p id="ben-3-desc">Екологічно чистий продукт</p>
+                </div>
+            </div>
+        </section>
+
         <section class="about-section" id="about-section">
             <h2 id="about-heading">Про нашу пасіку</h2>
             <p id="about-text-1">Від вуликів до баночки — ми працюємо з власною пасікою. Мед качаємо своїми руками, свічки виготовляємо з натуральної вощини, а прополіс та пилок збираємо невеликими партіями.</p>
@@ -1502,7 +1555,23 @@
             updateCartUI();
             renderReviews();
             startPromoTimers();
+            initScrollAnimation();
         };
+
+        // Анимация плавного всплытия плашек внизу при прокрутке
+        function initScrollAnimation() {
+            const cards = document.querySelectorAll('.benefit-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            cards.forEach(card => observer.observe(card));
+        }
 
         // Циклический таймер ровно на 23 часа 59 минут 3 секунды (автоматически перезапускается)
         function startPromoTimers() {
@@ -1935,7 +2004,13 @@
                 badgePollen: "ЗАРЯД ЕНЕРГІЇ",
                 badgeProp: "МІЦНИЙ ІМУНІТЕТ",
                 badgeComb: "100% ЕКО",
-                badgeGift2: "ЗАТИШОК"
+                badgeGift2: "ЗАТИШОК",
+                ben1Title: "100% натуральний",
+                ben1Desc: "Якісний мед без домішок",
+                ben2Title: "Власна пасіка",
+                ben2Desc: "Власне виробництво та догляд",
+                ben3Title: "Без антибіотиків",
+                ben3Desc: "Екологічно чистий продукт"
             },
             ru: {
                 pageTitle: "Медовая Пасека | Натуральный мед и изделия из воска",
@@ -1967,7 +2042,7 @@
                 labelName: "ФИО (Фамилия и Имя):",
                 labelPhone: "Номер телефона:",
                 labelDelivery: "Способ доставки:",
-                labelКомментарий: "Комментарий к заказу:",
+                labelComment: "Комментарий к заказу:",
                 delPlaceholder: "Выберите способ доставки",
                 delNp: "Новая почта",
                 delUkr: "Укрпочта",
@@ -1981,7 +2056,13 @@
                 badgePollen: "ЗАРЯД ЭНЕРГИИ",
                 badgeProp: "КРЕПКИЙ ИММУНИТЕТ",
                 badgeComb: "100% ЭКО",
-                badgeGift2: "УЮТ"
+                badgeGift2: "УЮТ",
+                ben1Title: "100% натуральный",
+                ben1Desc: "Качественный мед без примесей",
+                ben2Title: "Собственная пасека",
+                ben2Desc: "Собственное производство и уход",
+                ben3Title: "Без антибиотиков",
+                ben3Desc: "Экологически чистый продукт"
             }
         };
 
@@ -2006,7 +2087,21 @@
             document.getElementById('propolis-title').innerText = t.propolisTitle;
             document.getElementById('propolis-desc').innerText = t.propolisDesc;
             document.getElementById('comb-title').innerText = t.combTitle;
-            document.getElementById('comb-desc').innerText, t.combDesc;
+            document.getElementById('comb-desc').innerText = t.combDesc;
+
+            // Обновление текстов "Нет в наличии" / "Немає в наявності"
+            const stockMay = document.getElementById('stock-may');
+            const stockPollen = document.getElementById('stock-pollen');
+            if(stockMay) stockMay.innerText = stockMay.getAttribute(`data-${lang}`);
+            if(stockPollen) stockPollen.innerText = stockPollen.getAttribute(`data-${lang}`);
+
+            // Обновление перенесенных нижних плашек преимуществ
+            document.getElementById('ben-1-title').innerText = t.ben1Title;
+            document.getElementById('ben-1-desc').innerText = t.ben1Desc;
+            document.getElementById('ben-2-title').innerText = t.ben2Title;
+            document.getElementById('ben-2-desc').innerText = t.ben2Desc;
+            document.getElementById('ben-3-title').innerText = t.ben3Title;
+            document.getElementById('ben-3-desc').innerText = t.ben3Desc;
 
             document.querySelectorAll('[data-translate="add-to-cart"]').forEach(el => el.innerText = t.addToCart);
             document.querySelectorAll('[data-translate="details-btn"]').forEach(el => el.innerText = t.detailsBtn);
