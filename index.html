@@ -199,6 +199,47 @@
             padding: 0 16px;
         }
 
+        /* Переливающиеся баннеры (анимация градиента) */
+        .features-banner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .shimmer-banner {
+            background: linear-gradient(270deg, #ffb703, #e68a00, #ffb703, #ffa200);
+            background-size: 600% 600%;
+            animation: gradientShimmer 6s ease infinite;
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(230, 138, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .shimmer-banner h4 {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .shimmer-banner p {
+            font-size: 0.82rem;
+            color: #fffaf0;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            font-weight: 500;
+        }
+
+        @keyframes gradientShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -251,6 +292,11 @@
             margin: 0 auto 14px;
             border-radius: 14px;
             border: 1.5px solid var(--border-color);
+        }
+
+        /* Увеличенная высота фотографий для 3 акционных наборов со свечами */
+        .tall-product-img {
+            height: 260px !important;
         }
 
         .product-card h3 {
@@ -1066,6 +1112,22 @@
 
     <div class="container">
 
+        <!-- 3 переливающихся баннера -->
+        <div class="features-banner-grid">
+            <div class="shimmer-banner">
+                <h4>✨ 100% натуральный</h4>
+                <p>Якісний мед без домішок</p>
+            </div>
+            <div class="shimmer-banner">
+                <h4>🐝 Власна пасіка</h4>
+                <p>Власне виробництво та догляд</p>
+            </div>
+            <div class="shimmer-banner">
+                <h4>🛡️ Без антибіотиків</h4>
+                <p>Екологічно чистий продукт</p>
+            </div>
+        </div>
+
         <div class="products-grid" id="productsGrid">
 
             <!-- Мед Травневий -->
@@ -1171,14 +1233,14 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 1 (Свічки / Акційні свічки) -->
+            <!-- Подарунковий набір 1 (Набір «Медовий затишок») - увеличенная картинка + таймер -->
             <div class="product-card" data-category="gifts" data-name="подарунковий набір медовий затишок свічки" id="candlesSection">
                 <span class="badge-highlight">🔥 АКЦІЯ</span>
                 <div>
-                    <img src="svechi-podarok.jpg" alt="Набір Медовий затишок" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <img src="svechi-podarok.jpg" alt="Набір Медовий затишок" class="product-icon-img tall-product-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3>Набір «Медовий затишок»</h3>
                     <p>Чудовий комплект свічок ручної роботи. Розміри свічей: 20×3 см.</p>
-                    <div class="timer-box" id="promoTimer1">⏳ Акція до кінця місяця!</div>
+                    <div class="timer-box" id="promoTimer1">⏳ До кінця акції: завантаження...</div>
                 </div>
                 <div>
                     <div class="product-price"><span class="old-price">300 грн</span> <span>250</span> грн</div>
@@ -1191,11 +1253,11 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 2 -->
+            <!-- Подарунковий набір 2 (Патріотичний набір) - увеличенная картинка + таймер -->
             <div class="product-card" data-category="gifts" data-name="патріотичний набір свічки">
                 <span class="badge-highlight" id="badge-gift2">ХІТ / АКЦІЯ</span>
                 <div>
-                    <img src="nabor3.jpg" alt="Патріотичний набір" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <img src="nabor3.jpg" alt="Патріотичний набір" class="product-icon-img tall-product-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="gift2-title">Патріотичний набір свічок</h3>
                     <p id="gift2-desc">Синьо-жовті свічки з вощини. Розміри свічей: 20×3 см.</p>
                     <div class="timer-box" id="promoTimer">⏳ До кінця акції: завантаження...</div>
@@ -1211,13 +1273,14 @@
                 </div>
             </div>
 
-            <!-- Подарунковий набір 3 -->
+            <!-- Подарунковий набір 3 (Набір з натуральної вощини) - увеличенная картинка + таймер -->
             <div class="product-card" data-category="gifts" data-name="набір з натуральної вощини свічки">
                 <span class="badge-highlight">-15%</span>
                 <div>
-                    <img src="svecha3.jpg" alt="Набір з натуральної вощини" class="product-icon-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
+                    <img src="svecha3.jpg" alt="Набір з натуральної вощини" class="product-icon-img tall-product-img" onerror="this.src='https://static.tildacdn.ink/tila6338-3239-4734-a665-366531623332/10636.jpg'">
                     <h3 id="gift3-title">Набір з натуральної вощини</h3>
                     <p id="gift3-desc">З медовим запахом та ніжним природним ароматом.</p>
+                    <div class="timer-box" id="promoTimer3">⏳ До кінця акції: завантаження...</div>
                 </div>
                 <div>
                     <div class="product-price"><span class="old-price">200 грн</span> <span>170</span> грн</div>
@@ -1441,7 +1504,55 @@
             }
             updateCartUI();
             renderReviews();
+            startPromoTimers();
         };
+
+        // Живой таймер на 15 дней с уходом в минус и сменой текста на акции
+        function startPromoTimers() {
+            // Устанавливаем конечную дату акции (текущий момент + 15 дней)
+            let promoDeadline = localStorage.getItem('medova_promo_deadline');
+            if (!promoDeadline) {
+                promoDeadline = new Date().getTime() + (15 * 24 * 60 * 60 * 1000);
+                localStorage.setItem('medova_promo_deadline', promoDeadline);
+            } else {
+                promoDeadline = parseInt(promoDeadline);
+            }
+
+            function updateTimers() {
+                const now = new Date().getTime();
+                const distance = promoDeadline - now;
+
+                let timeString = "";
+                const absDistance = Math.abs(distance);
+                
+                const days = Math.floor(absDistance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((absDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((absDistance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((absDistance % (1000 * 60)) / 1000);
+
+                if (distance < 0) {
+                    // Время вышло — переключаем на акционное сообщение
+                    timeString = `🔥 Акция активна! Спеццена действует (${days}дн ${hours}ч назад)`;
+                } else {
+                    timeString = `⏳ До кінця акції: ${days} днів ${hours} годин ${minutes} хв`;
+                }
+
+                const timerElements = ['promoTimer1', 'promoTimer', 'promoTimer3'];
+                timerElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.innerText = timeString;
+                        if (distance < 0) {
+                            el.style.color = '#e63946';
+                            el.style.borderColor = '#e63946';
+                        }
+                    }
+                });
+            }
+
+            updateTimers();
+            setInterval(updateTimers, 1000);
+        }
 
         function saveCart() {
             localStorage.setItem('medova_cart', JSON.stringify(cart));
